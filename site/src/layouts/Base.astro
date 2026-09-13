@@ -53,7 +53,7 @@ const reviewedLabel = new Date(LAST_REVIEWED).toLocaleDateString('en-US', {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Source+Sans+3:wght@400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..800,30..100;1,9..144,300..800,30..100&family=Vollkorn:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Source+Sans+3:wght@400;500;600;700&display=swap"
   />
 
   <slot name="head" />
@@ -138,6 +138,26 @@ const reviewedLabel = new Date(LAST_REVIEWED).toLocaleDateString('en-US', {
       }
       document.addEventListener('scroll', onScroll, { passive: true });
       onScroll();
+
+      // Pedagogical reveal — targets that teach through motion.
+      // Custody diagram draws the safeguard relationship; how-starts draws the journey line;
+      // differs staggers the comparison; fee-cards stagger the two scenarios; counts-on staggers numerals.
+      const revealTargets = document.querySelectorAll<HTMLElement>(
+        '.custody-diagram-wrap, .how-starts, .differs, .fee-cards, .counts-on, .zermagen-mark-wrap, .risk-first-mark-wrap'
+      );
+      if (revealTargets.length && 'IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add('is-in');
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.18 });
+        revealTargets.forEach((el) => io.observe(el));
+      } else {
+        revealTargets.forEach((el) => el.classList.add('is-in'));
+      }
 
       // Right rail active state — wayfinding aid.
       const railLinks = document.querySelectorAll<HTMLAnchorElement>('.rail a');
@@ -244,42 +264,6 @@ const reviewedLabel = new Date(LAST_REVIEWED).toLocaleDateString('en-US', {
         });
       });
 
-      // Fee arrangement toggle — auto-cycles between "losing" and "winning" quarter
-      // so the reader sees the interaction happen (discoverability by demonstration).
-      // First real user click hands them manual control and stops the cycle.
-      const feeToggle = document.querySelector<HTMLElement>('.fee-toggle');
-      const feeWrap = document.querySelector<HTMLElement>('.fee-answer-wrap');
-      const feeProgress = document.querySelector<HTMLElement>('.fee-toggle-progress');
-
-      function applyFeeState(state: string) {
-        if (!feeToggle || !feeWrap) return;
-        feeWrap.setAttribute('data-state', state);
-        feeToggle.setAttribute('data-active', state);
-        feeToggle.querySelectorAll<HTMLButtonElement>('.fee-toggle-btn').forEach((b) => {
-          const active = b.dataset.state === state;
-          b.classList.toggle('is-active', active);
-          b.setAttribute('aria-selected', active ? 'true' : 'false');
-        });
-      }
-
-      if (feeToggle && feeWrap && feeProgress) {
-        if (!reduce) {
-          feeToggle.classList.add('is-cycling');
-          feeProgress.addEventListener('animationiteration', () => {
-            const current = feeWrap.getAttribute('data-state');
-            applyFeeState(current === 'losing' ? 'winning' : 'losing');
-          });
-        }
-        document.querySelectorAll<HTMLButtonElement>('.fee-toggle-btn').forEach((btn) => {
-          btn.addEventListener('click', (ev) => {
-            const state = btn.dataset.state;
-            if (!state) return;
-            applyFeeState(state);
-            // Real user click hands them control; disable auto-cycle.
-            if (ev.isTrusted) feeToggle.classList.remove('is-cycling');
-          });
-        });
-      }
     })();
   </script>
 </body>
