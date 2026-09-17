@@ -3,37 +3,83 @@
    Base 18px per accessibility rule (audience ~60). WCAG AA. */
 
 :root {
-  --navy: #12233b;
-  --navy-2: #1e3454;
-  --navy-3: #0b1728;
-  --ivory: #f7f3ec;
-  --cream: #efe7d6;
-  --brass: #a67833;
+  /* Ink tones — deep, warm, not corporate navy */
+  --ink: #1c1712;                 /* body ink */
+  --ink-2: #3a2f26;               /* softer ink */
+  --ink-3: #6a5a4a;               /* margin/meta */
+  --ink-4: #8e7d6a;               /* very faint */
+
+  /* Paper tones — aged, warmed */
+  --paper: #f4ecdc;               /* main reading paper */
+  --paper-2: #ece1c9;             /* deeper edge */
+  --paper-3: #e4d7b8;             /* strong warm */
+  --paper-line: #d0bf9c;          /* rule / divider */
+
+  /* Night — for the biggest punctuation moments (custody, titlepage) */
+  --night: #1a1712;               /* deep ink-black, warm */
+  --night-2: #2a221a;              /* softer night surface */
+
+  /* Rubric — restrained oxblood/brass accent */
+  --rubric: #8a3324;               /* deep restrained oxblood — for section marks + accents */
+  --rubric-soft: #b25a3f;          /* softer rubric */
+  --brass: #a67833;                /* held for gilt moments only */
   --brass-soft: #c9a15a;
-  --ink: #1a1a1a;
-  --ink-soft: #4a4a4a;
-  --ink-faint: #6a6a6a;
-  --line: #d8ceb8;
-  --focus: #ffb84d;
+
+  /* Kept for back-compat with existing footer/cred/etc. */
+  --navy: #1a1712;
+  --navy-2: #2a221a;
+  --navy-3: #100c08;
+  --ivory: #f4ecdc;
+  --cream: #ece1c9;
+  --line: #d0bf9c;
+  --ink-soft: #3a2f26;
+  --ink-faint: #6a5a4a;
+
+  --focus: #b25a3f;
+
+  /* Type */
+  --font-display: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Vollkorn', 'EB Garamond', Georgia, serif;
+  --font-meta: 'Source Sans 3', system-ui, sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  font-family: 'Source Sans 3', system-ui, sans-serif;
-  font-size: 18px;
-  line-height: 1.65;
+  font-family: var(--font-body);
+  font-size: 19px;
+  line-height: 1.7;
   color: var(--ink);
-  background: var(--ivory);
+  background: var(--paper);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  font-feature-settings: "onum", "kern", "liga";
 }
-h1, h2, h3, h4 { font-family: 'Cormorant Garamond', Georgia, serif; }
-a { color: var(--navy); text-decoration: none; transition: color 160ms ease; }
-a:hover { color: var(--brass); }
+h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 400; }
+a { color: var(--rubric); text-decoration: none; transition: color 200ms ease; }
+/* Prose links get an underline — nav/footer/UI links opt in explicitly */
+.letter a, .chapter-body a, .letter-note a, .letter-closing a, .differs a, .counts-on a, .how-starts a, .pull-origin a, .footnote a, .diptych-note a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--rubric-soft);
+}
+.letter a:hover, .chapter-body a:hover, .letter-note a:hover, .letter-closing a:hover, .differs a:hover, .counts-on a:hover, .how-starts a:hover, .diptych-note a:hover {
+  color: var(--ink);
+  text-decoration-color: var(--rubric);
+}
 a:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
 img { max-width: 100%; display: block; }
+
+/* Paper grain — subtle SVG noise overlay to break the flat digital feel */
+.paper-grain, .titlepage-grain, .letter-grain {
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><filter id='n'><feTurbulence baseFrequency='0.88' numOctaves='2' seed='4'/><feColorMatrix values='0 0 0 0 0.10 0 0 0 0 0.08 0 0 0 0 0.05 0 0 0 0.08 0'/></filter><rect width='200' height='200' filter='url(%23n)' opacity='0.65'/></svg>");
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  opacity: 0.55;
+}
 
 /* Skip link */
 .skip {
@@ -116,129 +162,1398 @@ nav a[aria-current="page"]::after { right: 0; }
 
 /* No page-load reveal choreography. Content is static — quiet is the point. */
 
-/* Hero — cover of the book, not a chapter opening.
-   Centered single-column masthead treatment. The question owns the space.
-   Interior pages (About, Approach) use .chapter-header for chapter openings — distinct pattern. */
-.hero {
-  background:
-    radial-gradient(ellipse at 50% 30%, rgba(166, 120, 51, 0.12), transparent 60%),
-    linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
-  color: var(--ivory);
-  padding: 120px 40px 140px;
+/* ============ TITLE PAGE ============
+   Editorial cover of a considered document. Asymmetric composition, deep warm ink,
+   monogram stamped in the corner, subtle breathing glow, staggered reveal on load,
+   scroll indicator at bottom. */
+.titlepage {
   position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  background:
+    linear-gradient(180deg, var(--night) 0%, var(--night-2) 100%);
+  color: var(--paper);
+  padding: 140px 40px 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-/* Subtle brass corner marks — publication register */
-.hero::before, .hero::after {
-  content: "";
+/* Slow-breathing glow gives the hero life without shouting */
+.titlepage-glow {
   position: absolute;
-  width: 40px; height: 40px;
-  border-color: rgba(166, 120, 51, 0.35);
-  border-style: solid;
+  top: -20%; left: 30%;
+  width: 80vw; height: 80vw;
+  max-width: 1200px; max-height: 1200px;
+  background: radial-gradient(ellipse, rgba(178, 90, 63, 0.14), transparent 65%);
+  pointer-events: none;
+  filter: blur(20px);
+  animation: glow-breathe 12s ease-in-out infinite;
 }
-.hero::before { top: 32px; left: 32px; border-width: 1px 0 0 1px; }
-.hero::after { top: 32px; right: 32px; border-width: 1px 1px 0 0; }
-.hero-inner {
-  max-width: 900px;
-  margin: 0 auto;
-  text-align: center;
+@keyframes glow-breathe {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.9; }
+  50% { transform: translate(-3%, 2%) scale(1.06); opacity: 1; }
+}
+/* Corner marks — editorial framing */
+.titlepage-corner {
+  position: absolute;
+  width: 44px; height: 44px;
+  border-color: rgba(201, 161, 90, 0.30);
+  border-style: solid;
+  pointer-events: none;
+}
+.titlepage-corner-tl { top: 36px; left: 36px; border-width: 1px 0 0 1px; }
+.titlepage-corner-tr { top: 36px; right: 36px; border-width: 1px 1px 0 0; }
+.titlepage-corner-bl { bottom: 36px; left: 36px; border-width: 0 0 1px 1px; }
+.titlepage-corner-br { bottom: 36px; right: 36px; border-width: 0 1px 1px 0; }
+/* Monogram floating in the upper-right — a signature stamp */
+.titlepage-monogram {
+  position: absolute;
+  top: 100px; right: 120px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 8px;
+  z-index: 2;
+  opacity: 0;
+  animation: mono-fade 900ms ease 1.1s forwards;
 }
-/* Publisher stamp */
-.hero-stamp {
-  font-family: 'Cormorant Garamond', serif;
+.mono-letters {
+  font-family: var(--font-display);
   font-style: italic;
-  font-weight: 500;
-  font-size: 22px;
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+  font-size: 60px;
+  line-height: 1;
   color: var(--brass-soft);
-  letter-spacing: 0.01em;
-  margin: 0 0 18px;
+  letter-spacing: -0.02em;
 }
-.hero-stamp em { font-style: italic; }
-.hero-rule {
-  width: 56px;
-  height: 1px;
-  background: var(--brass);
-  margin: 0 0 40px;
-  border: 0;
+.mono-line {
+  width: 24px; height: 1px;
+  background: var(--brass-soft);
+  opacity: 0.55;
 }
-/* Question — the moment. Bigger than any interior chapter title. */
-.hero h1 {
-  font-family: 'Cormorant Garamond', serif;
+.mono-label {
+  font-family: var(--font-meta);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(201, 161, 90, 0.6);
+}
+@keyframes mono-fade { to { opacity: 1; } }
+
+.titlepage-inner {
+  max-width: 960px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  margin: 0 auto;
+  text-align: center;
+}
+.titlepage-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  font-family: var(--font-meta);
+  font-size: 11px;
   font-weight: 500;
-  font-size: clamp(56px, 8vw, 110px);
-  line-height: 1.02;
-  letter-spacing: -0.015em;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(201, 161, 90, 0.75);
   margin: 0 0 40px;
-  color: var(--ivory);
-  max-width: 14ch;
+  opacity: 0;
+  animation: reveal 640ms cubic-bezier(0.2, 0.7, 0.2, 1) 0s forwards;
 }
-.hero h1 em { font-style: italic; color: var(--brass-soft); }
-/* Sub — small caps single line */
-.hero p.lede {
-  font-family: 'Source Sans 3', sans-serif;
-  font-size: 13px;
+.eyebrow-dash {
+  width: 28px; height: 1px;
+  background: rgba(201, 161, 90, 0.55);
+}
+
+.titlepage-h1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-variation-settings: "opsz" 144, "SOFT" 40;
+  font-size: clamp(48px, 6.4vw, 96px);
+  line-height: 1;
+  letter-spacing: -0.024em;
+  margin: 0 0 40px;
+  color: var(--paper);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+.titlepage-h1 .line1,
+.titlepage-h1 .line2 { display: block; }
+.titlepage-h1 .line2 em {
+  font-style: italic;
+  color: var(--brass-soft);
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+}
+
+.titlepage-lede {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 21px;
+  line-height: 1.55;
+  color: rgba(244, 236, 220, 0.80);
+  margin: 0 auto 44px;
+  max-width: 48ch;
+}
+
+.titlepage-cta-row {
+  display: inline-flex;
+  gap: 40px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 0 60px;
+}
+
+.titlepage-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-family: var(--font-meta);
+  font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.20em;
   text-transform: uppercase;
-  color: rgba(247, 243, 236, 0.70);
-  margin: 0 0 44px;
-  max-width: none;
+  color: rgba(201, 161, 90, 0.55);
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(201, 161, 90, 0.15);
+  padding-top: 20px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.meta-sep { color: rgba(201, 161, 90, 0.30); }
+
+/* Staggered reveal on load */
+.reveal-line {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: reveal 720ms cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0s) forwards;
+}
+@keyframes reveal {
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .titlepage-glow { animation: none; }
+  .reveal-line, .titlepage-monogram { opacity: 1; transform: none; animation: none; }
+}
+
+@media (max-width: 900px) {
+  .titlepage { padding: 80px 32px 60px; min-height: 90vh; }
+  .titlepage-monogram { top: 60px; right: 32px; }
+  .mono-letters { font-size: 42px; }
+  .titlepage-inner { margin-left: 0; padding-right: 0; }
+  .titlepage-corner { width: 28px; height: 28px; }
+  .titlepage-corner-tl, .titlepage-corner-tr { top: 20px; }
+  .titlepage-corner-tl, .titlepage-corner-bl { left: 20px; }
+  .titlepage-corner-tr, .titlepage-corner-br { right: 20px; }
+  .titlepage-corner-bl, .titlepage-corner-br { bottom: 20px; }
+}
+@media (max-width: 640px) {
+  .titlepage { padding: 72px 24px 100px; }
+  .titlepage-monogram { top: 40px; right: 24px; }
+  .mono-letters { font-size: 32px; }
+  .mono-label { font-size: 8px; }
+  .titlepage-eyebrow { font-size: 10px; letter-spacing: 0.20em; margin-bottom: 28px; }
+  .titlepage-lede { font-size: 18px; }
+  .titlepage-cta-row { gap: 24px; margin-bottom: 40px; }
+  .titlepage-meta { gap: 8px; font-size: 10px; }
+  .titlepage-scroll { bottom: 24px; }
+}
+
+/* ============ LETTER ============
+   Home body reads as a considered letter, not five stacked slides.
+   Center column ~640px, marginalia floats in outer margins on desktop.
+   Drop caps, pull-quotes, rubricated moments punctuate the flow. */
+.letter {
+  position: relative;
+  background: var(--paper);
+  padding: 80px 0 56px;
+  overflow: hidden;
+}
+.letter-column {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 40px;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns:
+    [outer-l] minmax(0, 1fr)
+    [main] minmax(0, 720px)
+    [outer-r] minmax(0, 1fr);
+  column-gap: 40px;
+  row-gap: 0;
+}
+/* Default: reading column — narrow, readable measure */
+.letter-column > * { grid-column: main; }
+/* Wide blocks — span the entire grid, capped at 1000px, always centered.
+   Guarantees a single "wide-track" alignment level across differs/counts/fee/how-starts. */
+.letter-column > .differs,
+.letter-column > .counts-on,
+.letter-column > .fee-moment,
+.letter-column > .how-starts,
+.letter-column > .mid-cta {
+  grid-column: 1 / -1;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+@media (max-width: 1080px) {
+  .letter-column {
+    display: block;
+    max-width: 780px;
+    padding: 0 32px;
+  }
+  .letter-column > .differs,
+  .letter-column > .counts-on,
+  .letter-column > .fee-moment,
+  .letter-column > .how-starts,
+  .letter-column > .mid-cta {
+    max-width: none;
+  }
+}
+@media (max-width: 640px) {
+  .letter-column { padding: 0 24px; }
+}
+.letter-open,
+.letter-p,
+.letter-note,
+.letter-question,
+.letter-closing {
+  font-family: var(--font-body);
+  color: var(--ink);
+  margin: 0 0 1.5em;
+}
+.letter-open {
+  font-size: 22px;
+  line-height: 1.55;
+  margin-bottom: 1.4em;
+}
+.letter-p {
+  font-size: 20px;
+  line-height: 1.72;
+}
+.letter-note {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  margin: 0.5em 0 2.2em;
+  padding-left: 20px;
+  border-left: 1px solid var(--paper-line);
+}
+.letter-question {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-variation-settings: "opsz" 72, "SOFT" 100;
+  font-size: clamp(28px, 3.4vw, 40px);
+  line-height: 1.2;
+  color: var(--ink);
+  margin: 60px 0 40px;
+  text-align: center;
+}
+.letter-closing {
+  font-size: 20px;
+  line-height: 1.7;
+  color: var(--ink);
+  margin: 40px 0 60px;
+}
+
+/* Drop cap — the letter opens like a printed page */
+.dropcap {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 144, "SOFT" 20;
+  font-weight: 500;
+  font-size: 5.6em;
+  line-height: 0.82;
+  float: left;
+  padding: 8px 14px 0 0;
+  margin: 0 0 0 -4px;
+  color: var(--rubric);
+  letter-spacing: -0.02em;
+}
+@media (max-width: 640px) {
+  .dropcap { font-size: 4.4em; padding-right: 10px; }
+}
+
+/* Marginalia — small notes that live in the outer margin on desktop.
+   Grid-based positioning: each aside sits in its outer column, aligned with adjacent content. */
+.marginalia {
+  font-family: var(--font-meta);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-3);
+  padding-left: 14px;
+  border-left: 1px solid var(--paper-line);
+  margin: 0 0 20px;
+}
+.marginalia-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rubric);
+  margin-bottom: 6px;
+}
+.marginalia-body { display: block; font-style: italic; color: var(--ink-2); }
+.marginalia-body a { color: var(--rubric); text-decoration-color: var(--rubric-soft); }
+
+/* On desktop, marginalia claims its outer grid column and shifts its top to align
+   visually next to the FOLLOWING paragraph (via negative margin). */
+@media (min-width: 1080px) {
+  .marginalia-recto {
+    grid-column: outer-l;
+    margin: 0 0 -1em 0;
+    text-align: right;
+    padding-left: 0;
+    padding-right: 14px;
+    border-left: 0;
+    border-right: 1px solid var(--paper-line);
+    align-self: start;
+  }
+  .marginalia-verso {
+    grid-column: outer-r;
+    margin: 0 0 -1em 0;
+    align-self: start;
+  }
+}
+
+/* Zermagen mark — small shield-and-fortress glyph in the "on the name" marginalia.
+   Visualises the Hebrew meaning: fortress + shield. */
+.zermagen-mark {
+  display: block;
+  width: 52px;
+  height: 66px;
+  margin: 0 0 12px;
+}
+.zermagen-mark path,
+.zermagen-mark circle {
+  fill: none;
+  stroke: var(--rubric);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.zermagen-mark circle { fill: var(--rubric); stroke: none; }
+@media (min-width: 1080px) {
+  .zermagen-mark-wrap { text-align: right; padding-right: 14px; }
+  .zermagen-mark { margin-left: auto; margin-right: 0; }
+}
+
+/* Draw the glyph via CSS animation when the marginalia enters view.
+   Default state = visible so no-JS / reduced-motion users see the finished glyph. */
+@media (prefers-reduced-motion: no-preference) {
+  .zermagen-mark-wrap.is-in .zm-crenel {
+    animation: zm-draw 1000ms cubic-bezier(0.2, 0.7, 0.2, 1) 100ms both;
+  }
+  .zermagen-mark-wrap.is-in .zm-shield {
+    animation: zm-draw 1200ms cubic-bezier(0.2, 0.7, 0.2, 1) 400ms both;
+  }
+  .zermagen-mark-wrap.is-in .zm-core {
+    animation: zm-appear 500ms ease 1100ms both;
+  }
+  @keyframes zm-draw {
+    from { stroke-dasharray: 320; stroke-dashoffset: 320; }
+    to   { stroke-dasharray: 320; stroke-dashoffset: 0; }
+  }
+  @keyframes zm-appear {
+    from { opacity: 0; transform: scale(0.4); transform-origin: center; }
+    to   { opacity: 1; transform: scale(1); }
+  }
+}
+
+/* Risk-first flow mark — visualises the inverted priority: Risk before Buy.
+   Two stacked labeled boxes with a down-arrow. First box is emphasised (rubric),
+   second is subordinate (muted). */
+.risk-first-mark {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  margin: 0 0 14px;
+  width: fit-content;
+}
+.rf-step {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--rubric);
+  border-radius: 3px;
+  min-width: 78px;
+  background: rgba(178, 90, 63, 0.06);
+}
+.rf-step-2 {
+  border-color: var(--paper-line);
+  background: transparent;
+  opacity: 0.72;
+}
+.rf-num {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-variation-settings: "opsz" 72, "SOFT" 100;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--rubric);
+}
+.rf-step-2 .rf-num { color: var(--ink-3); }
+.rf-label {
+  font-family: var(--font-meta);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--rubric);
+}
+.rf-step-2 .rf-label { color: var(--ink-3); }
+.rf-arrow {
+  width: 1px;
+  height: 14px;
+  background: var(--rubric);
+  margin: 4px 0 4px 24px;
+  position: relative;
+}
+.rf-arrow-head {
+  position: absolute;
+  bottom: -2px;
+  left: -3px;
+  width: 6px;
+  height: 6px;
+  border-right: 1px solid var(--rubric);
+  border-bottom: 1px solid var(--rubric);
+  transform: rotate(45deg);
+}
+/* On desktop, marginalia-recto text-aligns right — the mark aligns right too */
+@media (min-width: 1080px) {
+  .risk-first-mark-wrap { padding-right: 14px; }
+  .risk-first-mark-wrap .risk-first-mark { margin-left: auto; margin-right: 0; }
+}
+
+/* Draw-in animation: rf-step-1 fades in first, arrow draws, rf-step-2 arrives */
+@media (prefers-reduced-motion: no-preference) {
+  .risk-first-mark-wrap.is-in .rf-step-1 {
+    animation: rf-slide 520ms cubic-bezier(0.2, 0.7, 0.2, 1) 100ms both;
+  }
+  .risk-first-mark-wrap.is-in .rf-arrow {
+    animation: rf-line 480ms cubic-bezier(0.2, 0.7, 0.2, 1) 600ms both;
+    transform-origin: top center;
+  }
+  .risk-first-mark-wrap.is-in .rf-arrow-head {
+    animation: rf-fade 320ms ease 1000ms both;
+  }
+  .risk-first-mark-wrap.is-in .rf-step-2 {
+    animation: rf-slide 520ms cubic-bezier(0.2, 0.7, 0.2, 1) 1050ms both;
+  }
+  @keyframes rf-slide {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: none; }
+  }
+  @keyframes rf-line {
+    from { transform: scaleY(0); }
+    to   { transform: scaleY(1); }
+  }
+  @keyframes rf-fade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  /* rf-step-2 finishes at 0.72 opacity to match resting state */
+  .risk-first-mark-wrap.is-in .rf-step-2 {
+    animation-name: rf-slide-muted;
+  }
+  @keyframes rf-slide-muted {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 0.72; transform: none; }
+  }
+}
+
+
+/* Pull-quote — set off, larger serif, italic — a moment of pause */
+.pullquote-fig {
+  margin: 44px auto 44px;
+  max-width: 560px;
+  text-align: center;
+  border-top: 1px solid var(--paper-line);
+  border-bottom: 1px solid var(--paper-line);
+  padding: 32px 0 24px;
+}
+.pullquote {
+  margin: 0;
+}
+.pullquote p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+  font-size: clamp(28px, 3.6vw, 40px);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0;
+}
+.pullquote-source {
+  font-family: var(--font-meta);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--rubric);
+  margin: 20px 0 0;
+}
+
+/* Two columns — fit / not-fit pair with clear visual difference between the two sides.
+   Fit: warm cream card + rubric left-bar + rubric tick mark. Miss: transparent, dimmed. */
+.letter-column > .two-columns {
+  grid-column: 1 / -1;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+.two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 40px 0 32px;
+  padding: 0;
+  border: 0;
+}
+.two-columns-col {
+  padding: 32px 32px 28px;
+  border-radius: 3px;
+  transition: transform 320ms cubic-bezier(0.2, 0.7, 0.2, 1), opacity 320ms ease;
+}
+.two-columns-col.is-fit {
+  background: var(--paper-2);
+  border-left: 3px solid var(--rubric);
+}
+.two-columns-col.is-miss {
+  background: transparent;
+  border-left: 3px solid var(--paper-line);
+  opacity: 0.78;
+}
+.two-columns-col.is-miss:hover { opacity: 1; }
+.two-columns-h {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-meta);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  margin: 0 0 22px;
+  line-height: 1.3;
+}
+.is-fit .two-columns-h { color: var(--rubric); }
+.is-miss .two-columns-h { color: var(--ink-3); }
+.tc-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.is-fit .tc-mark { background: rgba(178, 90, 63, 0.14); color: var(--rubric); }
+.is-miss .tc-mark { background: rgba(58, 47, 38, 0.10); color: var(--ink-3); }
+
+.two-columns-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.two-columns-list li {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.55;
+  padding-left: 20px;
+  position: relative;
+}
+.is-fit .two-columns-list li { color: var(--ink); }
+.is-miss .two-columns-list li { color: var(--ink-2); }
+.two-columns-list li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 11px;
+  width: 10px; height: 1px;
+}
+.is-fit .two-columns-list li::before { background: var(--rubric); }
+.is-miss .two-columns-list li::before { background: var(--ink-4); }
+
+@media (max-width: 720px) {
+  .two-columns { grid-template-columns: 1fr; gap: 16px; }
+  .two-columns-col { padding: 28px 24px 24px; }
+}
+
+/* Fee moment — question, hook, two-card scenario pair. Both scenarios visible at once.
+   Losing case gets warm cream card (the wait-what moment); winning case sits on paper. */
+.fee-moment {
+  margin: 48px 0 32px;
+  padding: 36px 0 20px;
+  border-top: 1px solid var(--paper-line);
+}
+.fee-moment .letter-question {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+.fee-hook {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--ink);
+  text-align: center;
+  max-width: 46ch;
+  margin: 0 auto 44px;
+}
+.fee-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 0 0 32px;
+}
+.fee-card {
+  padding: 36px 32px 32px;
+  border-radius: 3px;
+  transition: transform 320ms cubic-bezier(0.2, 0.7, 0.2, 1), opacity 320ms ease;
+}
+.fee-card-lose {
+  background: var(--paper-2);
+  border-left: 3px solid var(--rubric);
+}
+.fee-card-win {
+  background: transparent;
+  border-left: 3px solid var(--paper-line);
+  opacity: 0.82;
+}
+.fee-card-win:hover { opacity: 1; }
+.fee-card-when {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-meta);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  margin: 0 0 24px;
+  line-height: 1.3;
+}
+.fee-card-lose .fee-card-when { color: var(--rubric); }
+.fee-card-win .fee-card-when { color: var(--ink-3); }
+.fee-card-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.fee-card-lose .fee-card-mark { background: rgba(178, 90, 63, 0.14); color: var(--rubric); }
+.fee-card-win .fee-card-mark { background: rgba(58, 47, 38, 0.10); color: var(--ink-3); }
+.fee-card-answer {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+  font-weight: 400;
+  font-size: clamp(32px, 3.6vw, 48px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 0 0 20px;
+}
+.fee-card-lose .fee-card-answer { color: var(--ink); }
+.fee-card-win .fee-card-answer { color: var(--ink-2); }
+.fee-card-body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  margin: 0;
+}
+@media (max-width: 720px) {
+  .fee-cards { grid-template-columns: 1fr; gap: 16px; }
+  .fee-card { padding: 28px 24px 24px; }
+}
+
+/* Custody breakout — the biggest moment.
+   Composition: eyebrow → question → giant statement → three structural facts → link.
+   Corner marks give the whole block an editorial-certificate frame. */
+.custody-breakout {
+  position: relative;
+  margin: 72px 0;
+  padding: 80px 40px 76px;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(178, 90, 63, 0.10), transparent 60%),
+    linear-gradient(180deg, var(--night) 0%, var(--night-2) 100%);
+  color: var(--paper);
+  overflow: hidden;
+}
+.custody-corner {
+  position: absolute;
+  width: 44px; height: 44px;
+  border-color: rgba(201, 161, 90, 0.32);
+  border-style: solid;
+  pointer-events: none;
+}
+.custody-corner.tl { top: 32px; left: 32px; border-width: 1px 0 0 1px; }
+.custody-corner.tr { top: 32px; right: 32px; border-width: 1px 1px 0 0; }
+.custody-corner.bl { bottom: 32px; left: 32px; border-width: 0 0 1px 1px; }
+.custody-corner.br { bottom: 32px; right: 32px; border-width: 0 1px 1px 0; }
+
+.custody-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  font-family: var(--font-meta);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(201, 161, 90, 0.85);
+  margin: 0 0 24px;
+}
+.custody-eyebrow .eyebrow-dash {
+  width: 28px; height: 1px;
+  background: rgba(201, 161, 90, 0.55);
+}
+
+.custody-question {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-variation-settings: "opsz" 72, "SOFT" 100;
+  font-size: clamp(22px, 2.6vw, 30px);
+  line-height: 1.25;
+  color: rgba(244, 236, 220, 0.72);
+  text-align: center;
+  margin: 0 0 28px;
+}
+
+.custody-statement {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-variation-settings: "opsz" 144, "SOFT" 20;
+  font-size: clamp(40px, 5.6vw, 84px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--paper);
+  text-align: center;
+  margin: 0 auto 64px;
+  max-width: 20ch;
+}
+
+/* Custody diagram — three-party structural safeguard visualisation.
+   You (owns) → Custodian ← Me (directs). "Me" cannot move funds. */
+.custody-diagram-wrap {
+  max-width: 1000px;
+  margin: 0 auto 56px;
+  padding: 32px 0 16px;
+  border-top: 1px solid rgba(201, 161, 90, 0.22);
+  border-bottom: 1px solid rgba(201, 161, 90, 0.22);
+}
+.custody-diagram {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.custody-diagram .cd-node rect { stroke: rgba(201, 161, 90, 0.55); }
+.custody-diagram .cd-cust rect { stroke: rgba(166, 120, 51, 0.85); fill: rgba(201, 161, 90, 0.06); }
+.custody-diagram .cd-title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 32px;
+  fill: var(--paper);
+}
+.custody-diagram .cd-title-cust { font-style: normal; font-size: 28px; letter-spacing: -0.005em; }
+.custody-diagram .cd-underline { stroke: rgba(201, 161, 90, 0.4); stroke-width: 1; }
+.custody-diagram .cd-underline-cust { stroke: rgba(201, 161, 90, 0.55); }
+.custody-diagram .cd-body {
+  font-family: 'Vollkorn', Georgia, serif;
+  font-size: 15px;
+  fill: rgba(244, 236, 220, 0.85);
+}
+.custody-diagram .cd-body-quiet { fill: rgba(244, 236, 220, 0.55); font-size: 13px; }
+.custody-diagram .cd-body-italic { font-style: italic; fill: rgba(244, 236, 220, 0.65); }
+.custody-diagram .cd-arrow path { stroke: rgba(201, 161, 90, 0.6); }
+.custody-diagram .cd-arrow polygon { fill: rgba(201, 161, 90, 0.6); }
+.custody-diagram .cd-arrow-label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  fill: var(--brass);
+}
+.custody-diagram .cd-crux {
+  font-family: 'Vollkorn', Georgia, serif;
+  font-style: italic;
+  font-size: 15px;
+  fill: rgba(244, 236, 220, 0.60);
+}
+
+/* Diagram animations — nodes fade in, arrows draw themselves, labels reveal.
+   One-shot when the diagram enters viewport. Not decorative — teaches the relationship. */
+@media (prefers-reduced-motion: no-preference) {
+  .custody-diagram .cd-node,
+  .custody-diagram .cd-arrow > *,
+  .custody-diagram .cd-crux {
+    opacity: 0;
+    transition: opacity 640ms ease var(--d, 0s);
+  }
+  .custody-diagram .cd-arrow path {
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+    transition: stroke-dashoffset 900ms cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0s);
+  }
+  .custody-diagram .cd-arrow polygon {
+    opacity: 0;
+    transition: opacity 240ms ease calc(var(--d, 0s) + 800ms);
+  }
+
+  .custody-diagram-wrap.is-in .custody-diagram .cd-node,
+  .custody-diagram-wrap.is-in .custody-diagram .cd-arrow > *,
+  .custody-diagram-wrap.is-in .custody-diagram .cd-crux {
+    opacity: 1;
+  }
+  .custody-diagram-wrap.is-in .custody-diagram .cd-arrow path {
+    stroke-dashoffset: 0;
+  }
+
+  /* Stagger */
+  .custody-diagram .cd-you       { --d: 0.05s; }
+  .custody-diagram .cd-me        { --d: 0.20s; }
+  .custody-diagram [class*="cd-arrow"]:nth-of-type(3) { --d: 0.55s; }
+  .custody-diagram [class*="cd-arrow"]:nth-of-type(4) { --d: 0.75s; }
+  .custody-diagram .cd-crux      { --d: 1.30s; }
+  .custody-diagram .cd-cust      { --d: 1.05s; }
+
+  /* Custodian box: subtle pulse after it enters */
+  .custody-diagram-wrap.is-in .custody-diagram .cd-cust rect {
+    animation: cd-pulse 3.6s ease-in-out 2s infinite;
+  }
+  @keyframes cd-pulse {
+    0%, 100% { stroke-opacity: 0.85; }
+    50% { stroke-opacity: 1; filter: drop-shadow(0 0 6px rgba(201, 161, 90, 0.4)); }
+  }
+}
+
+@media (max-width: 640px) {
+  .custody-diagram-wrap { padding: 24px 0 12px; margin-bottom: 40px; }
+}
+
+/* ============ PEDAGOGICAL REVEAL ============
+   Sections that teach through motion. Triggered by IntersectionObserver on scroll.
+   One-shot per session. Respect prefers-reduced-motion. */
+
+@media (prefers-reduced-motion: no-preference) {
+
+  /* --- DIFFERS: 4 comparison rows stagger in.
+     Reader absorbs each transformation "standard adviser → this firm" one at a time. --- */
+  .differs .differs-row {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity 640ms cubic-bezier(0.2, 0.7, 0.2, 1),
+      transform 640ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .differs.is-in .differs-row { opacity: 1; transform: none; }
+  .differs.is-in .differs-row:nth-child(1) { transition-delay: 120ms; }
+  .differs.is-in .differs-row:nth-child(2) { transition-delay: 260ms; }
+  .differs.is-in .differs-row:nth-child(3) { transition-delay: 400ms; }
+  .differs.is-in .differs-row:nth-child(4) { transition-delay: 540ms; }
+
+  /* --- COUNTS-ON: numbered commitments stagger, numerals scale-in subtly.
+     Reader sees the four promises appear as they're being made. --- */
+  .counts-on .counts-on-list li {
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+      opacity 560ms cubic-bezier(0.2, 0.7, 0.2, 1),
+      transform 560ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .counts-on .counts-on-list li .counts-on-num {
+    transform: scale(0.82);
+    transition: transform 560ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .counts-on.is-in .counts-on-list li { opacity: 1; transform: none; }
+  .counts-on.is-in .counts-on-list li .counts-on-num { transform: scale(1); }
+  .counts-on.is-in .counts-on-list li:nth-child(1),
+  .counts-on.is-in .counts-on-list li:nth-child(1) .counts-on-num { transition-delay: 120ms; }
+  .counts-on.is-in .counts-on-list li:nth-child(2),
+  .counts-on.is-in .counts-on-list li:nth-child(2) .counts-on-num { transition-delay: 240ms; }
+  .counts-on.is-in .counts-on-list li:nth-child(3),
+  .counts-on.is-in .counts-on-list li:nth-child(3) .counts-on-num { transition-delay: 360ms; }
+  .counts-on.is-in .counts-on-list li:nth-child(4),
+  .counts-on.is-in .counts-on-list li:nth-child(4) .counts-on-num { transition-delay: 480ms; }
+
+  /* --- FEE CARDS: the two scenarios reveal in sequence.
+     Losing first (the wait-what), then winning (the alignment). Both stay visible. --- */
+  .fee-cards .fee-card {
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 640ms cubic-bezier(0.2, 0.7, 0.2, 1),
+      transform 640ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .fee-cards.is-in .fee-card { opacity: 1; transform: none; }
+  .fee-cards.is-in .fee-card-lose { transition-delay: 120ms; }
+  .fee-cards.is-in .fee-card-win {
+    transition-delay: 420ms;
+    /* Winning card keeps its resting 82% opacity — animate to that, not 1 */
+    opacity: 0.82;
+  }
+
+  /* --- HOW-STARTS: steps stagger in, numerals subtly scale up. No visual line needed. --- */
+  .how-starts-steps li {
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+      opacity 520ms cubic-bezier(0.2, 0.7, 0.2, 1),
+      transform 520ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .how-starts-steps .how-step-num {
+    transform: scale(0.86);
+    transition: transform 520ms cubic-bezier(0.2, 0.7, 0.2, 1),
+                color 240ms ease;
+  }
+  .how-starts.is-in .how-starts-steps li { opacity: 1; transform: none; }
+  .how-starts.is-in .how-starts-steps li .how-step-num { transform: scale(1); }
+  .how-starts.is-in .how-starts-steps li:nth-child(1),
+  .how-starts.is-in .how-starts-steps li:nth-child(1) .how-step-num { transition-delay: 150ms; }
+  .how-starts.is-in .how-starts-steps li:nth-child(2),
+  .how-starts.is-in .how-starts-steps li:nth-child(2) .how-step-num { transition-delay: 350ms; }
+  .how-starts.is-in .how-starts-steps li:nth-child(3),
+  .how-starts.is-in .how-starts-steps li:nth-child(3) .how-step-num { transition-delay: 550ms; }
+}
+.custody-facts li {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 14px;
+  align-items: start;
+}
+.fact-num {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 1;
+  color: var(--brass-soft);
+  padding-top: 4px;
+  transition: transform 320ms cubic-bezier(0.2, 0.7, 0.2, 1), color 240ms ease;
+}
+.custody-facts li:hover .fact-num { transform: rotate(-4deg) scale(1.1); color: var(--brass); }
+.fact-body h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-variation-settings: "opsz" 48, "SOFT" 40;
+  font-size: 19px;
+  line-height: 1.3;
+  color: var(--paper);
+  margin: 0 0 8px;
+  letter-spacing: -0.005em;
+}
+.fact-body p {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.55;
+  color: rgba(244, 236, 220, 0.75);
+  margin: 0;
+}
+
+.custody-footer {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.65;
+  color: rgba(244, 236, 220, 0.80);
+}
+.custody-footer a {
+  color: var(--brass-soft);
+  text-decoration: underline;
+  text-decoration-color: rgba(201, 161, 90, 0.4);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 240ms ease, text-decoration-color 240ms ease;
+}
+.custody-footer a:hover {
+  color: var(--paper);
+  text-decoration-color: var(--paper);
+}
+
+@media (max-width: 900px) {
+  .custody-breakout { padding: 72px 24px 72px; }
+  .custody-facts { grid-template-columns: 1fr; gap: 28px; padding: 28px 0; }
+  .custody-corner { width: 28px; height: 28px; }
+  .custody-corner.tl, .custody-corner.tr { top: 20px; }
+  .custody-corner.tl, .custody-corner.bl { left: 20px; }
+  .custody-corner.tr, .custody-corner.br { right: 20px; }
+  .custody-corner.bl, .custody-corner.br { bottom: 20px; }
+}
+
+/* ============ CONVICTION MOMENTS ============
+   Turn the letter from a passive read into an active decision.
+   These are the reasons + reassurance + response beats. */
+
+/* Mid-letter CTA — quiet inline nudge that gives the right reader a way to act
+   before scrolling to the end. */
+.mid-cta {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin: 24px 0 48px;
+  padding: 24px 28px;
+  background: var(--paper-2);
+  border-left: 3px solid var(--rubric);
+}
+.mid-cta-text {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--ink);
+  margin: 0;
+  flex: 1;
+}
+.cta-inline { flex-shrink: 0; }
+@media (max-width: 640px) {
+  .mid-cta { flex-direction: column; align-items: flex-start; gap: 20px; padding: 24px; }
+}
+
+/* "How this differs" — four side-by-side comparison pairs.
+   Standard adviser (dim, strikethrough label) vs This firm (bold, rubric label). */
+.differs {
+  margin: 56px 0 44px;
+  padding: 36px 0 8px;
+  border-top: 1px solid var(--paper-line);
+  border-bottom: 1px solid var(--paper-line);
+}
+.differs .letter-question {
+  margin-top: 0;
+  margin-bottom: 32px;
+}
+.differs-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.differs-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  padding: 22px 12px;
+  margin: 0 -12px;
+  border-bottom: 1px solid var(--paper-line);
+  border-radius: 3px;
+  transition: background 280ms ease;
+}
+.differs-row:last-child { border-bottom: 0; }
+.differs-row:hover { background: rgba(178, 90, 63, 0.05); }
+.differs-them,
+.differs-me {
+  transition: opacity 280ms ease, transform 280ms ease;
+}
+.differs-row:hover .differs-them { opacity: 0.55; }
+.differs-row:hover .differs-me { transform: translateX(4px); }
+.differs-them,
+.differs-me {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.differs-label {
+  font-family: var(--font-meta);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
   line-height: 1.4;
 }
-.hero-cta-row {
+.differs-them .differs-label { color: var(--ink-4); text-decoration: line-through; text-decoration-color: var(--ink-4); text-decoration-thickness: 1px; }
+.differs-me .differs-label { color: var(--rubric); }
+.differs-them p {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink-3);
+  margin: 0;
+}
+.differs-me p {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink);
+  margin: 0;
+}
+.differs-note {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--ink-3);
+  margin: 24px 0 0;
+  text-align: center;
+}
+@media (max-width: 640px) {
+  .differs-row { grid-template-columns: 1fr; gap: 16px; padding: 20px 0; }
+  .differs-me { padding-top: 12px; border-top: 1px dashed var(--paper-line); }
+}
+
+/* "What you can count on" — first-person commitments as a numbered rubricated list. */
+.counts-on {
+  margin: 56px 0 44px;
+  padding: 36px 0 4px;
+}
+.counts-on .letter-question {
+  margin-top: 0;
+  margin-bottom: 32px;
+}
+.counts-on-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.counts-on-list li {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 24px;
+  align-items: start;
+  padding: 16px 12px 24px;
+  margin: 0 -12px;
+  border-bottom: 1px solid var(--paper-line);
+  border-radius: 3px;
+  transition: background 280ms ease;
+}
+.counts-on-list li:last-child { border-bottom: 0; }
+.counts-on-list li:hover { background: rgba(178, 90, 63, 0.04); }
+.counts-on-list li:hover .counts-on-num { transform: rotate(-4deg) scale(1.08); color: var(--rubric-soft); }
+.counts-on-num {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 1;
+  color: var(--rubric);
+  transition: transform 320ms cubic-bezier(0.2, 0.7, 0.2, 1), color 280ms ease;
+  transform-origin: center;
+}
+.counts-on-body {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+.counts-on-note {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--ink-3);
+  margin: 32px 0 0;
+  text-align: center;
+}
+@media (max-width: 640px) {
+  .counts-on-list li { grid-template-columns: 48px 1fr; gap: 16px; }
+  .counts-on-num { font-size: 32px; }
+}
+
+/* "How this starts" — three concrete steps + primary CTA. */
+.how-starts {
+  margin: 64px 0 40px;
+  padding: 44px 40px 36px;
+  background: var(--paper-2);
+  border: 1px solid var(--paper-line);
+  border-radius: 2px;
+}
+.how-starts .letter-question {
+  margin-top: 0;
+  margin-bottom: 32px;
+}
+.how-starts-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.how-starts-steps li {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 24px;
+  padding: 12px 16px 28px 0;
+  border-bottom: 1px dashed var(--paper-line);
+  border-radius: 3px;
+  transition: background 280ms ease;
+  position: relative;
+}
+.how-starts-steps li:last-child { border-bottom: 0; padding-bottom: 0; }
+.how-starts-steps li:hover { background: rgba(178, 90, 63, 0.03); }
+.how-starts-steps li:hover .how-step-num { transform: translateX(4px); color: var(--rubric-soft); }
+.how-starts-steps li:hover .how-step-h { color: var(--rubric); }
+.how-step-num {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1;
+  color: var(--rubric);
+  letter-spacing: 0.02em;
+  padding-top: 4px;
+  transition: transform 300ms cubic-bezier(0.2, 0.7, 0.2, 1), color 240ms ease;
+}
+.how-step-h { transition: color 240ms ease; }
+.how-step-body { min-width: 0; }
+.how-step-h {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-variation-settings: "opsz" 72, "SOFT" 30;
+  font-size: 22px;
+  line-height: 1.3;
+  color: var(--ink);
+  margin: 0 0 8px;
+  letter-spacing: -0.005em;
+}
+.how-step-h a { color: var(--ink); text-decoration-color: var(--rubric); }
+.how-step-h a:hover { color: var(--rubric); }
+.how-step-body p {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  margin: 0;
+}
+.how-starts-cta-row {
   display: flex;
   gap: 32px;
   align-items: center;
   flex-wrap: wrap;
-  justify-content: center;
+}
+.cta-ghost.cta-ghost-ink { color: var(--ink); }
+.cta-ghost.cta-ghost-ink::before { background: var(--rubric); opacity: 0.75; }
+.cta-ghost.cta-ghost-ink::after { color: var(--rubric); }
+.cta-ghost.cta-ghost-ink:hover { color: var(--rubric); }
+.cta-ghost.cta-ghost-ink:hover::before { background: var(--rubric); opacity: 1; }
+.cta-ghost.cta-ghost-ink:hover::after { color: var(--rubric); }
+@media (max-width: 640px) {
+  .how-starts { padding: 40px 24px 32px; }
+  .how-starts-steps li { grid-template-columns: 60px 1fr; gap: 16px; }
+  .how-step-num { font-size: 22px; }
+  .how-step-h { font-size: 19px; }
+}
+
+/* Signoff — closes the letter */
+.signoff {
+  margin: 56px 0 0;
+  padding-top: 32px;
+  border-top: 1px solid var(--paper-line);
+  text-align: left;
+}
+.signoff-line {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+  font-size: 28px;
+  color: var(--ink);
+  margin: 0 0 8px;
+}
+.signoff-meta {
+  font-family: var(--font-meta);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0;
 }
 .cta {
-  display: inline-flex; align-items: center; gap: 10px;
-  font-size: 14px; letter-spacing: 0.10em; text-transform: uppercase; font-weight: 600;
-  color: var(--navy); background: var(--brass);
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: var(--font-meta);
+  font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600;
+  color: var(--ink); background: var(--brass);
   padding: 18px 30px; border: 1px solid var(--brass); text-decoration: none;
   position: relative;
-  transition: background 240ms cubic-bezier(0.4, 0, 0.2, 1),
-              border-color 240ms,
-              box-shadow 260ms,
-              transform 240ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: gap 380ms cubic-bezier(0.2, 0.7, 0.2, 1),
+              box-shadow 380ms cubic-bezier(0.2, 0.7, 0.2, 1),
+              transform 320ms cubic-bezier(0.2, 0.7, 0.2, 1),
+              background 320ms ease;
 }
 .cta::after {
   content: "→";
   display: inline-block;
-  transition: transform 260ms cubic-bezier(0.4, 0, 0.2, 1);
   font-weight: 400;
+  color: currentColor;
+  transition: transform 380ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .cta:hover {
-  background: var(--navy);
-  color: var(--ivory);
-  border-color: var(--navy);
-  box-shadow: 0 10px 32px rgba(18, 35, 59, 0.30);
+  gap: 18px;
+  background: var(--brass);
   transform: translateY(-2px);
+  box-shadow:
+    0 14px 36px -8px rgba(166, 120, 51, 0.55),
+    0 6px 14px -2px rgba(166, 120, 51, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.20);
 }
-.cta:hover::after { transform: translateX(6px); }
-.cta:active { transform: translateY(0); box-shadow: 0 3px 12px rgba(18, 35, 59, 0.24); }
+.cta:hover::after { transform: translateX(4px); }
+.cta:active {
+  transform: translateY(0);
+  box-shadow:
+    0 4px 10px -2px rgba(166, 120, 51, 0.35),
+    inset 0 2px 4px rgba(28, 23, 18, 0.12);
+}
 .cta-ghost {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 500;
-  color: rgba(247, 243, 236, 0.75); background: transparent; border: 0;
-  padding: 0 0 4px;
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: var(--font-meta);
+  font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600;
+  color: rgba(244, 236, 220, 0.88); background: transparent; border: 0;
+  padding: 4px 0;
   text-decoration: none;
   position: relative;
-  transition: color 240ms;
+  transition: color 320ms ease, gap 420ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-.cta-ghost::after {
+/* Small brass mark at rest — anchors it as an interactive element */
+.cta-ghost::before {
   content: "";
-  position: absolute;
-  left: 0; right: 100%; bottom: 0;
+  display: inline-block;
+  width: 18px;
   height: 1px;
   background: var(--brass-soft);
-  transition: right 340ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition: width 380ms cubic-bezier(0.2, 0.7, 0.2, 1), background 320ms ease;
 }
-.cta-ghost:hover { color: var(--brass-soft); }
-.cta-ghost:hover::after { right: 0; }
+.cta-ghost::after {
+  content: "→";
+  display: inline-block;
+  color: var(--brass-soft);
+  font-weight: 400;
+  transition: transform 420ms cubic-bezier(0.2, 0.7, 0.2, 1), color 320ms ease;
+}
+.cta-ghost:hover {
+  color: var(--paper);
+  gap: 18px;
+}
+.cta-ghost:hover::before { width: 28px; background: var(--brass); }
+.cta-ghost:hover::after { transform: translateX(2px); color: var(--brass); }
 
 .hero-figure {
   aspect-ratio: 4 / 5;
@@ -376,31 +1691,6 @@ nav a[aria-current="page"]::after { right: 0; }
   max-width: none;
 }
 
-/* Fee-answer crossfade — the toggle should FEEL like a mechanical switch, not a UI blink.
-   Grid-stack the two state blocks so they occupy the same space and crossfade between. */
-.fee-answer-wrap {
-  display: grid;
-  margin: 0 auto 24px;
-}
-.fee-answer-wrap > .fee-state {
-  grid-area: 1 / 1;
-  transition: opacity 260ms ease, transform 260ms ease;
-}
-.fee-answer-wrap > .fee-state[data-state] {
-  opacity: 0;
-  transform: translateY(6px);
-  pointer-events: none;
-}
-.fee-answer-wrap[data-state="losing"] > .fee-state[data-state="losing"],
-.fee-answer-wrap[data-state="winning"] > .fee-state[data-state="winning"] {
-  opacity: 1;
-  transform: none;
-  pointer-events: auto;
-}
-/* Legacy [data-state] rule for the description paragraphs — kept, still used by the plain <p>s. */
-.fee-answer-wrap [data-state]:not(.fee-state) { display: none; }
-.fee-answer-wrap[data-state="losing"] [data-state="losing"]:not(.fee-state),
-.fee-answer-wrap[data-state="winning"] [data-state="winning"]:not(.fee-state) { display: block; }
 
 /* Custody */
 .sect-custody { background: var(--navy-3); color: var(--ivory); }
@@ -1078,97 +2368,3 @@ a.chapter-num:focus-visible { outline: 2px solid var(--focus); outline-offset: 8
    No numbers. No worked example. Just the structural fact he wants understood.
    [FLAG FOR COUNSEL: describes fee arrangement in prose, not a performance illustration.
     Same verbal content as the paragraph already states — this presents it as two-state.] */
-/* Editorial toggle — reads as two labels with a small brass rule between them.
-   No segmented-control chrome. The progress bar visibly flows FROM the active
-   label TOWARD the next one, so the direction of change is obvious. */
-.fee-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 24px;
-  margin: 0 auto 48px;
-  background: transparent;
-  border: 0;
-  position: relative;
-}
-.fee-toggle-btn {
-  background: transparent;
-  border: 0;
-  padding: 6px 0;
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 20px;
-  color: var(--ink-faint);
-  cursor: pointer;
-  letter-spacing: 0;
-  text-transform: none;
-  transition: color 320ms ease;
-  white-space: nowrap;
-  position: relative;
-}
-.fee-toggle-btn:hover { color: var(--navy); }
-.fee-toggle-btn.is-active {
-  color: var(--navy);
-  cursor: default;
-  font-style: normal;
-  font-weight: 500;
-}
-/* Brass underline on active — editorial, not app-like */
-.fee-toggle-btn.is-active::after {
-  content: "";
-  position: absolute;
-  left: 0; right: 0;
-  bottom: -8px;
-  height: 2px;
-  background: var(--brass);
-}
-.fee-toggle-btn:focus-visible {
-  outline: 3px solid var(--focus);
-  outline-offset: 6px;
-  border-radius: 2px;
-}
-/* Progress track between the two labels — brass flows toward the next state.
-   Direction reverses depending on which side is active. */
-.fee-toggle-progress {
-  width: 60px;
-  height: 1px;
-  background: var(--line);
-  position: relative;
-  overflow: hidden;
-  pointer-events: none;
-}
-.fee-toggle-progress::before {
-  content: "";
-  position: absolute;
-  inset: -1px 0;
-  height: 3px;
-  background: var(--brass);
-  transform: scaleX(0);
-  transform-origin: 0 50%;
-}
-.fee-toggle[data-active="losing"] .fee-toggle-progress::before { transform-origin: 0 50%; }
-.fee-toggle[data-active="winning"] .fee-toggle-progress::before { transform-origin: 100% 50%; }
-.fee-toggle.is-cycling .fee-toggle-progress::before {
-  animation: fee-cycle 5400ms linear infinite;
-}
-.fee-toggle.is-cycling:hover .fee-toggle-progress::before { animation-play-state: paused; }
-.fee-toggle:not(.is-cycling) .fee-toggle-progress { display: none; }
-@keyframes fee-cycle {
-  from { transform: scaleX(0); }
-  to { transform: scaleX(1); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .fee-toggle.is-cycling .fee-toggle-progress { display: none; }
-}
-
-.fee-answer-wrap [data-state] { display: none; }
-.fee-answer-wrap[data-state="losing"] [data-state="losing"],
-.fee-answer-wrap[data-state="winning"] [data-state="winning"] { display: block; }
-
-/* Reduced motion: kill the letter-spacing transition on hover.
-   The rest of the interactions are click-driven, not motion-driven. */
-@media (prefers-reduced-motion: reduce) {
-  .read-next a { transition: none; }
-  .read-next a:hover { letter-spacing: 0.14em; }
-  .share-quote, .share-quote::before, .share-quote::after,
-  .share-hint, .fee-toggle-btn { transition: none; }
-}
