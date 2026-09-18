@@ -1,0 +1,696 @@
+/* Life Story Wealth Planning — The Firm design system
+   Tokens + reset + shared component styles.
+   Base 18px per accessibility rule (audience ~60). WCAG AA. */
+
+:root {
+  --navy: #12233b;
+  --navy-2: #1e3454;
+  --navy-3: #0b1728;
+  --ivory: #f7f3ec;
+  --cream: #efe7d6;
+  --brass: #a67833;
+  --brass-soft: #c9a15a;
+  --ink: #1a1a1a;
+  --ink-soft: #4a4a4a;
+  --ink-faint: #6a6a6a;
+  --line: #d8ceb8;
+  --focus: #ffb84d;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: 'Source Sans 3', system-ui, sans-serif;
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--ivory);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+h1, h2, h3, h4 { font-family: 'Cormorant Garamond', Georgia, serif; }
+a { color: var(--navy); text-decoration: none; transition: color 160ms ease; }
+a:hover { color: var(--brass); }
+a:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
+img { max-width: 100%; display: block; }
+
+/* Skip link */
+.skip {
+  position: absolute; left: -9999px; top: 0;
+  padding: 12px 18px; background: var(--navy); color: var(--ivory);
+  z-index: 1000;
+}
+.skip:focus { left: 12px; top: 12px; }
+
+/* Reading progress */
+.progress {
+  position: fixed; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--brass);
+  transform: scaleX(0); transform-origin: 0 50%;
+  z-index: 100; transition: transform 80ms linear;
+}
+
+/* Top bar */
+.topbar { background: var(--navy); color: var(--ivory); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+.topbar-inner {
+  max-width: 1240px; margin: 0 auto; padding: 10px 40px;
+  display: flex; justify-content: space-between;
+  color: rgba(247, 243, 236, 0.75);
+}
+.topbar-inner span { display: inline-flex; align-items: center; gap: 10px; }
+.topbar-inner span::before {
+  content: ""; width: 6px; height: 6px; background: var(--brass); border-radius: 50%;
+}
+
+/* Nav */
+.nav-wrap { background: var(--ivory); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 20; }
+.nav-inner {
+  max-width: 1240px; margin: 0 auto; padding: 22px 40px;
+  display: flex; align-items: center; justify-content: space-between; gap: 40px;
+}
+.brand { display: flex; align-items: baseline; gap: 14px; }
+.brand-mark {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500; font-size: 26px; letter-spacing: 0.01em; color: var(--navy);
+}
+.brand-mark em { font-style: italic; color: var(--brass); }
+.brand-tag {
+  font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-soft); border-left: 1px solid var(--line); padding-left: 14px;
+}
+nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 30px; font-size: 14px; font-weight: 500; }
+nav a { color: var(--navy); position: relative; padding: 4px 0; }
+nav a::after {
+  content: ""; position: absolute; left: 0; right: 100%; bottom: -4px;
+  height: 1px; background: var(--brass);
+  transition: right 240ms cubic-bezier(.2, .7, .2, 1);
+}
+nav a:hover::after { right: 0; }
+nav a[aria-current="page"] { color: var(--brass); }
+nav a[aria-current="page"]::after { right: 0; }
+
+/* Right rail (desktop only) */
+.rail {
+  position: fixed; right: 24px; top: 50%; transform: translateY(-50%);
+  display: none; flex-direction: column; gap: 18px;
+  z-index: 15; padding: 12px 0;
+}
+@media (min-width: 1280px) { .rail { display: flex; } }
+.rail a {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-faint);
+  transition: color 200ms;
+}
+.rail a span {
+  width: 8px; height: 8px; border-radius: 50%;
+  border: 1px solid var(--ink-faint);
+  background: transparent;
+  transition: background 240ms, border-color 240ms, transform 240ms;
+}
+.rail a em { font-style: normal; opacity: 0; transform: translateX(-6px); transition: opacity 200ms, transform 200ms; }
+.rail a:hover, .rail a.active { color: var(--navy); }
+.rail a:hover em, .rail a.active em { opacity: 1; transform: none; }
+.rail a.active span { background: var(--brass); border-color: var(--brass); transform: scale(1.15); }
+
+/* No page-load reveal choreography. Content is static — quiet is the point. */
+
+/* Hero */
+.hero {
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(166, 120, 51, 0.10), transparent 55%),
+    linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
+  color: var(--ivory);
+  padding: 120px 40px 130px;
+}
+.hero-inner {
+  max-width: 1240px; margin: 0 auto;
+  display: grid; grid-template-columns: 1.15fr 1fr; gap: 80px; align-items: center;
+}
+.hero-eyebrow {
+  font-family: 'Source Sans 3', sans-serif; font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--brass-soft); margin: 0 0 28px;
+  display: flex; align-items: center; gap: 12px;
+}
+.hero-eyebrow::before { content: ""; width: 32px; height: 1px; background: var(--brass); }
+.hero h1 {
+  font-weight: 500; font-size: clamp(48px, 6.2vw, 82px);
+  line-height: 1.04; letter-spacing: -0.005em;
+  margin: 0 0 32px; color: var(--ivory);
+}
+.hero h1 em { font-style: italic; color: var(--brass-soft); }
+.hero p.lede {
+  font-size: 20px; line-height: 1.55; color: rgba(247, 243, 236, 0.85);
+  margin: 0 0 44px; max-width: 42ch;
+}
+.cta {
+  display: inline-block; font-size: 14px; letter-spacing: 0.10em; text-transform: uppercase; font-weight: 600;
+  color: var(--navy); background: var(--brass);
+  padding: 18px 30px; border: 1px solid var(--brass); text-decoration: none;
+  transition: background 200ms, color 200ms, transform 200ms;
+}
+.cta:hover { background: var(--brass-soft); transform: translateY(-1px); }
+.cta-ghost {
+  display: inline-block; font-size: 14px; letter-spacing: 0.10em; text-transform: uppercase; font-weight: 600;
+  color: var(--ivory); border: 1px solid rgba(247, 243, 236, 0.35);
+  padding: 18px 30px; text-decoration: none;
+  transition: border-color 200ms, background 200ms;
+  margin-left: 18px;
+}
+.cta-ghost:hover { border-color: var(--brass); background: rgba(166, 120, 51, 0.10); color: var(--ivory); }
+
+.hero-figure {
+  aspect-ratio: 4 / 5;
+  background:
+    linear-gradient(140deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0)),
+    rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(201, 161, 90, 0.35);
+  position: relative;
+}
+.hero-figure::before { content: ""; position: absolute; inset: 14px; border: 1px solid rgba(201, 161, 90, 0.20); }
+.hero-figure-caption {
+  position: absolute; bottom: 20px; left: 24px;
+  font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(201, 161, 90, 0.80);
+}
+
+/* Credentials strip */
+.credbar { background: var(--cream); border-bottom: 1px solid var(--line); }
+.credbar-inner {
+  max-width: 1240px; margin: 0 auto; padding: 22px 40px;
+  display: flex; justify-content: space-between; align-items: center; gap: 40px;
+  font-size: 13px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--ink-soft);
+  flex-wrap: wrap;
+}
+.credbar-inner span { display: inline-flex; align-items: center; gap: 10px; }
+.credbar-inner span::before { content: "◆"; color: var(--brass); font-size: 8px; }
+
+/* Section shell */
+.sect { padding: 120px 40px; }
+.sect-inner { max-width: 1240px; margin: 0 auto; }
+.sect-eyebrow {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--brass); margin: 0 0 22px;
+  display: inline-flex; align-items: baseline; gap: 14px;
+}
+.sect-eyebrow .numeral {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-weight: 500;
+  font-size: 22px; color: var(--brass);
+  letter-spacing: 0;
+}
+
+/* Differentiator */
+.sect-diff h2 {
+  font-weight: 500; font-size: clamp(38px, 4.4vw, 58px);
+  line-height: 1.1; color: var(--navy); margin: 0 0 44px; max-width: 22ch;
+}
+.sect-diff .body {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
+  font-size: 18px; line-height: 1.7; color: var(--ink);
+}
+.sect-diff .body p { margin: 0 0 1.1em; }
+.sect-diff .body p:last-child { margin-bottom: 0; }
+.sect-diff .body strong { color: var(--navy); }
+.sect-diff .body em { color: var(--brass); font-style: italic; }
+.sect-diff .body a { color: var(--brass); font-weight: 600; }
+
+/* Pull-quote */
+.pull-wrap { max-width: 1240px; margin: 0 auto; padding: 40px 40px 80px; }
+.pull {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-weight: 500;
+  font-size: clamp(32px, 3.8vw, 48px);
+  line-height: 1.25; color: var(--navy);
+  text-align: center; max-width: 24ch; margin: 0 auto;
+  padding: 40px 0;
+}
+.pull::before, .pull::after {
+  content: ""; display: block; width: 56px; height: 1px; background: var(--brass); margin: 0 auto;
+}
+.pull::before { margin-bottom: 36px; }
+.pull::after { margin-top: 36px; }
+
+/* Recognition */
+.sect-recog { background: var(--cream); }
+.sect-recog .inner { display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px; align-items: start; }
+.sect-recog h3 { font-weight: 500; font-size: 34px; line-height: 1.15; color: var(--navy); margin: 0; }
+.sect-recog .lead {
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500;
+  font-size: 26px; line-height: 1.4; color: var(--navy); margin: 0 0 1em; max-width: 42ch;
+}
+.sect-recog p { font-size: 18px; line-height: 1.7; color: var(--ink); margin: 0 0 1em; max-width: 56ch; }
+.sect-recog a { color: var(--brass); font-weight: 600; }
+
+/* Fee */
+.sect-fee { background: var(--ivory); text-align: center; }
+.sect-fee .sect-eyebrow { display: inline-flex; align-items: baseline; gap: 14px; margin: 0 auto 28px; }
+.fee-answer {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500; font-style: italic;
+  font-size: clamp(56px, 8vw, 120px); line-height: 1;
+  color: var(--navy); margin: 0 0 48px;
+  letter-spacing: -0.02em;
+}
+.sect-fee p { font-size: 20px; line-height: 1.7; color: var(--ink); max-width: 52ch; margin: 0 auto 1.2em; }
+.sect-fee a { color: var(--brass); font-weight: 600; }
+
+/* Custody */
+.sect-custody { background: var(--navy-3); color: var(--ivory); }
+.sect-custody .sect-eyebrow { color: var(--brass-soft); }
+.sect-custody .sect-eyebrow .numeral { color: var(--brass-soft); }
+.sect-custody .grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start; }
+.sect-custody h3 {
+  font-family: 'Cormorant Garamond', serif; font-weight: 500;
+  font-size: clamp(32px, 3.6vw, 46px); line-height: 1.15;
+  color: var(--ivory); margin: 0; max-width: 12ch;
+}
+.sect-custody p {
+  font-size: 20px; line-height: 1.65; color: rgba(247, 243, 236, 0.88);
+  margin: 0 0 1em; max-width: 54ch;
+}
+.sect-custody a { color: var(--brass-soft); font-weight: 600; }
+.sect-custody a:hover { color: var(--brass); }
+
+/* Next step */
+.sect-next { background: var(--ivory); }
+.sect-next h3 {
+  font-weight: 500; font-size: clamp(30px, 3.4vw, 42px);
+  line-height: 1.15; color: var(--navy); margin: 0 0 48px; max-width: 22ch;
+}
+.cards { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.card {
+  padding: 40px 36px; background: var(--cream);
+  border: 1px solid var(--line);
+  display: flex; flex-direction: column; gap: 18px;
+  color: inherit;
+  transition: transform 240ms ease, border-color 240ms ease;
+}
+.card:hover { transform: translateY(-3px); border-color: var(--brass); }
+.card h4 {
+  font-family: 'Cormorant Garamond', serif; font-weight: 500;
+  font-size: 26px; color: var(--navy); margin: 0;
+}
+.card p { margin: 0; color: var(--ink); font-size: 17px; line-height: 1.6; }
+.card .link {
+  margin-top: auto;
+  font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;
+  color: var(--brass);
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.card .link::after { content: "→"; transition: transform 240ms ease; }
+.card:hover .link::after { transform: translateX(4px); }
+
+/* Footer */
+footer.site-footer {
+  background: var(--navy); color: rgba(247, 243, 236, 0.75);
+  padding: 72px 40px 40px;
+}
+.footer-inner {
+  max-width: 1240px; margin: 0 auto;
+  display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 64px;
+}
+.footer-inner h5 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--brass-soft); margin: 0 0 18px; font-weight: 600;
+}
+.footer-inner p, .footer-inner li { font-size: 14px; line-height: 1.7; color: rgba(247, 243, 236, 0.75); margin: 0; }
+.footer-inner ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.footer-inner a { color: rgba(247, 243, 236, 0.85); border-bottom: 1px solid rgba(247, 243, 236, 0.20); padding-bottom: 1px; }
+.footer-inner a:hover { color: var(--brass); border-bottom-color: var(--brass); }
+.footer-legal {
+  max-width: 1240px; margin: 56px auto 0; padding-top: 28px;
+  border-top: 1px solid rgba(247, 243, 236, 0.15);
+  font-size: 12px; color: rgba(247, 243, 236, 0.55);
+  display: flex; justify-content: space-between; gap: 32px; flex-wrap: wrap;
+}
+
+@media (max-width: 900px) {
+  .topbar-inner, .credbar-inner, .nav-inner { padding-left: 24px; padding-right: 24px; }
+  nav ul { gap: 16px; font-size: 13px; flex-wrap: wrap; }
+  .nav-inner { flex-wrap: wrap; }
+  .hero { padding: 64px 24px 80px; }
+  .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+  .cta-ghost { margin-left: 0; margin-top: 14px; display: block; text-align: center; }
+  .sect { padding: 72px 24px; }
+  .sect-diff .body { grid-template-columns: 1fr; gap: 24px; }
+  .pull-wrap { padding: 32px 24px 56px; }
+  .sect-recog .inner { grid-template-columns: 1fr; gap: 24px; }
+  .sect-custody .grid { grid-template-columns: 1fr; gap: 24px; }
+  .cards { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr; gap: 40px; }
+  .footer-legal { flex-direction: column; gap: 12px; }
+}
+
+/* ---------- Site-specific interactions ----------
+   Every element here means something because of what Alex does.
+   Not decoration. Not animation for animation's sake. */
+
+/* Anchor § on section-eyebrow — hover reveals, click copies section URL.
+   Belongs to this site because "someone shared this exact line with me" is how referrals travel. */
+.sect-anchor {
+  color: var(--brass);
+  text-decoration: none;
+  margin-left: 10px;
+  font-size: 16px;
+  vertical-align: middle;
+  line-height: 1;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.sect-custody .sect-anchor { color: var(--brass-soft); }
+@media (hover: hover) {
+  .sect-anchor {
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: opacity 200ms ease, transform 200ms ease, color 200ms ease;
+  }
+  .sect:hover .sect-anchor,
+  .sect-anchor:focus-visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.sect-anchor:hover { color: var(--brass-soft); }
+.sect-custody .sect-anchor:hover { color: var(--brass); }
+.sect-anchor:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+.sect-anchor.is-copied::after {
+  content: " copied";
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: currentColor; margin-left: 6px; opacity: 0.75;
+}
+
+/* Chapter numeral — large Roman numeral as chapter marker at top-left of each section.
+   Editorial-book register. A considered read has chapters, not sections. */
+.sect { position: relative; }
+.chapter-num {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(64px, 8vw, 120px);
+  line-height: 1;
+  color: rgba(166, 120, 51, 0.30);
+  pointer-events: none;
+  user-select: none;
+}
+.sect-custody .chapter-num { color: rgba(201, 161, 90, 0.35); }
+@media (max-width: 900px) {
+  .chapter-num { top: 20px; left: 20px; font-size: clamp(48px, 12vw, 72px); }
+}
+
+/* Credentials strip — click to expand education for a careful audience.
+   These terms MATTER to Alex's readers. They might not know what "fiduciary" actually means. */
+.credbar { border-bottom: 1px solid var(--line); background: var(--cream); }
+.cred-btn {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: var(--ink-soft);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: color 200ms ease;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  font-size: inherit;
+}
+.cred-btn::before { content: "◆"; color: var(--brass); font-size: 8px; }
+.cred-btn:hover { color: var(--navy); }
+.cred-btn.is-active { color: var(--navy); }
+.cred-btn.is-active::before { color: var(--brass-soft); }
+.cred-btn:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
+.cred-expand {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 20px 40px 28px;
+  border-top: 1px solid var(--line);
+}
+.cred-expand p {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+  margin: 0;
+  max-width: 62ch;
+}
+.cred-expand[hidden] { display: none; }
+
+/* Diptych — two sides of the same coin, side-by-side. Belongs to Alex's directness ("I'll say so directly"). */
+.diptych {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 48px;
+  margin-top: 40px;
+  align-items: start;
+}
+.diptych-rule {
+  background: var(--line);
+  align-self: stretch;
+  min-height: 100%;
+}
+.diptych-col h4 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin: 0 0 20px;
+}
+.diptych-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.diptych-col li {
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--ink);
+  padding-left: 20px;
+  position: relative;
+}
+.diptych-col li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--brass);
+}
+.diptych-note {
+  margin: 48px 0 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1.45;
+  color: var(--ink);
+  max-width: 48ch;
+}
+.diptych-note a { color: var(--brass); font-weight: 600; font-style: normal; }
+@media (max-width: 900px) {
+  .diptych { grid-template-columns: 1fr; gap: 32px; }
+  .diptych-rule { display: none; }
+}
+
+/* Custody breakout — "I never hold client money." breaks container width.
+   The single most important safeguard gets weight matching its content weight. */
+.sect-custody .grid { grid-template-columns: 1fr; gap: 48px; }
+.sect-custody h3.custody-statement {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: clamp(56px, 9vw, 132px);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--ivory);
+  margin: 0;
+  max-width: none;
+}
+.custody-body {
+  max-width: 60ch;
+  margin-left: auto;
+}
+.custody-body p { font-size: 20px; line-height: 1.65; color: rgba(247, 243, 236, 0.88); margin: 0 0 1em; }
+.custody-body p:last-child { margin: 0; }
+.custody-body a { color: var(--brass-soft); font-weight: 600; }
+.custody-body a:hover { color: var(--brass); }
+
+/* Highlight-to-share — user highlights any text, small popover offers to copy quote + link.
+   Because Alex's whole strategy is content that gets shared. */
+.share-popover {
+  position: fixed;
+  z-index: 200;
+  background: var(--navy);
+  color: var(--ivory);
+  padding: 10px 16px;
+  border-radius: 3px;
+  border: 0;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transform: translate(-50%, calc(-100% - 12px));
+  box-shadow: 0 4px 20px rgba(18, 35, 59, 0.25);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease;
+}
+.share-popover.is-visible { opacity: 1; pointer-events: auto; }
+.share-popover:hover { background: var(--navy-2); }
+.share-popover:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+.share-popover::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 12px; height: 12px;
+  background: var(--navy);
+}
+.share-popover.is-copied { background: var(--brass); color: var(--navy); }
+.share-popover.is-copied::after { background: var(--brass); }
+
+/* Read next — Alex's whole strategy is content-driven reading.
+   He said "the page most people read next is About." The Home page IS a considered read. */
+.read-next {
+  max-width: 1240px;
+  margin: 48px auto 0;
+  padding: 0 40px;
+  display: flex;
+  justify-content: flex-end;
+}
+.read-next a {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brass);
+  text-decoration: none;
+  padding: 6px 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color 200ms ease, letter-spacing 200ms ease;
+}
+.read-next a:hover {
+  border-bottom-color: var(--brass);
+  letter-spacing: 0.18em;
+}
+.sect-custody .read-next a { color: var(--brass-soft); }
+.sect-custody .read-next a:hover { border-bottom-color: var(--brass-soft); }
+
+/* Shareable pull-quote — referrals travel as quotes. Click copies quote + section URL. */
+.share-quote {
+  background: transparent;
+  border: 0;
+  padding: 40px 0;
+  cursor: pointer;
+  color: inherit;
+  text-align: center;
+  max-width: 24ch;
+  margin: 0 auto;
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-weight: 500;
+  font-size: clamp(32px, 3.8vw, 48px);
+  line-height: 1.25;
+  color: var(--navy);
+  position: relative;
+  transition: color 200ms ease;
+}
+.share-quote::before, .share-quote::after {
+  content: ""; display: block; width: 56px; height: 1px;
+  background: var(--brass); margin: 0 auto;
+}
+.share-quote::before { margin-bottom: 36px; }
+.share-quote::after { margin-top: 36px; }
+.share-quote:hover { color: var(--brass); }
+.share-quote:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 8px;
+  border-radius: 2px;
+}
+.share-hint {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+@media (hover: hover) {
+  .pull-wrap:hover .share-hint,
+  .share-quote:focus-visible ~ .share-hint {
+    opacity: 1;
+  }
+}
+.share-hint.is-copied {
+  opacity: 1;
+  color: var(--brass);
+}
+
+/* Fee-arrangement toggle — reader can feel the alignment by clicking through both states.
+   No numbers. No worked example. Just the structural fact he wants understood.
+   [FLAG FOR COUNSEL: describes fee arrangement in prose, not a performance illustration.
+    Same verbal content as the paragraph already states — this presents it as two-state.] */
+.fee-toggle {
+  display: inline-flex;
+  gap: 0;
+  margin: 0 auto 48px;
+  border: 1px solid var(--line);
+  background: transparent;
+}
+.fee-toggle-btn {
+  background: transparent;
+  border: 0;
+  padding: 14px 24px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: color 200ms ease, background 200ms ease;
+}
+.fee-toggle-btn:first-child { border-right: 1px solid var(--line); }
+.fee-toggle-btn:hover { color: var(--navy); }
+.fee-toggle-btn.is-active {
+  background: var(--navy);
+  color: var(--ivory);
+  cursor: default;
+}
+.fee-toggle-btn:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: -3px;
+}
+
+.fee-answer-wrap [data-state] { display: none; }
+.fee-answer-wrap[data-state="losing"] [data-state="losing"],
+.fee-answer-wrap[data-state="winning"] [data-state="winning"] { display: block; }
+
+/* Reduced motion: kill the letter-spacing transition on hover.
+   The rest of the interactions are click-driven, not motion-driven. */
+@media (prefers-reduced-motion: reduce) {
+  .read-next a { transition: none; }
+  .read-next a:hover { letter-spacing: 0.14em; }
+  .share-quote, .share-quote::before, .share-quote::after,
+  .share-hint, .fee-toggle-btn { transition: none; }
+}

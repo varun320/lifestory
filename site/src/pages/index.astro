@@ -1,0 +1,268 @@
+---
+import Base from '../layouts/Base.astro';
+
+const title = 'Life Story Wealth Planning — Alex Hilbert, Registered Investment Advisor, Scottsdale, Arizona';
+const description = 'A small Scottsdale investment advisory firm run by Alex Hilbert, a Registered Investment Advisor and fiduciary. Active portfolio management for people who have already built their wealth.';
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Alex Hilbert',
+  jobTitle: 'Registered Investment Advisor',
+  worksFor: {
+    '@type': 'FinancialService',
+    name: 'Life Story Wealth Planning',
+    url: 'https://lifestorywp.com',
+  },
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Scottsdale',
+    addressRegion: 'AZ',
+    addressCountry: 'US',
+  },
+};
+
+const firmSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FinancialService',
+  name: 'Life Story Wealth Planning',
+  url: 'https://lifestorywp.com',
+  founder: { '@type': 'Person', name: 'Alex Hilbert' },
+  areaServed: { '@type': 'State', name: 'Arizona' },
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Scottsdale',
+    addressRegion: 'AZ',
+    addressCountry: 'US',
+  },
+};
+---
+<Base title={title} description={description} canonicalPath="/">
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(firmSchema)} />
+  </Fragment>
+
+  <Fragment slot="rail">
+    <a href="#why"><span></span><em>Why</em></a>
+    <a href="#who"><span></span><em>Who</em></a>
+    <a href="#cost"><span></span><em>Cost</em></a>
+    <a href="#custody"><span></span><em>Custody</em></a>
+    <a href="#next"><span></span><em>Next</em></a>
+  </Fragment>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <p class="hero-eyebrow">Life Story Wealth Planning</p>
+        <h1>What is this money <em>for?</em></h1>
+        <p class="lede">
+          That question comes before any portfolio decision. My name is Alex Hilbert. I run a small
+          investment advisory firm in Scottsdale, Arizona, for people who have already built their
+          wealth and want it managed by someone who is actually managing it.
+        </p>
+        <a class="cta" href="#next">Start a conversation →</a>
+        <a class="cta-ghost" href="/about">Read about Alex</a>
+      </div>
+      <figure class="hero-figure" aria-hidden="true">
+        <span class="hero-figure-caption">Alex Hilbert · Portrait to come</span>
+      </figure>
+    </div>
+  </section>
+
+  <div class="credbar">
+    <div class="credbar-inner">
+      <button type="button" class="cred-btn" data-target="ria">Registered Investment Advisor</button>
+      <button type="button" class="cred-btn" data-target="fid">Fiduciary Standard</button>
+      <button type="button" class="cred-btn" data-target="cust">Third-Party Custodian</button>
+      <button type="button" class="cred-btn" data-target="fee">Fee-Aligned</button>
+    </div>
+    <div class="cred-expand" data-cred="ria" hidden>
+      <p>
+        <strong>Registered Investment Advisor.</strong> A specific US regulatory designation, not a job
+        title anyone can adopt. It requires SEC or state registration and comes with legal obligations
+        that don't apply to unregistered advisors — including the fiduciary standard described below.
+      </p>
+    </div>
+    <div class="cred-expand" data-cred="fid" hidden>
+      <p>
+        <strong>Fiduciary Standard.</strong> A legal requirement to act in your interest ahead of my
+        own. Most broker-dealers operate under the lower "suitability" standard — they only have to
+        recommend products that are broadly suitable for your situation, not necessarily what's best
+        for you. As a fiduciary I don't have that latitude.
+      </p>
+    </div>
+    <div class="cred-expand" data-cred="cust" hidden>
+      <p>
+        <strong>Third-Party Custodian.</strong> Your assets are held at an independent custodian — not
+        by the firm. I direct how the money in your account is invested. I cannot move funds out of it,
+        to me or to anyone else. That structural separation is described in full on the Custody page.
+      </p>
+    </div>
+    <div class="cred-expand" data-cred="fee" hidden>
+      <p>
+        <strong>Fee-Aligned.</strong> There is no management fee. I am paid only when your portfolio
+        exceeds a defined threshold in a given quarter. If it doesn't, I don't get paid for that
+        quarter. My incentives are aligned with yours by construction, not by promise.
+      </p>
+    </div>
+  </div>
+
+  <section id="why" class="sect sect-diff">
+    <span class="chapter-num" aria-hidden="true">Ⅰ</span>
+    <div class="sect-inner">
+      <p class="sect-eyebrow"><span class="numeral">Ⅰ</span>Why this firm exists <a class="sect-anchor" href="#why" aria-label="Copy link to this section">§</a></p>
+      <h2>Most portfolios sit still. Markets do not.</h2>
+      <div class="body">
+        <div>
+          <p>When markets fall, the standard answer clients hear from their adviser is to do nothing.</p>
+          <p>
+            I do not think that is management. It is the absence of it. I built this firm to work the
+            other way — to actually manage portfolios, reviewed and reconstituted every quarter,
+            moved between asset classes as conditions change.
+          </p>
+        </div>
+        <div>
+          <p>
+            The process has a name. I call it <strong>Zermagen</strong>, from the Hebrew for
+            <em>fortress and shield</em>. It is built around a single idea: risk comes first. Before I
+            decide what to buy, I decide what could go wrong and how to guard against it.
+          </p>
+          <p>If you were referred to me, the page most people read next is <a href="/about">About</a>.</p>
+        </div>
+      </div>
+    </div>
+    <div class="read-next"><a href="#pull-markets">Continue — a note on markets →</a></div>
+  </section>
+
+  <div class="pull-wrap" id="pull-markets">
+    <p class="pull">Markets are people first, and mathematics a distant third.</p>
+  </div>
+
+  <section id="who" class="sect sect-recog">
+    <span class="chapter-num" aria-hidden="true">Ⅱ</span>
+    <div class="sect-inner">
+      <p class="sect-eyebrow"><span class="numeral">Ⅱ</span>Who this is for <a class="sect-anchor" href="#who" aria-label="Copy link to this section">§</a></p>
+      <div class="inner">
+        <h3>A small number of people, quietly served.</h3>
+        <div>
+          <p class="lead">
+            Most of my clients came to me because someone they trust suggested it. If that is how you
+            arrived here, you are the person this site is written for.
+          </p>
+          <p>
+            I work with a small number of individuals — usually approaching retirement or already in
+            it, usually more focused on keeping what they have built than on growing it aggressively.
+          </p>
+        </div>
+      </div>
+
+      <div class="diptych">
+        <div class="diptych-col">
+          <h4>It probably is a fit if</h4>
+          <ul>
+            <li>You have built your wealth and are more focused on keeping it than on growing it aggressively.</li>
+            <li>You want an actively managed portfolio, not one left on a fixed model and forgotten.</li>
+            <li>You prefer to work directly with the person managing your money, not through layers.</li>
+            <li>You are careful. You read carefully, and you make decisions in your own time.</li>
+          </ul>
+        </div>
+        <div class="diptych-rule" aria-hidden="true"></div>
+        <div class="diptych-col">
+          <h4>It probably isn't if</h4>
+          <ul>
+            <li>You are early in building your wealth and are looking for aggressive growth.</li>
+            <li>You want a portfolio you never look at, matched to a passive index and left alone.</li>
+            <li>You want frequent trading based on short-term market calls.</li>
+            <li>You want product recommendations paid for by commission.</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="diptych-note">
+        If any of the right column describes you, there are firms that fit that better than I do, and
+        I will say so directly. <a href="/who-i-work-with">The full Who I work with page →</a>
+      </p>
+    </div>
+    <div class="read-next"><a href="#cost">Continue — What it costs →</a></div>
+  </section>
+
+  <section id="cost" class="sect sect-fee">
+    <span class="chapter-num" aria-hidden="true">Ⅲ</span>
+    <div class="sect-inner">
+      <p class="sect-eyebrow"><span class="numeral">Ⅲ</span>What it costs <a class="sect-anchor" href="#cost" aria-label="Copy link to this section">§</a></p>
+
+      <div class="fee-toggle" role="tablist" aria-label="Fee arrangement">
+        <button type="button" class="fee-toggle-btn is-active" role="tab" aria-selected="true" data-state="losing">In a losing quarter</button>
+        <button type="button" class="fee-toggle-btn" role="tab" aria-selected="false" data-state="winning">In a winning quarter</button>
+      </div>
+
+      <div class="fee-answer-wrap" data-state="losing">
+        <p class="fee-answer" data-state="losing">Potentially nothing.</p>
+        <p class="fee-answer" data-state="winning">A share of your gain.</p>
+        <p data-state="losing">
+          There is no management fee. When the strategy does not exceed the defined threshold in a
+          given quarter, I am not paid for that quarter.
+        </p>
+        <p data-state="winning">
+          There is no management fee. When the strategy exceeds the threshold in a given quarter,
+          I am paid a share of the gain above it. Not commissions. Not fixed fees. A share.
+        </p>
+      </div>
+
+      <p><a href="/fees">The exact wording, and what it means in plain language, is on the Fees page →</a></p>
+    </div>
+    <div class="read-next"><a href="#custody">Continue — Where your money is →</a></div>
+  </section>
+
+  <section id="custody" class="sect sect-custody">
+    <span class="chapter-num" aria-hidden="true">Ⅳ</span>
+    <div class="sect-inner">
+      <p class="sect-eyebrow"><span class="numeral">Ⅳ</span>Where your money actually is <a class="sect-anchor" href="#custody" aria-label="Copy link to this section">§</a></p>
+
+      <h3 class="custody-statement">I never hold client money.</h3>
+
+      <div class="custody-body">
+        <p>
+          Your account is at a third-party custodian, in your own name. I direct how it is invested.
+          I cannot move funds out of it, to me or to anyone else.
+        </p>
+        <p>
+          That distinction is the single most important structural safeguard in how I have set up
+          the firm.
+        </p>
+        <p><a href="/custody">The full explanation is on the Custody page →</a></p>
+      </div>
+    </div>
+    <div class="read-next"><a href="#next">Continue — The next step →</a></div>
+  </section>
+
+  <section id="next" class="sect sect-next">
+    <span class="chapter-num" aria-hidden="true">Ⅴ</span>
+    <div class="sect-inner">
+      <p class="sect-eyebrow"><span class="numeral">Ⅴ</span>The next step <a class="sect-anchor" href="#next" aria-label="Copy link to this section">§</a></p>
+      <h3>
+        If you were referred to me, the page most people read next is About. If you would rather
+        talk, start a conversation.
+      </h3>
+      <div class="cards">
+        <a href="/about" class="card">
+          <h4>Read about Alex</h4>
+          <p>
+            The Vanguard-to-independent origin story, what fiduciary means in practice, and how to
+            verify me before we speak.
+          </p>
+          <span class="link">Open About</span>
+        </a>
+        <a href="/contact" class="card">
+          <h4>Start a conversation</h4>
+          <p>
+            A short message is enough. I reply personally. No pressure to move faster than you want
+            to.
+          </p>
+          <span class="link">Open Contact</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,4 @@
+# Staging — do not index. Flip to Allow: / and add Sitemap: line at cutover.
+# See docs/part-2-implementation/03-staging-and-launch.md
+User-agent: *
+Disallow: /

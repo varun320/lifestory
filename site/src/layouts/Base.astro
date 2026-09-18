@@ -1,0 +1,257 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Staging default: block search engines. Flip to false at launch. */
+  noindex?: boolean;
+  /** Path portion of canonical URL, e.g. "/" or "/about". */
+  canonicalPath?: string;
+}
+
+const {
+  title,
+  description,
+  noindex = true,
+  canonicalPath = Astro.url.pathname,
+} = Astro.props;
+
+const canonical = new URL(canonicalPath, Astro.site).toString();
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+
+  {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+  {/* Open Graph */}
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Life Story Wealth Planning" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+
+  {/* Fonts — CDN for now, upgrade to @fontsource pre-launch for perf */}
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Source+Sans+3:wght@400;500;600;700&display=swap"
+  />
+
+  <slot name="head" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="progress" aria-hidden="true"></div>
+
+  <div class="topbar">
+    <div class="topbar-inner">
+      <span>Registered Investment Advisor</span>
+      <span>Scottsdale, Arizona</span>
+    </div>
+  </div>
+
+  <div class="nav-wrap">
+    <div class="nav-inner">
+      <div class="brand">
+        <a href="/" class="brand-mark" style="text-decoration:none">Life Story <em>Wealth Planning</em></a>
+        <div class="brand-tag">Est. 2012</div>
+      </div>
+      <nav aria-label="Main navigation">
+        <ul>
+          <li><a href="/" aria-current={Astro.url.pathname === '/' ? 'page' : undefined}>Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/approach">Approach</a></li>
+          <li><a href="/fees">Fees</a></li>
+          <li><a href="/custody">Custody</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <aside class="rail" aria-hidden="true">
+    <slot name="rail" />
+  </aside>
+
+  <main id="main">
+    <slot />
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <h5>Life Story Wealth Planning</h5>
+        <p>A small investment advisory firm in Scottsdale, Arizona. Alex Hilbert, Registered Investment Advisor and fiduciary.</p>
+      </div>
+      <div>
+        <h5>Verify</h5>
+        <ul>
+          {/* [NEEDS CONFIRMATION: exact SEC IAPD URL for Alex/firm CRD] */}
+          <li><a href="https://adviserinfo.sec.gov/" target="_blank" rel="noopener">Form ADV (SEC / IAPD)</a></li>
+          <li><a href="https://brokercheck.finra.org/" target="_blank" rel="noopener">FINRA BrokerCheck</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <ul>
+          <li>Scottsdale, Arizona</li>
+          <li><a href="/contact">Start a conversation</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <span>© {new Date().getFullYear()} Life Story Wealth Planning</span>
+      <span>[Required regulatory disclosures — from counsel, not copied]</span>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      // Reading progress — functional, not decorative.
+      const bar = document.querySelector<HTMLElement>('.progress');
+      function onScroll() {
+        const h = document.documentElement;
+        const pct = h.scrollTop / Math.max(1, h.scrollHeight - h.clientHeight);
+        if (bar) bar.style.transform = 'scaleX(' + pct + ')';
+      }
+      document.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      // Right rail active state — wayfinding aid.
+      const railLinks = document.querySelectorAll<HTMLAnchorElement>('.rail a');
+      if (railLinks.length && 'IntersectionObserver' in window) {
+        const ids = Array.from(railLinks).map((a) => a.getAttribute('href')?.slice(1) || '');
+        const sections = ids.map((id) => document.getElementById(id));
+        const ioRail = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              const i = sections.indexOf(e.target as HTMLElement);
+              railLinks.forEach((a, j) => a.classList.toggle('active', j === i));
+            }
+          });
+        }, { rootMargin: '-45% 0px -45% 0px' });
+        sections.forEach((s) => { if (s) ioRail.observe(s); });
+      }
+
+      // § anchor — click to copy section URL. Referrals travel as specific links.
+      document.querySelectorAll<HTMLAnchorElement>('.sect-anchor').forEach((a) => {
+        a.addEventListener('click', (ev) => {
+          if (!navigator.clipboard) return;
+          ev.preventDefault();
+          const href = a.getAttribute('href') || '';
+          const url = window.location.origin + window.location.pathname + href;
+          navigator.clipboard.writeText(url).then(() => {
+            history.replaceState(null, '', href);
+            a.classList.add('is-copied');
+            setTimeout(() => a.classList.remove('is-copied'), 1400);
+          }).catch(() => history.replaceState(null, '', href));
+        });
+      });
+
+      // Highlight-to-share — user selects any text, popover offers to copy quote + link.
+      // Because Alex's strategy is content that gets shared.
+      const popover = document.createElement('button');
+      popover.className = 'share-popover';
+      popover.type = 'button';
+      popover.textContent = 'Share this quote';
+      popover.setAttribute('aria-label', 'Copy selected text with link to clipboard');
+      document.body.appendChild(popover);
+
+      let currentQuote = '';
+      let currentSectionId = '';
+
+      function findEnclosingSectionId(node: Node | null): string {
+        while (node && node !== document.body) {
+          if (node instanceof HTMLElement && node.id && node.tagName === 'SECTION') return node.id;
+          node = node.parentNode;
+        }
+        return '';
+      }
+
+      function updatePopover() {
+        const sel = window.getSelection();
+        if (!sel || sel.isCollapsed) { popover.classList.remove('is-visible'); return; }
+        const text = sel.toString().trim();
+        if (text.length < 12) { popover.classList.remove('is-visible'); return; }
+        const range = sel.getRangeAt(0);
+        const rect = range.getBoundingClientRect();
+        if (!rect.width && !rect.height) { popover.classList.remove('is-visible'); return; }
+        currentQuote = text;
+        currentSectionId = findEnclosingSectionId(range.startContainer);
+        popover.style.left = (rect.left + rect.width / 2) + 'px';
+        popover.style.top = rect.top + 'px';
+        popover.textContent = 'Share this quote';
+        popover.classList.remove('is-copied');
+        popover.classList.add('is-visible');
+      }
+
+      document.addEventListener('mouseup', () => { setTimeout(updatePopover, 0); });
+      document.addEventListener('keyup', (e) => {
+        if (e.shiftKey || e.key === 'Shift') setTimeout(updatePopover, 0);
+      });
+      document.addEventListener('selectionchange', () => {
+        const sel = window.getSelection();
+        if (!sel || sel.isCollapsed) popover.classList.remove('is-visible');
+      });
+
+      popover.addEventListener('click', (ev) => {
+        ev.preventDefault();
+        if (!navigator.clipboard || !currentQuote) return;
+        const url = window.location.origin + window.location.pathname + (currentSectionId ? '#' + currentSectionId : '');
+        const payload = '"' + currentQuote + '"\n— Alex Hilbert, Life Story Wealth Planning\n' + url;
+        navigator.clipboard.writeText(payload).then(() => {
+          popover.classList.add('is-copied');
+          popover.textContent = 'Copied';
+          setTimeout(() => popover.classList.remove('is-visible'), 1400);
+        });
+      });
+
+      // Credentials strip — click a term to expand its meaning inline.
+      document.querySelectorAll<HTMLButtonElement>('.cred-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const target = btn.dataset.target;
+          if (!target) return;
+          const wasActive = btn.classList.contains('is-active');
+          document.querySelectorAll<HTMLButtonElement>('.cred-btn').forEach((b) => b.classList.remove('is-active'));
+          document.querySelectorAll<HTMLElement>('.cred-expand').forEach((e) => (e.hidden = true));
+          if (!wasActive) {
+            btn.classList.add('is-active');
+            const exp = document.querySelector<HTMLElement>(`.cred-expand[data-cred="${target}"]`);
+            if (exp) exp.hidden = false;
+          }
+        });
+      });
+
+      // Fee arrangement toggle — reader clicks between "losing" and "winning" quarter.
+      // No numbers. Just the structural fact of alignment made feel-able.
+      document.querySelectorAll<HTMLButtonElement>('.fee-toggle-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const state = btn.dataset.state;
+          if (!state) return;
+          const toggle = btn.closest('.fee-toggle');
+          const wrap = toggle?.parentElement?.querySelector<HTMLElement>('.fee-answer-wrap');
+          if (!toggle || !wrap) return;
+          toggle.querySelectorAll<HTMLButtonElement>('.fee-toggle-btn').forEach((b) => {
+            const active = b === btn;
+            b.classList.toggle('is-active', active);
+            b.setAttribute('aria-selected', active ? 'true' : 'false');
+          });
+          wrap.setAttribute('data-state', state);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
