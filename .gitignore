@@ -1,0 +1,30 @@
+# Node / Astro
+node_modules/
+dist/
+.astro/
+.vercel/
+
+# Env
+.env
+.env.production
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.idea/
+.vscode/
+
+# Playwright + verification artifacts
+.playwright-mcp/
+_shot-*.png
+_*.tmp
+_pdf_text.txt
+
+# Log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
