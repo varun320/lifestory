@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Life Story Wealth Planning — Alex Hilbert, Registered Investment Advisor, Scottsdale, Arizona</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fafaf7;
+    --surface: #ffffff;
+    --surface-2: #f2f0e9;
+    --ink: #111111;
+    --ink-2: #2b2b2b;
+    --ink-3: #4a4a4a;
+    --ink-4: #6a6a6a;
+    --rule: #dcdad3;
+    --accent: #244a34;
+    --accent-soft: #eaf1ec;
+    --focus: #1a4570;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 19px;
+    line-height: 1.65;
+    color: var(--ink);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "ss01", "cv11";
+  }
+  a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); transition: border-color 120ms, color 120ms; }
+  a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+  a:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
+
+  /* Nav */
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(250,250,247,0.94);
+    backdrop-filter: saturate(140%) blur(8px);
+    -webkit-backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .nav {
+    max-width: 1200px; margin: 0 auto; padding: 22px 40px;
+    display: flex; align-items: center; justify-content: space-between; gap: 40px;
+  }
+  .brand { font-size: 16px; font-weight: 600; letter-spacing: -0.005em; color: var(--ink); }
+  .brand span { color: var(--ink-4); font-weight: 400; }
+  nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 32px; font-size: 15px; font-weight: 500; }
+  nav a { color: var(--ink-3); border-bottom: none; position: relative; padding: 4px 0; }
+  nav a::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -6px;
+    height: 1px; background: transparent; transition: background 140ms;
+  }
+  nav a:hover { color: var(--ink); }
+  nav a:hover::after { background: var(--accent); }
+  nav a[aria-current="page"] { color: var(--ink); }
+  nav a[aria-current="page"]::after { background: var(--ink); }
+
+  /* Hero — intent: three signals fast, room for the question to breathe */
+  .hero {
+    max-width: 1200px; margin: 0 auto;
+    padding: 140px 40px 96px;
+    display: grid; grid-template-columns: 1fr; gap: 56px;
+  }
+  .meta-line {
+    display: flex; gap: 32px; font-size: 14px; font-weight: 500;
+    color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.10em;
+    flex-wrap: wrap;
+  }
+  .meta-line span { display: inline-flex; align-items: center; gap: 10px; }
+  .meta-line span::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+  }
+  .hero h1 {
+    font-family: 'Inter', sans-serif; font-weight: 500;
+    font-size: clamp(48px, 6.4vw, 90px);
+    line-height: 1.02; letter-spacing: -0.028em;
+    margin: 0; max-width: 18ch; color: var(--ink);
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero-sub {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end;
+  }
+  .hero-sub p {
+    font-size: 21px; line-height: 1.55; color: var(--ink-2);
+    margin: 0; max-width: 44ch;
+  }
+  .cta-row { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+  .cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 16px; font-weight: 500; color: var(--bg); background: var(--ink);
+    padding: 16px 28px; border-radius: 4px; border: 1px solid var(--ink);
+    text-decoration: none; transition: background 140ms, border-color 140ms;
+  }
+  .cta:hover { background: var(--accent); border-color: var(--accent); }
+  .cta-secondary {
+    font-size: 16px; font-weight: 500; color: var(--ink-2);
+    border-bottom: 1px solid var(--ink-4); padding-bottom: 3px;
+  }
+  .cta-secondary:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* Divider */
+  .divider { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+  .divider hr { border: 0; height: 1px; background: var(--rule); margin: 0; }
+
+  /* Section — differentiator (intent: name industry failure mode in one beat) */
+  .section-diff {
+    max-width: 1200px; margin: 0 auto;
+    padding: 108px 40px 60px;
+    display: grid; grid-template-columns: 280px 1fr; gap: 80px;
+  }
+  .section-label { align-self: start; }
+  .section-label .kicker {
+    font-size: 13px; font-weight: 600; color: var(--accent);
+    letter-spacing: 0.14em; text-transform: uppercase;
+    display: block; margin-bottom: 14px;
+  }
+  .section-label h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(30px, 3.4vw, 42px);
+    font-weight: 500; color: var(--ink);
+    margin: 0; letter-spacing: -0.02em; line-height: 1.15;
+  }
+  .section-body {
+    font-size: 21px; line-height: 1.7; color: var(--ink);
+    max-width: 60ch;
+  }
+  .section-body p { margin: 0 0 1.15em; }
+  .section-body p:last-child { margin-bottom: 0; }
+  .section-body strong { color: var(--ink); font-weight: 600; }
+
+  /* Pull-quote — intent: stop the scroll */
+  .pull-wrap {
+    max-width: 1200px; margin: 0 auto;
+    padding: 40px 40px 100px;
+  }
+  .pull {
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    padding: 44px 48px;
+    font-size: clamp(24px, 2.6vw, 32px);
+    line-height: 1.35; color: var(--ink);
+    font-weight: 500; letter-spacing: -0.01em;
+    max-width: 42ch; margin: 0 auto;
+  }
+
+  /* Section — recognition (intent: right reader recognises themselves) */
+  .section-recog {
+    background: var(--surface-2);
+    padding: 96px 40px 112px;
+  }
+  .section-recog-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 280px 1fr; gap: 80px;
+  }
+  .section-recog h3 {
+    font-size: 26px; font-weight: 600; color: var(--ink);
+    margin: 0; letter-spacing: -0.01em;
+  }
+  .section-recog .lead {
+    font-size: 26px; line-height: 1.4; color: var(--ink);
+    font-weight: 500; letter-spacing: -0.01em;
+    margin: 0 0 1em; max-width: 42ch;
+  }
+  .section-recog p {
+    font-size: 19px; line-height: 1.7; color: var(--ink-2);
+    margin: 0 0 1em; max-width: 56ch;
+  }
+  .section-recog a { color: var(--accent); border-bottom-color: var(--accent); font-weight: 500; }
+
+  /* Section — fee hook (intent: two-word punch, then explain) */
+  .section-fee {
+    max-width: 1200px; margin: 0 auto;
+    padding: 120px 40px 128px;
+    display: grid; grid-template-columns: 1.1fr 1fr;
+    gap: 96px; align-items: center;
+  }
+  .section-fee .left { border-left: 3px solid var(--accent); padding-left: 36px; }
+  .section-fee .kicker {
+    font-size: 13px; font-weight: 600; color: var(--accent);
+    letter-spacing: 0.14em; text-transform: uppercase;
+    display: block; margin-bottom: 20px;
+  }
+  .section-fee .answer {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(52px, 6.4vw, 88px);
+    font-weight: 500;
+    line-height: 1;
+    color: var(--ink);
+    letter-spacing: -0.035em;
+    margin: 0;
+  }
+  .section-fee .right p {
+    font-size: 21px; line-height: 1.65; color: var(--ink-2);
+    margin: 0 0 1em; max-width: 44ch;
+  }
+  .section-fee .right a { color: var(--accent); border-bottom-color: var(--accent); font-weight: 500; }
+
+  /* Footer preview */
+  .footer-preview {
+    border-top: 1px solid var(--rule);
+    padding: 36px 40px; text-align: center;
+    font-size: 15px; color: var(--ink-3);
+    background: var(--bg);
+  }
+  .footer-preview a { border-bottom: none; color: var(--ink-2); }
+  .footer-preview a:hover { color: var(--accent); }
+
+  @media (max-width: 900px) {
+    .nav { padding: 16px 24px; flex-wrap: wrap; }
+    nav ul { gap: 16px; font-size: 14px; flex-wrap: wrap; }
+    .hero { padding: 72px 24px 48px; gap: 40px; }
+    .hero-sub { grid-template-columns: 1fr; gap: 32px; }
+    .section-diff { padding: 56px 24px 32px; grid-template-columns: 1fr; gap: 24px; }
+    .pull-wrap { padding: 24px 24px 56px; }
+    .pull { padding: 28px 24px; }
+    .section-recog { padding: 56px 24px 72px; }
+    .section-recog-inner { grid-template-columns: 1fr; gap: 24px; }
+    .section-fee { padding: 64px 24px 80px; grid-template-columns: 1fr; gap: 32px; }
+    .section-fee .left { padding-left: 20px; }
+    .divider { padding: 0 24px; }
+    .footer-preview { padding: 28px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">Life Story <span>/ Wealth Planning</span></div>
+    <nav aria-label="Main navigation">
+      <ul>
+        <li><a href="#" aria-current="page">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Approach</a></li>
+        <li><a href="#">Who I work with</a></li>
+        <li><a href="#">Fees</a></li>
+        <li><a href="#">Custody</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="meta-line">
+      <span>Registered Investment Advisor</span>
+      <span>Fiduciary</span>
+      <span>Scottsdale, Arizona</span>
+    </div>
+
+    <h1>What is this money <span>for?</span></h1>
+
+    <div class="hero-sub">
+      <p>That question comes before any portfolio decision. My name is Alex Hilbert. I run a small investment advisory firm in Scottsdale, Arizona, for people who have already built their wealth and want it managed by someone who is actually managing it.</p>
+      <div class="cta-row">
+        <a class="cta" href="#">Start a conversation <span aria-hidden="true">→</span></a>
+        <a class="cta-secondary" href="#">Read about Alex</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><hr></div>
+
+  <section class="section-diff">
+    <div class="section-label">
+      <span class="kicker">Why this firm exists</span>
+      <h2>Most portfolios sit still. Markets do not.</h2>
+    </div>
+    <div class="section-body">
+      <p>When markets fall, the standard answer clients hear from their adviser is to do nothing.</p>
+      <p>I do not think that is management. It is the absence of it.</p>
+      <p>I built this firm to work the other way. To actually manage portfolios — reviewed and reconstituted every quarter, moved between asset classes as conditions change, with the discretion to hold cash when nothing deserves capital. The process has a name — I call it <strong>Zermagen</strong>, which is Hebrew for fortress and shield.</p>
+    </div>
+  </section>
+
+  <div class="pull-wrap">
+    <p class="pull">Markets are people first, and mathematics a distant third.</p>
+  </div>
+
+  <section class="section-recog">
+    <div class="section-recog-inner">
+      <h3>Who this is for</h3>
+      <div>
+        <p class="lead">Most of my clients came to me because someone they trust suggested it. If that is how you arrived here, you are the person this site is written for.</p>
+        <p>I work with a small number of individuals — usually approaching retirement or already in it, usually more focused on keeping what they have built than on growing it aggressively.</p>
+        <p><a href="#">The Who I work with page describes the fit in more detail →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-fee">
+    <div class="left">
+      <span class="kicker">What it costs</span>
+      <p class="answer">Potentially nothing.</p>
+    </div>
+    <div class="right">
+      <p>There is no management fee. I am paid only on gains above a defined threshold — and if the strategy does not work in a given quarter, I do not get paid for that quarter.</p>
+      <p><a href="#">The exact wording, and what it means in plain language, is on the Fees page →</a></p>
+    </div>
+  </section>
+
+</main>
+
+<div class="footer-preview">
+  <a href="#">Form ADV</a> &nbsp;·&nbsp; <a href="#">FINRA BrokerCheck</a> &nbsp;·&nbsp; Scottsdale, AZ &nbsp;·&nbsp; © 2026
+</div>
+
+</body>
+</html>

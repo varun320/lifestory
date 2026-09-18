@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Life Story Wealth Planning — Alex Hilbert, Registered Investment Advisor, Scottsdale, Arizona</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1613;
+    --ink-soft: #4a423b;
+    --ink-faint: #7a7167;
+    --paper: #f6f1e7;
+    --paper-warm: #efe7d6;
+    --rule: #cbc0aa;
+    --accent: #4a3a2a;         /* deep muted oxblood-brown — editorial, not magazine-red */
+    --accent-2: #6b2b1a;
+    --focus: #1a4570;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 20px;
+    line-height: 1.55;
+    color: var(--ink);
+    background: var(--paper);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  a { color: var(--accent-2); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 120ms ease; }
+  a:hover { border-bottom-color: var(--accent-2); }
+  a:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
+
+  /* Masthead */
+  .masthead {
+    padding: 22px 0 18px;
+    border-bottom: 1px solid var(--rule);
+    background: var(--paper);
+  }
+  .masthead-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 48px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 40px;
+  }
+  .wordmark {
+    font-family: 'EB Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+  }
+  .wordmark small {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-top: 2px;
+  }
+  nav ul {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: flex;
+    gap: 28px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  nav a { color: var(--ink-soft); font-weight: 500; }
+  nav a[aria-current="page"] { color: var(--ink); }
+
+  /* Dateline strip */
+  .dateline {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12px 48px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* Hero — intent: land three signals in the first breath */
+  .hero {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 108px 48px 96px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
+    align-items: end;
+    border-bottom: 1px solid var(--rule);
+  }
+  .hero-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 24px;
+  }
+  .hero h1 {
+    font-family: 'EB Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(46px, 6vw, 78px);
+    line-height: 1.02;
+    letter-spacing: -0.015em;
+    margin: 0 0 32px;
+    color: var(--ink);
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero p.lede {
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 0 0 36px;
+    max-width: 38ch;
+  }
+  .cta {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--paper);
+    background: var(--ink);
+    padding: 16px 26px;
+    border: 1px solid var(--ink);
+    border-radius: 0;
+    text-decoration: none;
+    transition: background 140ms, color 140ms;
+  }
+  .cta:hover { background: transparent; color: var(--ink); }
+
+  .hero-figure {
+    aspect-ratio: 4/5;
+    background:
+      linear-gradient(160deg, rgba(74,58,42,0.08) 0%, rgba(74,58,42,0) 40%),
+      var(--paper-warm);
+    position: relative;
+    border: 1px solid var(--rule);
+  }
+  .hero-figure::before {
+    content: "";
+    position: absolute; inset: 20px;
+    border: 1px solid var(--rule);
+  }
+  .hero-figure-caption {
+    position: absolute;
+    bottom: -32px; right: 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  /* Section — differentiator (intent: name industry failure mode in one beat) */
+  .section-diff {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 112px 48px 72px;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 72px;
+  }
+  .section-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 8px 0 0;
+    align-self: start;
+  }
+  .section-body { max-width: 62ch; }
+  .section-body h2 {
+    font-family: 'EB Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(32px, 3.6vw, 46px);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: 0 0 32px;
+    max-width: 20ch;
+  }
+  .section-body p {
+    font-size: 22px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin: 0 0 1.2em;
+  }
+  .section-body p:last-child { margin-bottom: 0; }
+  .section-body em {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  /* Pull-quote — intent: make the reader stop scrolling */
+  .pull-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 48px 96px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .pull {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(30px, 3.4vw, 42px);
+    line-height: 1.25;
+    color: var(--ink);
+    max-width: 22ch;
+    margin: 0 auto;
+    padding: 32px 0;
+    text-align: center;
+    position: relative;
+  }
+  .pull::before, .pull::after {
+    content: "";
+    display: block;
+    width: 48px; height: 1px;
+    background: var(--accent);
+    margin: 0 auto;
+  }
+  .pull::before { margin-bottom: 32px; }
+  .pull::after { margin-top: 32px; }
+
+  /* Section — recognition (intent: right reader recognises themselves in one line) */
+  .section-recog {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 96px 48px 96px;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 72px;
+  }
+  .section-recog .lead {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 1.35;
+    color: var(--ink);
+    margin: 0 0 1em;
+    max-width: 40ch;
+  }
+  .section-recog p {
+    font-size: 20px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin: 0 0 1.1em;
+    max-width: 58ch;
+  }
+
+  /* Section — fee hook (intent: wait-what answer, then explain) */
+  .section-fee {
+    border-top: 1px solid var(--rule);
+    background: var(--paper-warm);
+  }
+  .section-fee-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 112px 48px 128px;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 72px;
+  }
+  .section-fee .question {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 20px;
+  }
+  .section-fee .answer {
+    font-family: 'EB Garamond', serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: clamp(48px, 6vw, 84px);
+    line-height: 1.02;
+    letter-spacing: -0.015em;
+    color: var(--accent);
+    margin: 0 0 40px;
+    max-width: 12ch;
+  }
+  .section-fee p {
+    font-size: 20px;
+    line-height: 1.6;
+    color: var(--ink);
+    margin: 0 0 1.1em;
+    max-width: 56ch;
+  }
+  .section-fee p:last-child { margin-bottom: 0; }
+
+  /* Footer preview */
+  .footer-preview {
+    background: var(--paper-warm);
+    border-top: 1px solid var(--rule);
+    padding: 40px 48px;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding: 56px 28px; gap: 40px; }
+    .section-diff, .section-recog { grid-template-columns: 1fr; padding: 64px 28px; gap: 20px; }
+    .section-fee-inner { grid-template-columns: 1fr; padding: 64px 28px 80px; gap: 20px; }
+    .pull-wrap { padding: 24px 28px 64px; }
+    .masthead-inner, .dateline { padding-left: 28px; padding-right: 28px; }
+    nav ul { gap: 18px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="wordmark">
+      Life Story Wealth Planning
+      <small>Alex Hilbert · Scottsdale, AZ</small>
+    </div>
+    <nav aria-label="Main navigation">
+      <ul>
+        <li><a href="#" aria-current="page">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Approach</a></li>
+        <li><a href="#">Who I work with</a></li>
+        <li><a href="#">Fees</a></li>
+        <li><a href="#">Custody</a></li>
+        <li><a href="#">How we start</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="dateline">
+  <span>Registered Investment Advisor · Fiduciary</span>
+  <span>Scottsdale, Arizona</span>
+</div>
+
+<main>
+
+  <section class="hero">
+    <div>
+      <p class="hero-eyebrow">Life Story Wealth Planning</p>
+      <h1>What is this money <em>for?</em></h1>
+      <p class="lede">That question comes before any portfolio decision. My name is Alex Hilbert. I run a small investment advisory firm in Scottsdale, Arizona, for people who have already built their wealth and want it managed by someone who is actually managing it.</p>
+      <a class="cta" href="#">Start a conversation →</a>
+    </div>
+    <figure class="hero-figure" aria-hidden="true">
+      <span class="hero-figure-caption">Portrait to come</span>
+    </figure>
+  </section>
+
+  <section class="section-diff">
+    <p class="section-eyebrow">Why this firm exists</p>
+    <div class="section-body">
+      <h2>Most portfolios sit still. Markets do not.</h2>
+      <p>When markets fall, the standard answer clients hear from their adviser is to do nothing.</p>
+      <p>I do not think that is management. It is the absence of it.</p>
+      <p>I built this firm to work the other way. To actually manage portfolios — reviewed and reconstituted every quarter, moved between asset classes as conditions change, with the discretion to hold cash when nothing deserves capital. The process has a name. I call it <em>Zermagen</em>, which is Hebrew for fortress and shield.</p>
+    </div>
+  </section>
+
+  <div class="pull-wrap">
+    <p class="pull">Markets are people first and mathematics a distant third.</p>
+  </div>
+
+  <section class="section-recog">
+    <p class="section-eyebrow">Who this is for</p>
+    <div>
+      <p class="lead">Most of my clients came to me because someone they trust suggested it. If that is how you arrived here, you are the person this site is written for.</p>
+      <p>I work with a small number of individuals — usually approaching retirement or already in it, usually more focused on keeping what they have built than on growing it aggressively.</p>
+      <p><a href="#">The Who I work with page describes the fit in more detail →</a></p>
+    </div>
+  </section>
+
+  <section class="section-fee">
+    <div class="section-fee-inner">
+      <p class="section-eyebrow question">What it costs</p>
+      <div>
+        <p class="answer">Potentially nothing.</p>
+        <p>There is no management fee. I am paid only on gains above a defined threshold — and if the strategy does not work in a given quarter, I do not get paid for that quarter.</p>
+        <p><a href="#">The exact wording, and what it means in plain language, is on the Fees page →</a></p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="footer-preview">
+  Form ADV · FINRA BrokerCheck · Scottsdale, AZ
+</div>
+
+</body>
+</html>

@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Life Story Wealth Planning — Alex Hilbert, Registered Investment Advisor, Scottsdale, Arizona</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #12233b;
+    --navy-2: #1e3454;
+    --ivory: #f7f3ec;
+    --cream: #efe7d6;
+    --brass: #a67833;
+    --brass-soft: #c9a15a;
+    --ink: #1a1a1a;
+    --ink-soft: #4a4a4a;
+    --line-dark: #d8ceb8;
+    --focus: #ffb84d;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--ink);
+    background: var(--ivory);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, .display { font-family: 'Cormorant Garamond', Georgia, serif; }
+  a { color: var(--navy); text-decoration: none; transition: color 120ms; }
+  a:hover { color: var(--brass); }
+  a:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
+
+  /* Top bar */
+  .topbar { background: var(--navy); color: var(--ivory); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .topbar-inner {
+    max-width: 1240px; margin: 0 auto; padding: 10px 40px;
+    display: flex; justify-content: space-between;
+    color: rgba(247,243,236,0.75);
+  }
+  .topbar-inner span::before {
+    content: ""; display: inline-block; width: 6px; height: 6px;
+    background: var(--brass); border-radius: 50%;
+    margin-right: 10px; vertical-align: middle;
+  }
+
+  /* Nav */
+  .nav-wrap { background: var(--ivory); border-bottom: 1px solid var(--line-dark); }
+  .nav-inner {
+    max-width: 1240px; margin: 0 auto; padding: 22px 40px;
+    display: flex; align-items: center; justify-content: space-between; gap: 40px;
+  }
+  .brand { display: flex; align-items: baseline; gap: 14px; }
+  .brand-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500; font-size: 26px; letter-spacing: 0.01em; color: var(--navy);
+  }
+  .brand-mark em { font-style: italic; color: var(--brass); }
+  .brand-tag {
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink-soft); border-left: 1px solid var(--line-dark); padding-left: 14px;
+  }
+  nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 30px; font-size: 14px; font-weight: 500; }
+  nav a { color: var(--navy); }
+  nav a[aria-current="page"] { color: var(--brass); }
+
+  /* Hero — intent: land three signals fast */
+  .hero {
+    background:
+      radial-gradient(ellipse at 20% 20%, rgba(166,120,51,0.10), transparent 55%),
+      linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
+    color: var(--ivory);
+    padding: 120px 40px 130px;
+  }
+  .hero-inner {
+    max-width: 1240px; margin: 0 auto;
+    display: grid; grid-template-columns: 1.15fr 1fr; gap: 80px; align-items: center;
+  }
+  .hero-eyebrow {
+    font-family: 'Source Sans 3', sans-serif; font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--brass-soft); margin: 0 0 28px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .hero-eyebrow::before { content: ""; width: 32px; height: 1px; background: var(--brass); }
+  .hero h1 {
+    font-weight: 500; font-size: clamp(48px, 6.2vw, 82px);
+    line-height: 1.04; letter-spacing: -0.005em;
+    margin: 0 0 32px; color: var(--ivory);
+  }
+  .hero h1 em { font-style: italic; color: var(--brass-soft); }
+  .hero p.lede {
+    font-size: 20px; line-height: 1.55; color: rgba(247,243,236,0.85);
+    margin: 0 0 44px; max-width: 42ch;
+  }
+  .cta {
+    display: inline-block; font-size: 14px; letter-spacing: 0.10em; text-transform: uppercase; font-weight: 600;
+    color: var(--navy); background: var(--brass);
+    padding: 18px 30px; border: 1px solid var(--brass); text-decoration: none;
+    transition: background 140ms, color 140ms;
+  }
+  .cta:hover { background: var(--brass-soft); }
+
+  .hero-figure {
+    aspect-ratio: 4/5;
+    background:
+      linear-gradient(140deg, rgba(255,255,255,0.06), rgba(255,255,255,0)),
+      rgba(255,255,255,0.03);
+    border: 1px solid rgba(201,161,90,0.35);
+    position: relative;
+  }
+  .hero-figure::before { content: ""; position: absolute; inset: 14px; border: 1px solid rgba(201,161,90,0.20); }
+  .hero-figure-caption {
+    position: absolute; bottom: 20px; left: 24px;
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: rgba(201,161,90,0.80);
+  }
+
+  /* Credentials bar */
+  .credbar { background: var(--cream); border-bottom: 1px solid var(--line-dark); }
+  .credbar-inner {
+    max-width: 1240px; margin: 0 auto; padding: 22px 40px;
+    display: flex; justify-content: space-between; align-items: center; gap: 40px;
+    font-size: 13px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--ink-soft);
+    flex-wrap: wrap;
+  }
+  .credbar-inner span { display: inline-flex; align-items: center; gap: 10px; }
+  .credbar-inner span::before { content: "◆"; color: var(--brass); font-size: 8px; }
+
+  /* Section — differentiator (intent: name industry failure mode) */
+  .section-diff {
+    max-width: 1240px; margin: 0 auto; padding: 120px 40px 40px;
+  }
+  .section-eyebrow {
+    font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--brass); margin: 0 0 20px;
+  }
+  .section-diff h2 {
+    font-weight: 500; font-size: clamp(38px, 4.4vw, 58px);
+    line-height: 1.1; color: var(--navy); margin: 0 0 44px;
+    max-width: 20ch;
+  }
+  .section-body-2col {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
+    font-size: 18px; line-height: 1.7; color: var(--ink);
+  }
+  .section-body-2col p { margin: 0 0 1.1em; }
+  .section-body-2col p:last-child { margin-bottom: 0; }
+  .section-body-2col strong { color: var(--navy); font-weight: 600; }
+  .section-body-2col em { color: var(--brass); font-style: italic; }
+
+  /* Pull-quote — intent: stop the scroll */
+  .pull-wrap {
+    max-width: 1240px; margin: 0 auto; padding: 60px 40px 100px;
+  }
+  .pull {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-weight: 500;
+    font-size: clamp(32px, 3.8vw, 48px);
+    line-height: 1.25; color: var(--navy);
+    text-align: center; max-width: 24ch; margin: 0 auto;
+    padding: 40px 0; position: relative;
+  }
+  .pull::before, .pull::after {
+    content: ""; display: block; width: 56px; height: 1px;
+    background: var(--brass); margin: 0 auto;
+  }
+  .pull::before { margin-bottom: 36px; }
+  .pull::after { margin-top: 36px; }
+
+  /* Section — recognition (intent: right reader recognises themselves) */
+  .section-recog {
+    background: var(--cream);
+    padding: 96px 40px 112px;
+  }
+  .section-recog-inner {
+    max-width: 1240px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px; align-items: start;
+  }
+  .section-recog h3 {
+    font-weight: 500; font-size: 34px; line-height: 1.15;
+    color: var(--navy); margin: 0;
+  }
+  .section-recog .lead {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-weight: 500;
+    font-size: 26px; line-height: 1.4; color: var(--navy);
+    margin: 0 0 1em; max-width: 42ch;
+  }
+  .section-recog p {
+    font-size: 18px; line-height: 1.7; color: var(--ink);
+    margin: 0 0 1em; max-width: 56ch;
+  }
+  .section-recog a { color: var(--brass); font-weight: 600; }
+
+  /* Section — fee hook (intent: wait-what answer, premium treatment) */
+  .section-fee {
+    background: var(--ivory);
+    border-top: 1px solid var(--line-dark);
+    padding: 128px 40px 136px;
+  }
+  .section-fee-inner {
+    max-width: 1240px; margin: 0 auto;
+    text-align: center;
+  }
+  .section-fee .question {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--brass); margin: 0 0 28px;
+    display: inline-flex; align-items: center; gap: 14px;
+  }
+  .section-fee .question::before,
+  .section-fee .question::after {
+    content: ""; width: 32px; height: 1px; background: var(--brass);
+  }
+  .section-fee .answer {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500; font-style: italic;
+    font-size: clamp(56px, 8vw, 120px);
+    line-height: 1;
+    color: var(--navy);
+    margin: 0 0 48px;
+    letter-spacing: -0.02em;
+  }
+  .section-fee p {
+    font-size: 20px; line-height: 1.7; color: var(--ink);
+    max-width: 52ch; margin: 0 auto 1.2em;
+  }
+  .section-fee a { color: var(--brass); font-weight: 600; }
+
+  /* Footer preview */
+  .footer-preview {
+    background: var(--navy); color: rgba(247,243,236,0.65);
+    padding: 40px; text-align: center; font-size: 12px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  .footer-preview a { color: var(--brass-soft); }
+
+  @media (max-width: 900px) {
+    .hero { padding: 60px 24px 72px; }
+    .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+    .section-diff { padding: 64px 24px 24px; }
+    .section-body-2col { grid-template-columns: 1fr; gap: 24px; }
+    .pull-wrap { padding: 40px 24px 64px; }
+    .section-recog { padding: 64px 24px 80px; }
+    .section-recog-inner { grid-template-columns: 1fr; gap: 24px; }
+    .section-fee { padding: 72px 24px 88px; }
+    .nav-inner { padding: 18px 24px; flex-wrap: wrap; }
+    nav ul { gap: 16px; font-size: 13px; flex-wrap: wrap; }
+    .topbar-inner, .credbar-inner { padding-left: 24px; padding-right: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <span>Registered Investment Advisor</span>
+    <span>Scottsdale, Arizona</span>
+  </div>
+</div>
+
+<div class="nav-wrap">
+  <div class="nav-inner">
+    <div class="brand">
+      <div class="brand-mark">Life Story <em>Wealth Planning</em></div>
+      <div class="brand-tag">Est. 2012</div>
+    </div>
+    <nav aria-label="Main navigation">
+      <ul>
+        <li><a href="#" aria-current="page">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Approach</a></li>
+        <li><a href="#">Fees</a></li>
+        <li><a href="#">Custody</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<main>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <p class="hero-eyebrow">Life Story Wealth Planning</p>
+        <h1>What is this money <em>for?</em></h1>
+        <p class="lede">That question comes before any portfolio decision. My name is Alex Hilbert. I run a small investment advisory firm in Scottsdale, Arizona, for people who have already built their wealth and want it managed by someone who is actually managing it.</p>
+        <a class="cta" href="#">Start a conversation →</a>
+      </div>
+      <figure class="hero-figure" aria-hidden="true">
+        <span class="hero-figure-caption">Alex Hilbert · Portrait to come</span>
+      </figure>
+    </div>
+  </section>
+
+  <div class="credbar">
+    <div class="credbar-inner">
+      <span>Registered Investment Advisor</span>
+      <span>Fiduciary Standard</span>
+      <span>Third-Party Custodian</span>
+      <span>Fee-Aligned</span>
+    </div>
+  </div>
+
+  <section class="section-diff">
+    <p class="section-eyebrow">Why this firm exists</p>
+    <h2>Most portfolios sit still. Markets do not.</h2>
+    <div class="section-body-2col">
+      <div>
+        <p>When markets fall, the standard answer clients hear from their adviser is to do nothing.</p>
+        <p>I do not think that is management. It is the absence of it. I built this firm to work the other way — to actually manage portfolios, reviewed and reconstituted every quarter, moved between asset classes as conditions change.</p>
+      </div>
+      <div>
+        <p>The process has a name. I call it <strong>Zermagen</strong>, from the Hebrew for <em>fortress and shield</em>. It is built around a single idea: risk comes first. Before I decide what to buy, I decide what could go wrong and how to guard against it.</p>
+        <p>If you were referred to me, the page most people read next is <a href="#">About</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="pull-wrap">
+    <p class="pull">Markets are people first, and mathematics a distant third.</p>
+  </div>
+
+  <section class="section-recog">
+    <div class="section-recog-inner">
+      <h3>Who this is for</h3>
+      <div>
+        <p class="lead">Most of my clients came to me because someone they trust suggested it. If that is how you arrived here, you are the person this site is written for.</p>
+        <p>I work with a small number of individuals — usually approaching retirement or already in it, usually more focused on keeping what they have built than on growing it aggressively.</p>
+        <p><a href="#">The Who I work with page describes the fit in more detail →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-fee">
+    <div class="section-fee-inner">
+      <p class="question">What it costs</p>
+      <p class="answer">Potentially nothing.</p>
+      <p>There is no management fee. I am paid only on gains above a defined threshold — and if the strategy does not work in a given quarter, I do not get paid for that quarter.</p>
+      <p><a href="#">The exact wording, and what it means in plain language, is on the Fees page →</a></p>
+    </div>
+  </section>
+
+</main>
+
+<div class="footer-preview">
+  <a href="#">Form ADV</a> &nbsp;·&nbsp; <a href="#">FINRA BrokerCheck</a> &nbsp;·&nbsp; Scottsdale, AZ
+</div>
+
+</body>
+</html>
