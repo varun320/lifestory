@@ -116,49 +116,129 @@ nav a[aria-current="page"]::after { right: 0; }
 
 /* No page-load reveal choreography. Content is static — quiet is the point. */
 
-/* Hero */
+/* Hero — cover of the book, not a chapter opening.
+   Centered single-column masthead treatment. The question owns the space.
+   Interior pages (About, Approach) use .chapter-header for chapter openings — distinct pattern. */
 .hero {
   background:
-    radial-gradient(ellipse at 20% 20%, rgba(166, 120, 51, 0.10), transparent 55%),
+    radial-gradient(ellipse at 50% 30%, rgba(166, 120, 51, 0.12), transparent 60%),
     linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
   color: var(--ivory);
-  padding: 120px 40px 130px;
+  padding: 120px 40px 140px;
+  position: relative;
 }
+/* Subtle brass corner marks — publication register */
+.hero::before, .hero::after {
+  content: "";
+  position: absolute;
+  width: 40px; height: 40px;
+  border-color: rgba(166, 120, 51, 0.35);
+  border-style: solid;
+}
+.hero::before { top: 32px; left: 32px; border-width: 1px 0 0 1px; }
+.hero::after { top: 32px; right: 32px; border-width: 1px 1px 0 0; }
 .hero-inner {
-  max-width: 1240px; margin: 0 auto;
-  display: grid; grid-template-columns: 1.15fr 1fr; gap: 80px; align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.hero-eyebrow {
-  font-family: 'Source Sans 3', sans-serif; font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase;
-  color: var(--brass-soft); margin: 0 0 28px;
-  display: flex; align-items: center; gap: 12px;
+/* Publisher stamp */
+.hero-stamp {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 22px;
+  color: var(--brass-soft);
+  letter-spacing: 0.01em;
+  margin: 0 0 18px;
 }
-.hero-eyebrow::before { content: ""; width: 32px; height: 1px; background: var(--brass); }
+.hero-stamp em { font-style: italic; }
+.hero-rule {
+  width: 56px;
+  height: 1px;
+  background: var(--brass);
+  margin: 0 0 40px;
+  border: 0;
+}
+/* Question — the moment. Bigger than any interior chapter title. */
 .hero h1 {
-  font-weight: 500; font-size: clamp(48px, 6.2vw, 82px);
-  line-height: 1.04; letter-spacing: -0.005em;
-  margin: 0 0 32px; color: var(--ivory);
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: clamp(56px, 8vw, 110px);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  margin: 0 0 40px;
+  color: var(--ivory);
+  max-width: 14ch;
 }
 .hero h1 em { font-style: italic; color: var(--brass-soft); }
+/* Sub — small caps single line */
 .hero p.lede {
-  font-size: 20px; line-height: 1.55; color: rgba(247, 243, 236, 0.85);
-  margin: 0 0 44px; max-width: 42ch;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: rgba(247, 243, 236, 0.70);
+  margin: 0 0 44px;
+  max-width: none;
+  line-height: 1.4;
+}
+.hero-cta-row {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .cta {
-  display: inline-block; font-size: 14px; letter-spacing: 0.10em; text-transform: uppercase; font-weight: 600;
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 14px; letter-spacing: 0.10em; text-transform: uppercase; font-weight: 600;
   color: var(--navy); background: var(--brass);
   padding: 18px 30px; border: 1px solid var(--brass); text-decoration: none;
-  transition: background 200ms, color 200ms, transform 200ms;
+  position: relative;
+  transition: background 240ms cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 240ms,
+              box-shadow 260ms,
+              transform 240ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-.cta:hover { background: var(--brass-soft); transform: translateY(-1px); }
+.cta::after {
+  content: "→";
+  display: inline-block;
+  transition: transform 260ms cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 400;
+}
+.cta:hover {
+  background: var(--navy);
+  color: var(--ivory);
+  border-color: var(--navy);
+  box-shadow: 0 10px 32px rgba(18, 35, 59, 0.30);
+  transform: translateY(-2px);
+}
+.cta:hover::after { transform: translateX(6px); }
+.cta:active { transform: translateY(0); box-shadow: 0 3px 12px rgba(18, 35, 59, 0.24); }
 .cta-ghost {
-  display: inline-block; font-size: 14px; letter-spacing: 0.10em; text-transform: uppercase; font-weight: 600;
-  color: var(--ivory); border: 1px solid rgba(247, 243, 236, 0.35);
-  padding: 18px 30px; text-decoration: none;
-  transition: border-color 200ms, background 200ms;
-  margin-left: 18px;
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 500;
+  color: rgba(247, 243, 236, 0.75); background: transparent; border: 0;
+  padding: 0 0 4px;
+  text-decoration: none;
+  position: relative;
+  transition: color 240ms;
 }
-.cta-ghost:hover { border-color: var(--brass); background: rgba(166, 120, 51, 0.10); color: var(--ivory); }
+.cta-ghost::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 100%; bottom: 0;
+  height: 1px;
+  background: var(--brass-soft);
+  transition: right 340ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.cta-ghost:hover { color: var(--brass-soft); }
+.cta-ghost:hover::after { right: 0; }
 
 .hero-figure {
   aspect-ratio: 4 / 5;
@@ -351,9 +431,37 @@ nav a[aria-current="page"]::after { right: 0; }
   border: 1px solid var(--line);
   display: flex; flex-direction: column; gap: 18px;
   color: inherit;
-  transition: transform 240ms ease, border-color 240ms ease;
+  position: relative;
+  transition: transform 320ms cubic-bezier(0.2, 0.7, 0.2, 1),
+              border-color 240ms ease,
+              box-shadow 320ms ease;
 }
-.card:hover { transform: translateY(-3px); border-color: var(--brass); }
+/* Corner marks — appear on hover. Says "click me" without a button label. */
+.card::before, .card::after {
+  content: "";
+  position: absolute;
+  width: 14px; height: 14px;
+  border-color: var(--brass);
+  border-style: solid;
+  opacity: 0;
+  transition: opacity 260ms ease, transform 300ms ease;
+}
+.card::before {
+  top: 10px; left: 10px;
+  border-width: 1px 0 0 1px;
+  transform: translate(4px, 4px);
+}
+.card::after {
+  bottom: 10px; right: 10px;
+  border-width: 0 1px 1px 0;
+  transform: translate(-4px, -4px);
+}
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--brass);
+  box-shadow: 0 12px 32px rgba(18, 35, 59, 0.10);
+}
+.card:hover::before, .card:hover::after { opacity: 1; transform: translate(0, 0); }
 .card h4 {
   font-family: 'Cormorant Garamond', serif; font-weight: 500;
   font-size: 26px; color: var(--navy); margin: 0;
@@ -391,6 +499,181 @@ footer.site-footer {
   border-top: 1px solid rgba(247, 243, 236, 0.15);
   font-size: 12px; color: rgba(247, 243, 236, 0.55);
   display: flex; justify-content: space-between; gap: 32px; flex-wrap: wrap;
+}
+
+/* Chapter page — for interior long-form pages (About, Approach, Fees, Custody, etc.).
+   Reads as a book chapter, not a landing page. Editorial. Generous vertical rhythm. */
+.chapter-page { background: var(--ivory); }
+.chapter-header {
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(166, 120, 51, 0.10), transparent 55%),
+    linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
+  color: var(--ivory);
+  padding: 96px 40px 104px;
+}
+.chapter-header-inner {
+  max-width: 1240px; margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.chapter-eyebrow {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--brass-soft);
+  margin: 0 0 22px;
+  display: flex; align-items: center; gap: 12px;
+}
+.chapter-eyebrow::before { content: ""; width: 32px; height: 1px; background: var(--brass); }
+.chapter-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: clamp(48px, 6.2vw, 82px);
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  color: var(--ivory);
+  margin: 0 0 24px;
+}
+.chapter-title em { font-style: italic; color: var(--brass-soft); }
+.chapter-sub {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(247, 243, 236, 0.75);
+  margin: 0;
+}
+.chapter-portrait {
+  aspect-ratio: 4 / 5;
+  background:
+    linear-gradient(140deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0)),
+    rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(201, 161, 90, 0.35);
+  position: relative;
+  margin: 0;
+}
+.chapter-portrait::before { content: ""; position: absolute; inset: 14px; border: 1px solid rgba(201, 161, 90, 0.20); }
+
+.chapter-body {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 96px 40px 120px;
+}
+.chapter-body > section { margin: 0 0 72px; }
+.chapter-body > section:last-of-type { margin-bottom: 32px; }
+.chapter-body h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: clamp(28px, 3.2vw, 36px);
+  line-height: 1.2;
+  color: var(--navy);
+  margin: 0 0 28px;
+  letter-spacing: -0.005em;
+  position: relative;
+}
+.chapter-body h3::after {
+  content: ""; display: block;
+  width: 40px; height: 1px; background: var(--brass);
+  margin-top: 16px;
+}
+.chapter-body p {
+  font-size: 20px;
+  line-height: 1.7;
+  color: var(--ink);
+  margin: 0 0 1.2em;
+}
+.chapter-body p:last-child { margin-bottom: 0; }
+.chapter-body strong { color: var(--navy); font-weight: 600; }
+.chapter-body em { font-style: italic; color: var(--ink); }
+.chapter-body a { color: var(--brass); font-weight: 600; }
+.chapter-body ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.2em;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.chapter-body li {
+  font-size: 19px;
+  line-height: 1.6;
+  color: var(--ink);
+  padding-left: 24px;
+  position: relative;
+}
+.chapter-body li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--brass);
+}
+
+/* Pull-quote inline within a chapter — wider than body, centered, italic serif with brass rules. */
+.pull-inline {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-weight: 500;
+  font-size: clamp(28px, 3.2vw, 40px);
+  line-height: 1.28;
+  color: var(--navy);
+  text-align: center;
+  max-width: 26ch;
+  margin: 56px auto;
+  padding: 32px 0;
+  border: 0;
+}
+.pull-inline::before, .pull-inline::after {
+  content: ""; display: block;
+  width: 48px; height: 1px;
+  background: var(--brass);
+  margin: 0 auto;
+}
+.pull-inline::before { margin-bottom: 28px; }
+.pull-inline::after { margin-top: 28px; }
+
+/* Chapter footnote — small aside at the end. Reads as a considered addendum. */
+.chapter-body .footnote {
+  margin: 88px 0 0;
+  padding: 32px 0 0;
+  border-top: 1px solid var(--line);
+}
+.chapter-body .footnote h4 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--brass);
+  margin: 0 0 16px;
+}
+.chapter-body .footnote p {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  margin: 0 0 1em;
+}
+
+/* Chapter end CTA — sits after the reading, not inside it. */
+.chapter-cta {
+  margin: 88px 0 0;
+  display: flex;
+  justify-content: center;
+}
+.chapter-cta a {
+  display: inline-block;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px; letter-spacing: 0.10em; text-transform: uppercase; font-weight: 600;
+  color: var(--ivory); background: var(--navy);
+  padding: 18px 32px; border: 1px solid var(--navy);
+  text-decoration: none;
+  transition: background 200ms, transform 200ms;
+}
+.chapter-cta a:hover {
+  background: var(--brass); border-color: var(--brass); color: var(--navy);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 900px) {
+  .chapter-header { padding: 56px 24px 72px; }
+  .chapter-header-inner { grid-template-columns: 1fr; gap: 48px; }
+  .chapter-body { padding: 64px 24px 88px; }
+  .chapter-body > section { margin-bottom: 56px; }
+  .pull-inline { margin: 40px auto; padding: 24px 0; }
 }
 
 @media (max-width: 900px) {
@@ -440,7 +723,7 @@ footer.site-footer {
     transform: translateX(0);
   }
 }
-.sect-anchor:hover { color: var(--brass-soft); }
+.sect-anchor:hover { color: var(--brass-soft); transform: translateX(2px) rotate(4deg); }
 .sect-custody .sect-anchor:hover { color: var(--brass); }
 .sect-anchor:focus-visible {
   outline: 2px solid var(--focus);
@@ -468,9 +751,12 @@ footer.site-footer {
   color: rgba(166, 120, 51, 0.30);
   text-decoration: none;
   user-select: none;
-  transition: color 220ms ease;
+  transition: color 300ms ease, transform 300ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-a.chapter-num:hover { color: rgba(166, 120, 51, 0.65); }
+a.chapter-num:hover {
+  color: rgba(166, 120, 51, 0.75);
+  transform: translateY(-2px);
+}
 a.chapter-num:focus-visible { outline: 2px solid var(--focus); outline-offset: 8px; border-radius: 4px; }
 .sect-custody .chapter-num { color: rgba(201, 161, 90, 0.35); }
 .sect-custody a.chapter-num:hover { color: rgba(201, 161, 90, 0.75); }
@@ -529,40 +815,60 @@ a.chapter-num:focus-visible { outline: 2px solid var(--focus); outline-offset: 8
 }
 .cred-expand[hidden] { display: none; }
 
-/* Diptych — two sides of the same coin, side-by-side. Belongs to Alex's directness ("I'll say so directly"). */
+/* Diptych — two sides of the same coin as distinct SURFACES, not two lists side-by-side.
+   Left card: warm cream, "you're welcome here". Right card: cool navy, "you're probably not".
+   Both cards end with a short first-person quote from Alex — personal address, not template content. */
 .diptych {
   display: grid;
-  grid-template-columns: 1fr 1px 1fr;
-  gap: 48px;
-  margin-top: 40px;
-  align-items: start;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 48px;
+  align-items: stretch;
 }
-.diptych-rule {
-  background: var(--line);
-  align-self: stretch;
-  min-height: 100%;
+.diptych-col {
+  padding: 40px 36px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  position: relative;
+}
+.diptych-col.fit {
+  background: var(--ivory);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--brass);
+  color: var(--ink);
+}
+.diptych-col.miss {
+  background: var(--navy);
+  border: 1px solid var(--navy);
+  border-left: 3px solid var(--brass-soft);
+  color: var(--ivory);
 }
 .diptych-col h4 {
-  font-family: 'Source Sans 3', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--brass);
-  margin: 0 0 20px;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 1.25;
+  margin: 0;
+  color: inherit;
+  letter-spacing: -0.005em;
 }
+.diptych-col.fit h4 { color: var(--navy); }
+.diptych-col.miss h4 { color: var(--ivory); }
 .diptych-col ul {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
+  flex-grow: 1;
 }
 .diptych-col li {
-  font-size: 18px;
+  font-size: 17px;
   line-height: 1.55;
-  color: var(--ink);
+  color: inherit;
   padding-left: 20px;
   position: relative;
 }
@@ -570,21 +876,54 @@ a.chapter-num:focus-visible { outline: 2px solid var(--focus); outline-offset: 8
   content: "—";
   position: absolute;
   left: 0;
-  color: var(--brass);
 }
-.diptych-note {
-  margin: 48px 0 0;
+.diptych-col.fit li::before { color: var(--brass); }
+.diptych-col.miss li::before { color: var(--brass-soft); }
+.diptych-quote {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
-  font-size: 22px;
-  line-height: 1.45;
-  color: var(--ink);
-  max-width: 48ch;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 1.5;
+  margin: 8px 0 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
 }
-.diptych-note a { color: var(--brass); font-weight: 600; font-style: normal; }
+.diptych-col.miss .diptych-quote { border-top-color: rgba(201, 161, 90, 0.30); color: rgba(247, 243, 236, 0.85); }
+.diptych-quote::before { content: "\201C"; margin-right: 2px; }
+.diptych-quote::after { content: "\201D"; margin-left: 2px; }
+.diptych-quote .attribution {
+  display: block;
+  margin-top: 8px;
+  font-style: normal;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+.diptych-col.miss .diptych-quote .attribution { color: var(--brass-soft); }
+
+.diptych-opener {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.45;
+  color: var(--navy);
+  margin: 40px 0 0;
+  max-width: 46ch;
+}
+.diptych-note {
+  margin: 40px 0 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 60ch;
+}
+.diptych-note a { color: var(--brass); font-weight: 600; }
 @media (max-width: 900px) {
-  .diptych { grid-template-columns: 1fr; gap: 32px; }
-  .diptych-rule { display: none; }
+  .diptych { grid-template-columns: 1fr; gap: 20px; }
 }
 
 /* Custody breakout — "I never hold client money." breaks container width.
@@ -646,8 +985,7 @@ a.chapter-num:focus-visible { outline: 2px solid var(--focus); outline-offset: 8
 .share-popover.is-copied { background: var(--brass); color: var(--navy); }
 .share-popover.is-copied::after { background: var(--brass); }
 
-/* Read next — Alex's whole strategy is content-driven reading.
-   He said "the page most people read next is About." The Home page IS a considered read. */
+/* Read next — Alex's whole strategy is content-driven reading. */
 .read-next {
   max-width: 1240px;
   margin: 48px auto 0;
@@ -665,12 +1003,20 @@ a.chapter-num:focus-visible { outline: 2px solid var(--focus); outline-offset: 8
   text-decoration: none;
   padding: 6px 0;
   border-bottom: 1px solid transparent;
-  transition: border-color 200ms ease, letter-spacing 200ms ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  transition: border-color 260ms ease, color 240ms ease;
+}
+.read-next a .arrow {
+  display: inline-block;
+  transition: transform 300ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .read-next a:hover {
   border-bottom-color: var(--brass);
-  letter-spacing: 0.18em;
 }
+.read-next a:hover .arrow { transform: translateX(6px); }
 .sect-custody .read-next a { color: var(--brass-soft); }
 .sect-custody .read-next a:hover { border-bottom-color: var(--brass-soft); }
 
@@ -732,36 +1078,86 @@ a.chapter-num:focus-visible { outline: 2px solid var(--focus); outline-offset: 8
    No numbers. No worked example. Just the structural fact he wants understood.
    [FLAG FOR COUNSEL: describes fee arrangement in prose, not a performance illustration.
     Same verbal content as the paragraph already states — this presents it as two-state.] */
+/* Editorial toggle — reads as two labels with a small brass rule between them.
+   No segmented-control chrome. The progress bar visibly flows FROM the active
+   label TOWARD the next one, so the direction of change is obvious. */
 .fee-toggle {
   display: inline-flex;
-  gap: 0;
+  align-items: center;
+  gap: 24px;
   margin: 0 auto 48px;
-  border: 1px solid var(--line);
   background: transparent;
+  border: 0;
+  position: relative;
 }
 .fee-toggle-btn {
   background: transparent;
   border: 0;
-  padding: 14px 24px;
-  font-family: 'Source Sans 3', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.10em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
+  padding: 6px 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 20px;
+  color: var(--ink-faint);
   cursor: pointer;
-  transition: color 200ms ease, background 200ms ease;
+  letter-spacing: 0;
+  text-transform: none;
+  transition: color 320ms ease;
+  white-space: nowrap;
+  position: relative;
 }
-.fee-toggle-btn:first-child { border-right: 1px solid var(--line); }
 .fee-toggle-btn:hover { color: var(--navy); }
 .fee-toggle-btn.is-active {
-  background: var(--navy);
-  color: var(--ivory);
+  color: var(--navy);
   cursor: default;
+  font-style: normal;
+  font-weight: 500;
+}
+/* Brass underline on active — editorial, not app-like */
+.fee-toggle-btn.is-active::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  bottom: -8px;
+  height: 2px;
+  background: var(--brass);
 }
 .fee-toggle-btn:focus-visible {
   outline: 3px solid var(--focus);
-  outline-offset: -3px;
+  outline-offset: 6px;
+  border-radius: 2px;
+}
+/* Progress track between the two labels — brass flows toward the next state.
+   Direction reverses depending on which side is active. */
+.fee-toggle-progress {
+  width: 60px;
+  height: 1px;
+  background: var(--line);
+  position: relative;
+  overflow: hidden;
+  pointer-events: none;
+}
+.fee-toggle-progress::before {
+  content: "";
+  position: absolute;
+  inset: -1px 0;
+  height: 3px;
+  background: var(--brass);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+.fee-toggle[data-active="losing"] .fee-toggle-progress::before { transform-origin: 0 50%; }
+.fee-toggle[data-active="winning"] .fee-toggle-progress::before { transform-origin: 100% 50%; }
+.fee-toggle.is-cycling .fee-toggle-progress::before {
+  animation: fee-cycle 5400ms linear infinite;
+}
+.fee-toggle.is-cycling:hover .fee-toggle-progress::before { animation-play-state: paused; }
+.fee-toggle:not(.is-cycling) .fee-toggle-progress { display: none; }
+@keyframes fee-cycle {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fee-toggle.is-cycling .fee-toggle-progress { display: none; }
 }
 
 .fee-answer-wrap [data-state] { display: none; }

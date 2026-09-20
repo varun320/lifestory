@@ -53,25 +53,14 @@ const firmSchema = {
 
   <section class="hero">
     <div class="hero-inner">
-      <div>
-        <p class="hero-eyebrow">Life Story Wealth Planning</p>
-        <h1>What is this money <em>for?</em></h1>
-        <p class="lede">
-          That question comes before any portfolio decision. My name is Alex Hilbert. I run a small
-          investment advisory firm in Scottsdale, Arizona, for people who have already built their
-          wealth and want it managed by someone who is actually managing it.
-        </p>
-        <a class="cta" href="#next">Start a conversation →</a>
+      <p class="hero-stamp"><em>Life Story Wealth Planning</em></p>
+      <hr class="hero-rule" />
+      <h1>What is this money <em>for?</em></h1>
+      <p class="lede">The question that comes before any portfolio decision.</p>
+      <div class="hero-cta-row">
+        <a class="cta" href="#next">Start a conversation</a>
         <a class="cta-ghost" href="/about">Read about Alex</a>
       </div>
-      <figure class="hero-figure" aria-label="Publisher's monogram — real photograph forthcoming">
-        <div class="hero-mark" aria-hidden="true">
-          <span class="hero-mark-letters">AH</span>
-          <span class="hero-mark-rule"></span>
-          <span class="hero-mark-label">Life Story · Wealth Planning</span>
-        </div>
-        <span class="hero-figure-caption">Portrait forthcoming</span>
-      </figure>
     </div>
   </section>
 
@@ -137,7 +126,7 @@ const firmSchema = {
         </div>
       </div>
     </div>
-    <div class="read-next"><a href="#pull-markets">Continue — a note on markets →</a></div>
+    <div class="read-next"><a href="#pull-markets">Continue — a note on markets <span class="arrow" aria-hidden="true">→</span></a></div>
   </section>
 
   <div class="pull-wrap" id="pull-markets">
@@ -163,34 +152,43 @@ const firmSchema = {
         </div>
       </div>
 
+      <p class="diptych-opener">Two ways to know quickly whether you're the person I built this for.</p>
+
       <div class="diptych">
-        <div class="diptych-col">
-          <h4>It probably is a fit if</h4>
+        <div class="diptych-col fit">
+          <h4>You're probably in the right place if…</h4>
           <ul>
-            <li>You have built your wealth and are more focused on keeping it than on growing it aggressively.</li>
-            <li>You want an actively managed portfolio, not one left on a fixed model and forgotten.</li>
-            <li>You prefer to work directly with the person managing your money, not through layers.</li>
-            <li>You are careful. You read carefully, and you make decisions in your own time.</li>
+            <li>You have already built your wealth, and you're more focused on keeping it than growing it aggressively.</li>
+            <li>You want a portfolio that responds to markets, not one left on a fixed model and forgotten.</li>
+            <li>You'd rather work directly with the person managing your money.</li>
+            <li>You read carefully. You ask real questions. You make decisions in your own time.</li>
           </ul>
+          <p class="diptych-quote">
+            If you recognise yourself here, that's exactly who I built the firm for.
+            <span class="attribution">— A. Hilbert</span>
+          </p>
         </div>
-        <div class="diptych-rule" aria-hidden="true"></div>
-        <div class="diptych-col">
-          <h4>It probably isn't if</h4>
+        <div class="diptych-col miss">
+          <h4>You're probably not the fit if…</h4>
           <ul>
-            <li>You are early in building your wealth and are looking for aggressive growth.</li>
-            <li>You want a portfolio you never look at, matched to a passive index and left alone.</li>
+            <li>You're early in building your wealth and looking for aggressive growth.</li>
+            <li>You want a portfolio you never look at, matched to an index and left alone.</li>
             <li>You want frequent trading based on short-term market calls.</li>
             <li>You want product recommendations paid for by commission.</li>
           </ul>
+          <p class="diptych-quote">
+            If this side is you, there are firms that fit that better than I do — and I'll say so directly.
+            <span class="attribution">— A. Hilbert</span>
+          </p>
         </div>
       </div>
 
       <p class="diptych-note">
-        If any of the right column describes you, there are firms that fit that better than I do, and
-        I will say so directly. <a href="/who-i-work-with">The full Who I work with page →</a>
+        For a fuller portrait of the people I usually work with, and the situations they usually
+        arrive in, <a href="/who-i-work-with">read the Who I work with page →</a>
       </p>
     </div>
-    <div class="read-next"><a href="#cost">Continue — What it costs →</a></div>
+    <div class="read-next"><a href="#cost">Continue — What it costs <span class="arrow" aria-hidden="true">→</span></a></div>
   </section>
 
   <section id="cost" class="sect sect-fee">
@@ -198,8 +196,9 @@ const firmSchema = {
     <div class="sect-inner">
       <p class="sect-eyebrow"><span class="numeral">Ⅲ</span>What it costs <a class="sect-anchor" href="#cost" aria-label="Copy link to this section">§</a></p>
 
-      <div class="fee-toggle" role="tablist" aria-label="Fee arrangement">
+      <div class="fee-toggle" role="tablist" aria-label="Fee arrangement" data-active="losing">
         <button type="button" class="fee-toggle-btn is-active" role="tab" aria-selected="true" data-state="losing">In a losing quarter</button>
+        <span class="fee-toggle-progress" aria-hidden="true"></span>
         <button type="button" class="fee-toggle-btn" role="tab" aria-selected="false" data-state="winning">In a winning quarter</button>
       </div>
 
@@ -222,7 +221,7 @@ const firmSchema = {
 
       <p><a href="/fees">The exact wording, and what it means in plain language, is on the Fees page →</a></p>
     </div>
-    <div class="read-next"><a href="#custody">Continue — Where your money is →</a></div>
+    <div class="read-next"><a href="#custody">Continue — Where your money is <span class="arrow" aria-hidden="true">→</span></a></div>
   </section>
 
   <section id="custody" class="sect sect-custody">
@@ -244,7 +243,7 @@ const firmSchema = {
         <p><a href="/custody">The full explanation is on the Custody page →</a></p>
       </div>
     </div>
-    <div class="read-next"><a href="#next">Continue — The next step →</a></div>
+    <div class="read-next"><a href="#next">Continue — The next step <span class="arrow" aria-hidden="true">→</span></a></div>
   </section>
 
   <section id="next" class="sect sect-next">

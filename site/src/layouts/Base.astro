@@ -127,6 +127,8 @@ const reviewedLabel = new Date(LAST_REVIEWED).toLocaleDateString('en-US', {
 
   <script>
     (function () {
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
       // Reading progress — functional, not decorative.
       const bar = document.querySelector<HTMLElement>('.progress');
       function onScroll() {
@@ -242,23 +244,42 @@ const reviewedLabel = new Date(LAST_REVIEWED).toLocaleDateString('en-US', {
         });
       });
 
-      // Fee arrangement toggle — reader clicks between "losing" and "winning" quarter.
-      // No numbers. Just the structural fact of alignment made feel-able.
-      document.querySelectorAll<HTMLButtonElement>('.fee-toggle-btn').forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const state = btn.dataset.state;
-          if (!state) return;
-          const toggle = btn.closest('.fee-toggle');
-          const wrap = toggle?.parentElement?.querySelector<HTMLElement>('.fee-answer-wrap');
-          if (!toggle || !wrap) return;
-          toggle.querySelectorAll<HTMLButtonElement>('.fee-toggle-btn').forEach((b) => {
-            const active = b === btn;
-            b.classList.toggle('is-active', active);
-            b.setAttribute('aria-selected', active ? 'true' : 'false');
-          });
-          wrap.setAttribute('data-state', state);
+      // Fee arrangement toggle — auto-cycles between "losing" and "winning" quarter
+      // so the reader sees the interaction happen (discoverability by demonstration).
+      // First real user click hands them manual control and stops the cycle.
+      const feeToggle = document.querySelector<HTMLElement>('.fee-toggle');
+      const feeWrap = document.querySelector<HTMLElement>('.fee-answer-wrap');
+      const feeProgress = document.querySelector<HTMLElement>('.fee-toggle-progress');
+
+      function applyFeeState(state: string) {
+        if (!feeToggle || !feeWrap) return;
+        feeWrap.setAttribute('data-state', state);
+        feeToggle.setAttribute('data-active', state);
+        feeToggle.querySelectorAll<HTMLButtonElement>('.fee-toggle-btn').forEach((b) => {
+          const active = b.dataset.state === state;
+          b.classList.toggle('is-active', active);
+          b.setAttribute('aria-selected', active ? 'true' : 'false');
         });
-      });
+      }
+
+      if (feeToggle && feeWrap && feeProgress) {
+        if (!reduce) {
+          feeToggle.classList.add('is-cycling');
+          feeProgress.addEventListener('animationiteration', () => {
+            const current = feeWrap.getAttribute('data-state');
+            applyFeeState(current === 'losing' ? 'winning' : 'losing');
+          });
+        }
+        document.querySelectorAll<HTMLButtonElement>('.fee-toggle-btn').forEach((btn) => {
+          btn.addEventListener('click', (ev) => {
+            const state = btn.dataset.state;
+            if (!state) return;
+            applyFeeState(state);
+            // Real user click hands them control; disable auto-cycle.
+            if (ev.isTrusted) feeToggle.classList.remove('is-cycling');
+          });
+        });
+      }
     })();
   </script>
 </body>
