@@ -18,6 +18,13 @@ const {
 } = Astro.props;
 
 const canonical = new URL(canonicalPath, Astro.site).toString();
+
+// ponytail: manual constant — bump after each counsel-reviewed material change.
+// This is a compliance/register signal, not an auto-timestamp; auto-bumping would misrepresent.
+const LAST_REVIEWED = '2026-09-19';
+const reviewedLabel = new Date(LAST_REVIEWED).toLocaleDateString('en-US', {
+  year: 'numeric', month: 'long', day: 'numeric',
+});
 ---
 <!doctype html>
 <html lang="en">
@@ -113,6 +120,7 @@ const canonical = new URL(canonicalPath, Astro.site).toString();
     </div>
     <div class="footer-legal">
       <span>© {new Date().getFullYear()} Life Story Wealth Planning</span>
+      <span>This site was last reviewed {reviewedLabel}.</span>
       <span>[Required regulatory disclosures — from counsel, not copied]</span>
     </div>
   </footer>

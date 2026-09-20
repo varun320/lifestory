@@ -64,8 +64,13 @@ const firmSchema = {
         <a class="cta" href="#next">Start a conversation →</a>
         <a class="cta-ghost" href="/about">Read about Alex</a>
       </div>
-      <figure class="hero-figure" aria-hidden="true">
-        <span class="hero-figure-caption">Alex Hilbert · Portrait to come</span>
+      <figure class="hero-figure" aria-label="Publisher's monogram — real photograph forthcoming">
+        <div class="hero-mark" aria-hidden="true">
+          <span class="hero-mark-letters">AH</span>
+          <span class="hero-mark-rule"></span>
+          <span class="hero-mark-label">Life Story · Wealth Planning</span>
+        </div>
+        <span class="hero-figure-caption">Portrait forthcoming</span>
       </figure>
     </div>
   </section>
@@ -109,7 +114,7 @@ const firmSchema = {
   </div>
 
   <section id="why" class="sect sect-diff">
-    <span class="chapter-num" aria-hidden="true">Ⅰ</span>
+    <a class="chapter-num" href="#why" aria-label="Jump to Chapter I">Ⅰ</a>
     <div class="sect-inner">
       <p class="sect-eyebrow"><span class="numeral">Ⅰ</span>Why this firm exists <a class="sect-anchor" href="#why" aria-label="Copy link to this section">§</a></p>
       <h2>Most portfolios sit still. Markets do not.</h2>
@@ -137,10 +142,11 @@ const firmSchema = {
 
   <div class="pull-wrap" id="pull-markets">
     <p class="pull">Markets are people first, and mathematics a distant third.</p>
+    <p class="pull-origin">— A. Hilbert</p>
   </div>
 
   <section id="who" class="sect sect-recog">
-    <span class="chapter-num" aria-hidden="true">Ⅱ</span>
+    <a class="chapter-num" href="#who" aria-label="Jump to Chapter II">Ⅱ</a>
     <div class="sect-inner">
       <p class="sect-eyebrow"><span class="numeral">Ⅱ</span>Who this is for <a class="sect-anchor" href="#who" aria-label="Copy link to this section">§</a></p>
       <div class="inner">
@@ -188,7 +194,7 @@ const firmSchema = {
   </section>
 
   <section id="cost" class="sect sect-fee">
-    <span class="chapter-num" aria-hidden="true">Ⅲ</span>
+    <a class="chapter-num" href="#cost" aria-label="Jump to Chapter III">Ⅲ</a>
     <div class="sect-inner">
       <p class="sect-eyebrow"><span class="numeral">Ⅲ</span>What it costs <a class="sect-anchor" href="#cost" aria-label="Copy link to this section">§</a></p>
 
@@ -198,16 +204,20 @@ const firmSchema = {
       </div>
 
       <div class="fee-answer-wrap" data-state="losing">
-        <p class="fee-answer" data-state="losing">Potentially nothing.</p>
-        <p class="fee-answer" data-state="winning">A share of your gain.</p>
-        <p data-state="losing">
-          There is no management fee. When the strategy does not exceed the defined threshold in a
-          given quarter, I am not paid for that quarter.
-        </p>
-        <p data-state="winning">
-          There is no management fee. When the strategy exceeds the threshold in a given quarter,
-          I am paid a share of the gain above it. Not commissions. Not fixed fees. A share.
-        </p>
+        <div class="fee-state" data-state="losing">
+          <p class="fee-answer">Potentially nothing.</p>
+          <p>
+            There is no management fee. When the strategy does not exceed the defined threshold in a
+            given quarter, I am not paid for that quarter.
+          </p>
+        </div>
+        <div class="fee-state" data-state="winning">
+          <p class="fee-answer">A share of your gain.</p>
+          <p>
+            There is no management fee. When the strategy exceeds the threshold in a given quarter,
+            I am paid a share of the gain above it. Not commissions. Not fixed fees. A share.
+          </p>
+        </div>
       </div>
 
       <p><a href="/fees">The exact wording, and what it means in plain language, is on the Fees page →</a></p>
@@ -216,7 +226,7 @@ const firmSchema = {
   </section>
 
   <section id="custody" class="sect sect-custody">
-    <span class="chapter-num" aria-hidden="true">Ⅳ</span>
+    <a class="chapter-num" href="#custody" aria-label="Jump to Chapter IV">Ⅳ</a>
     <div class="sect-inner">
       <p class="sect-eyebrow"><span class="numeral">Ⅳ</span>Where your money actually is <a class="sect-anchor" href="#custody" aria-label="Copy link to this section">§</a></p>
 
@@ -238,7 +248,7 @@ const firmSchema = {
   </section>
 
   <section id="next" class="sect sect-next">
-    <span class="chapter-num" aria-hidden="true">Ⅴ</span>
+    <a class="chapter-num" href="#next" aria-label="Jump to Chapter V">Ⅴ</a>
     <div class="sect-inner">
       <p class="sect-eyebrow"><span class="numeral">Ⅴ</span>The next step <a class="sect-anchor" href="#next" aria-label="Copy link to this section">§</a></p>
       <h3>

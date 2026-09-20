@@ -172,7 +172,44 @@ nav a[aria-current="page"]::after { right: 0; }
 .hero-figure-caption {
   position: absolute; bottom: 20px; left: 24px;
   font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
-  color: rgba(201, 161, 90, 0.80);
+  color: rgba(201, 161, 90, 0.70);
+}
+/* Hero mark — publisher-monogram placeholder that gets replaced when the real photo arrives.
+   Turns dead space into an intentional element. */
+.hero-mark {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  padding: 24px;
+  user-select: none;
+}
+.hero-mark-letters {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(96px, 14vw, 160px);
+  color: var(--brass);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+.hero-mark-rule {
+  width: 42px;
+  height: 1px;
+  background: var(--brass);
+  opacity: 0.6;
+}
+.hero-mark-label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--brass-soft);
+  text-align: center;
 }
 
 /* Credentials strip */
@@ -247,15 +284,43 @@ nav a[aria-current="page"]::after { right: 0; }
 /* Fee */
 .sect-fee { background: var(--ivory); text-align: center; }
 .sect-fee .sect-eyebrow { display: inline-flex; align-items: baseline; gap: 14px; margin: 0 auto 28px; }
-.fee-answer {
+.sect-fee p { font-size: 20px; line-height: 1.7; color: var(--ink); max-width: 52ch; margin: 0 auto 1.2em; }
+.sect-fee a { color: var(--brass); font-weight: 600; }
+/* Higher-specificity override — plain `.fee-answer` was losing to `.sect-fee p`. */
+.sect-fee p.fee-answer {
   font-family: 'Cormorant Garamond', serif;
   font-weight: 500; font-style: italic;
   font-size: clamp(56px, 8vw, 120px); line-height: 1;
-  color: var(--navy); margin: 0 0 48px;
+  color: var(--navy); margin: 0 0 24px;
   letter-spacing: -0.02em;
+  max-width: none;
 }
-.sect-fee p { font-size: 20px; line-height: 1.7; color: var(--ink); max-width: 52ch; margin: 0 auto 1.2em; }
-.sect-fee a { color: var(--brass); font-weight: 600; }
+
+/* Fee-answer crossfade — the toggle should FEEL like a mechanical switch, not a UI blink.
+   Grid-stack the two state blocks so they occupy the same space and crossfade between. */
+.fee-answer-wrap {
+  display: grid;
+  margin: 0 auto 24px;
+}
+.fee-answer-wrap > .fee-state {
+  grid-area: 1 / 1;
+  transition: opacity 260ms ease, transform 260ms ease;
+}
+.fee-answer-wrap > .fee-state[data-state] {
+  opacity: 0;
+  transform: translateY(6px);
+  pointer-events: none;
+}
+.fee-answer-wrap[data-state="losing"] > .fee-state[data-state="losing"],
+.fee-answer-wrap[data-state="winning"] > .fee-state[data-state="winning"] {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+/* Legacy [data-state] rule for the description paragraphs — kept, still used by the plain <p>s. */
+.fee-answer-wrap [data-state]:not(.fee-state) { display: none; }
+.fee-answer-wrap[data-state="losing"] [data-state="losing"]:not(.fee-state),
+.fee-answer-wrap[data-state="winning"] [data-state="winning"]:not(.fee-state) { display: block; }
 
 /* Custody */
 .sect-custody { background: var(--navy-3); color: var(--ivory); }
@@ -389,7 +454,7 @@ footer.site-footer {
 }
 
 /* Chapter numeral — large Roman numeral as chapter marker at top-left of each section.
-   Editorial-book register. A considered read has chapters, not sections. */
+   Editorial-book register. Clickable to jump to the top of its own section. */
 .sect { position: relative; }
 .chapter-num {
   position: absolute;
@@ -401,12 +466,29 @@ footer.site-footer {
   font-size: clamp(64px, 8vw, 120px);
   line-height: 1;
   color: rgba(166, 120, 51, 0.30);
-  pointer-events: none;
+  text-decoration: none;
   user-select: none;
+  transition: color 220ms ease;
 }
+a.chapter-num:hover { color: rgba(166, 120, 51, 0.65); }
+a.chapter-num:focus-visible { outline: 2px solid var(--focus); outline-offset: 8px; border-radius: 4px; }
 .sect-custody .chapter-num { color: rgba(201, 161, 90, 0.35); }
+.sect-custody a.chapter-num:hover { color: rgba(201, 161, 90, 0.75); }
 @media (max-width: 900px) {
   .chapter-num { top: 20px; left: 20px; font-size: clamp(48px, 12vw, 72px); }
+}
+
+/* Pull-quote origin caption — small editorial signature giving the quote provenance.
+   When the quote gets copied via highlight-share, the attribution travels with it. */
+.pull-origin {
+  text-align: center;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: -12px 0 0;
 }
 
 /* Credentials strip — click to expand education for a careful audience.
