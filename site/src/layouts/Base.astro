@@ -19,7 +19,7 @@ const {
 
 const canonical = new URL(canonicalPath, Astro.site).toString();
 
-// ponytail: manual constant — bump after each counsel-reviewed material change.
+// ponytail: manual constant, bump after each counsel-reviewed material change.
 // This is a compliance/register signal, not an auto-timestamp; auto-bumping would misrepresent.
 const LAST_REVIEWED = '2026-09-19';
 const reviewedLabel = new Date(LAST_REVIEWED).toLocaleDateString('en-US', {
@@ -48,7 +48,7 @@ const reviewedLabel = new Date(LAST_REVIEWED).toLocaleDateString('en-US', {
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
 
-  {/* Fonts — CDN for now, upgrade to @fontsource pre-launch for perf */}
+  {/* Fonts, CDN for now, upgrade to @fontsource pre-launch for perf */}
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -121,7 +121,7 @@ const reviewedLabel = new Date(LAST_REVIEWED).toLocaleDateString('en-US', {
     <div class="footer-legal">
       <span>© {new Date().getFullYear()} Life Story Wealth Planning</span>
       <span>This site was last reviewed {reviewedLabel}.</span>
-      <span>[Required regulatory disclosures — from counsel, not copied]</span>
+      <span>[Required regulatory disclosures, from counsel, not copied]</span>
     </div>
   </footer>
 
@@ -129,7 +129,7 @@ const reviewedLabel = new Date(LAST_REVIEWED).toLocaleDateString('en-US', {
     (function () {
       const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      // Reading progress — functional, not decorative.
+      // Reading progress, functional, not decorative.
       const bar = document.querySelector<HTMLElement>('.progress');
       function onScroll() {
         const h = document.documentElement;
@@ -139,11 +139,11 @@ const reviewedLabel = new Date(LAST_REVIEWED).toLocaleDateString('en-US', {
       document.addEventListener('scroll', onScroll, { passive: true });
       onScroll();
 
-      // Pedagogical reveal — targets that teach through motion.
+      // Pedagogical reveal, targets that teach through motion.
       // Custody diagram draws the safeguard relationship; how-starts draws the journey line;
       // differs staggers the comparison; fee-cards stagger the two scenarios; counts-on staggers numerals.
       const revealTargets = document.querySelectorAll<HTMLElement>(
-        '.custody-diagram-wrap, .how-starts, .differs, .fee-cards, .counts-on, .zermagen-mark-wrap, .risk-first-mark-wrap'
+        '.custody-diagram-wrap, .how-starts, .differs, .fee-cards, .counts-on, .zermagen-mark-wrap, .risk-first-mark-wrap, .app-reveal'
       );
       if (revealTargets.length && 'IntersectionObserver' in window) {
         const io = new IntersectionObserver((entries) => {
@@ -159,7 +159,7 @@ const reviewedLabel = new Date(LAST_REVIEWED).toLocaleDateString('en-US', {
         revealTargets.forEach((el) => el.classList.add('is-in'));
       }
 
-      // Right rail active state — wayfinding aid.
+      // Right rail active state, wayfinding aid.
       const railLinks = document.querySelectorAll<HTMLAnchorElement>('.rail a');
       if (railLinks.length && 'IntersectionObserver' in window) {
         const ids = Array.from(railLinks).map((a) => a.getAttribute('href')?.slice(1) || '');
@@ -175,7 +175,7 @@ const reviewedLabel = new Date(LAST_REVIEWED).toLocaleDateString('en-US', {
         sections.forEach((s) => { if (s) ioRail.observe(s); });
       }
 
-      // § anchor — click to copy section URL. Referrals travel as specific links.
+      // § anchor, click to copy section URL. Referrals travel as specific links.
       document.querySelectorAll<HTMLAnchorElement>('.sect-anchor').forEach((a) => {
         a.addEventListener('click', (ev) => {
           if (!navigator.clipboard) return;
@@ -190,7 +190,7 @@ const reviewedLabel = new Date(LAST_REVIEWED).toLocaleDateString('en-US', {
         });
       });
 
-      // Highlight-to-share — user selects any text, popover offers to copy quote + link.
+      // Highlight-to-share, user selects any text, popover offers to copy quote + link.
       // Because Alex's strategy is content that gets shared.
       const popover = document.createElement('button');
       popover.className = 'share-popover';
@@ -240,7 +240,7 @@ const reviewedLabel = new Date(LAST_REVIEWED).toLocaleDateString('en-US', {
         ev.preventDefault();
         if (!navigator.clipboard || !currentQuote) return;
         const url = window.location.origin + window.location.pathname + (currentSectionId ? '#' + currentSectionId : '');
-        const payload = '"' + currentQuote + '"\n— Alex Hilbert, Life Story Wealth Planning\n' + url;
+        const payload = '"' + currentQuote + '"\nAlex Hilbert, Life Story Wealth Planning\n' + url;
         navigator.clipboard.writeText(payload).then(() => {
           popover.classList.add('is-copied');
           popover.textContent = 'Copied';
@@ -248,7 +248,7 @@ const reviewedLabel = new Date(LAST_REVIEWED).toLocaleDateString('en-US', {
         });
       });
 
-      // Credentials strip — click a term to expand its meaning inline.
+      // Credentials strip, click a term to expand its meaning inline.
       document.querySelectorAll<HTMLButtonElement>('.cred-btn').forEach((btn) => {
         btn.addEventListener('click', () => {
           const target = btn.dataset.target;

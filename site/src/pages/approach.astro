@@ -1,0 +1,731 @@
+---
+import Base from '../layouts/Base.astro';
+
+const title = "Approach · Perfect math, wrong problem | Life Story Wealth Planning";
+const description = "Alex Hilbert's case that Nobel Prizes don't move markets and liquidity does. The philosophy behind Tzur Magen, in his own words.";
+const publishedISO = '2026-09-04';
+const publishedLabel = 'September 4, 2026';
+
+const drops = [
+  { name: 'CoreWeave', pct: -54 },
+  { name: 'Nebius',    pct: -46 },
+  { name: 'SanDisk',   pct: -38 },
+  { name: 'SK Hynix',  pct: -32 },
+  { name: 'Micron',    pct: -27 },
+];
+const pops = [
+  { name: 'CoreWeave', pct: 27 },
+  { name: 'Nebius',    pct: 25 },
+  { name: 'SanDisk',   pct: 23 },
+  { name: 'SK Hynix',  pct: 22 },
+  { name: 'Micron',    pct: 20 },
+];
+---
+<Base title={title} description={description} canonicalPath="/approach">
+  <article class="approach-page">
+    <header class="app-masthead">
+      <p class="app-marker">        <span>Chapter · Approach</span>
+      </p>
+      <h1 class="app-title">Perfect math, <em>wrong problem.</em></h1>
+      <p class="app-deck">
+        The case that Nobel Prizes don't move markets and liquidity does, and why the strategy
+        I run doesn't rest on a single theory.
+      </p>
+      <div class="app-byline">
+        <span class="app-byline-name">Alex Hilbert</span>
+        <span class="app-byline-sep">·</span>
+        <time datetime={publishedISO}>{publishedLabel}</time>
+        <span class="app-byline-sep">·</span>
+        <span class="app-byline-tag">Philosophy · Life Story Wealth Planning</span>
+      </div>
+    </header>
+
+    <div class="app-column">
+      {/* Part I */}
+      <div class="app-section-mark app-reveal">
+        <span class="app-section-sigil">One</span>
+        <span class="app-section-label">The math trap</span>
+        <span class="app-section-rule"></span>
+      </div>
+
+      <p class="body-p body-p-lead"><span class="body-dropcap">I</span>'m a bit of a maverick when it comes to investing, and honestly when it comes to the way I think in general. So here's something I believe that gets me funny looks: just because someone has a Nobel Prize and their math is flawless and beautiful, that doesn't mean what they wrote is actually useful.</p>
+
+      <p class="body-p">You can have a perfect formula where one plus one always equals two, everything adds up on paper, and it still doesn't comport to reality, because you're describing the wrong things in the wrong context.</p>
+
+      <aside class="app-marginalia app-margin-recto app-reveal">
+        <span class="app-marg-label">Portfolio Selection</span>
+        <span class="app-marg-body">Harry Markowitz. Journal of Finance, 1952. Nobel (Sveriges Riksbank Prize) in 1990.</span>
+      </aside>
+
+      <p class="body-p">Take Harry Markowitz. His 1952 paper, "Portfolio Selection," is the foundation of modern portfolio theory, and it eventually won him a Nobel Prize (well, the economics version of one, in 1990). But read the opening paragraphs. He says right up front that picking a portfolio has two stages. Stage one is forming your beliefs about how every security is going to perform in the future. Stage two is turning those beliefs into a portfolio. And then he tells you his paper is only about stage two.</p>
+
+      <p class="body-p">So the entire theory sits on top of inputs it doesn't provide. Expected returns, variances, how everything moves together. You supply those. If your guesses are right, his math will build you a lovely portfolio. If your guesses are wrong, his math will build you a lovely portfolio out of wrong guesses, and it'll look just as elegant on paper. Seventy years later people are still arguing about which assumptions to feed the machine, and that argument is the whole ballgame. The math was never the hard part.</p>
+
+      <aside class="body-pullquote app-reveal">
+        <p>Being good at math doesn't make you a good investor. It doesn't even mean you've accurately described how markets work.</p>
+      </aside>
+
+      {/* Part II */}
+      <div class="app-section-mark app-reveal">
+        <span class="app-section-sigil">Two</span>
+        <span class="app-section-label">How markets really move</span>
+        <span class="app-section-rule"></span>
+      </div>
+
+      <aside class="app-marginalia app-margin-verso app-reveal">
+        <span class="app-marg-label">Supply. Demand.</span>
+        <span class="app-marg-body">Value is in there somewhere. Liquidity delivers the price.</span>
+      </aside>
+
+      <p class="body-p">Here's how I think they actually work. Public markets run on liquidity. How many shares are available for sale, and how many are demanded for purchase, at a given price at a given time. The value of the company is in there somewhere, sure. But how do you even value a company? There are different methodologies, different standards, different estimates, and every one of them still has to pass through supply and demand before it becomes a price.</p>
+
+      {/* Part III */}
+      <div class="app-section-mark app-reveal">
+        <span class="app-section-sigil">Three</span>
+        <span class="app-section-label">The live demonstration</span>
+        <span class="app-section-rule"></span>
+      </div>
+
+      <p class="body-p">We just got a live demonstration. In July, a hedge fund run by a 20-something former OpenAI researcher, a fund that had reportedly returned more than 1,000% since it launched in 2024 and was sitting on something like $45 billion, got caught levered about 4 to 1 in AI infrastructure stocks. The Nasdaq 100 fell roughly 10% that month. His core holdings fell 27% to 54%. At 4x leverage, a 30% drop in the book is about a 120% hit to your equity, and the prime brokers (Goldman, JPMorgan, Bank of America) started making margin calls. On July 30 he sold something like $20 billion of stock to Citadel in a single block before the market opened.</p>
+
+      <figure class="app-chart-wrap app-reveal" aria-labelledby="chart-h">
+        <figcaption class="app-chart-caption">
+          <p id="chart-h" class="app-chart-title">Same holdings. Different day.</p>
+          <p class="app-chart-sub">Situational Awareness LP · July 2026</p>
+        </figcaption>
+
+        <div class="app-chart">
+          <div class="app-chart-legend" aria-hidden="true">
+            <span class="lg lg-drop"><span class="lg-swatch"></span>Into the forced sale</span>
+            <span class="lg lg-pop"><span class="lg-swatch"></span>Day the forced seller was gone</span>
+          </div>
+
+          <div class="app-chart-rows" role="table" aria-label="Percentage move by stock across the forced unwind and the following session">
+            {drops.map((d, i) => {
+              const p = pops[i];
+              const dropWidth = Math.abs(d.pct);
+              const popWidth = Math.abs(p.pct);
+              return (
+                <div class="chart-row" role="row" style={`--drop-w: ${dropWidth}; --pop-w: ${popWidth};`}>
+                  <span class="chart-row-name" role="rowheader">{d.name}</span>
+                  <div class="chart-row-track" role="cell">
+                    <div class="chart-axis" aria-hidden="true"></div>
+                    <div class="chart-bar chart-bar-drop" data-label={`${d.pct}%`} aria-label={`${d.name} dropped ${dropWidth}% into the forced sale`}></div>
+                    <div class="chart-bar chart-bar-pop" data-label={`+${p.pct}%`} aria-label={`${d.name} recovered ${popWidth}% the following session`}></div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          <div class="app-chart-scale" aria-hidden="true">
+            <span class="scale-tick">−60</span>
+            <span class="scale-tick">−40</span>
+            <span class="scale-tick">−20</span>
+            <span class="scale-tick scale-zero">0</span>
+            <span class="scale-tick">+20</span>
+            <span class="scale-tick">+40</span>
+          </div>
+        </div>
+
+        <p class="app-chart-note">Same companies. Same revenue. Same CEO. What changed was who <em>had to</em> sell.</p>
+      </figure>
+
+      <aside class="app-marginalia app-margin-recto app-reveal">
+        <span class="app-marg-label">The $20B block</span>
+        <span class="app-marg-body">Sold to Citadel before the open. July 30, 2026.</span>
+      </aside>
+
+      <p class="body-p">Then the interesting part. The day the forced seller disappeared, those same stocks jumped 20% to 27%. CoreWeave, Nebius, SanDisk. Same companies as the day before. Same revenue. Same CEO. What changed was who <em>had to</em> sell.</p>
+
+      <p class="body-p">That is a liquidity story. Not a valuation story, not a modern portfolio theory story, not a my-formula-is-perfect story, not an I-have-a-PhD story. Somebody had to dump a lot of shares, and there weren't enough buyers on the other side to hold the price up.</p>
+
+      <p class="body-p">It happens on a smaller scale every December. Lots of retirees with lots of money in IRAs get a stack of notices from their custodian: take your required minimum distribution by December 31 or eat a penalty. So they call in and say, "I need to pull money out. Sell." Does that selling, concentrated into a few weeks because of a tax calendar, have anything to do with the value of the underlying companies, or GDP growth, or anything like that? No. It's human behavior on a deadline.</p>
+
+      <p class="body-p">So you've got fear and greed, you've got supply and demand, and then, oh yeah, there's the various ways of estimating what a company is worth. And that last piece is the one everyone harps on. The efficient market crowd says information travels fast and everyone can react to it instantly, so prices are always about right, and that's why we punish insider trading, to keep the market efficient.</p>
+
+      <p class="body-p">The pieces are true. Prices move fast, data routes instantly, access is broad. But a lot of the people making decisions are making them on very little of that information. Plenty of retail traders are buying because line go up. They're already late to the party. There's the old joke that when your cab driver starts giving you stock tips, it's time to sell. It's a joke, but there's some reality in it. Retail demand shows up, institutions unload into it, and they do it just gently enough to keep the line going up until they've exited what they wanted to exit.</p>
+
+      <aside class="app-marginalia app-margin-verso app-reveal">
+        <span class="app-marg-label">The old joke</span>
+        <span class="app-marg-body">When the cab driver starts giving stock tips, it's time to sell. Attributed to Joe Kennedy, 1929.</span>
+      </aside>
+
+      <p class="body-p">So the day-to-day game is volume. How much can you move at a certain price. That's the day trader game, the market-maker game, the algorithms splitting orders into pieces so they don't move the price against themselves while they're building or unwinding a position. Not everyone behaves that way. Not everyone uses all available information. Not everyone prices things the same way. And even though one plus one equals two, that doesn't tell you whether you're better off adopting a cat or a dog.</p>
+
+      <aside class="body-pullquote app-reveal">
+        <p>Which is why I don't much care whether someone has a Nobel Prize.</p>
+      </aside>
+
+      <aside class="app-marginalia app-margin-recto app-reveal">
+        <span class="app-marg-label">LTCM, 1998</span>
+        <span class="app-marg-body">About 25:1 on balance. Over $1T of derivatives notional. $3.6B rescue by 14 banks.</span>
+      </aside>
+
+      <p class="body-p">Long-Term Capital Management, back in 1998, nearly took the global financial system down with it. They were running about 25 to 1 on the balance sheet, with over a trillion dollars of derivatives notional stacked on top, and when their trades went the wrong way the New York Fed had to herd 14 banks into a $3.6 billion rescue. Two of the partners were Myron Scholes and Robert Merton. They'd won the Nobel the year before, for the option pricing model with Scholes' name on it. Brilliant idea, egregiously misapplied, with a big dose of hubris, and it cost billions.</p>
+
+      <p class="body-p">So markets go up and down, sometimes violently, sometimes for no reason that has any rational or mathematical basis beyond liquidity and behavior. Occasionally a few rational players walk in, look at the pricing, decide it's off, and buy or sell to close the gap. That's the readjustment. The rest is people. And people with PhDs, Silicon Valley geniuses, even multiple Nobel laureates in one room, screw up quite often.</p>
+
+      {/* Part IV */}
+      <div class="app-section-mark app-reveal">
+        <span class="app-section-sigil">Four</span>
+        <span class="app-section-label">Different by design</span>
+        <span class="app-section-rule"></span>
+      </div>
+
+      <section class="body-tie app-reveal" aria-labelledby="tie-h">
+        <p class="body-tie-eyebrow">Which brings me to Tzur Magen</p>
+        <p id="tie-h" class="body-tie-body">
+          That's why I built <strong>Tzur Magen</strong> differently. I didn't want it to rest on
+          a single theory or a single idea that has to stand on its own. I didn't want it
+          constrained to a single market. Money moves between markets. So should your portfolio.
+        </p>
+      </section>
+
+      <p class="body-p body-p-close">If you want to look at a different way to manage your portfolio, let's have a conversation.</p>
+
+      <div class="body-signoff app-reveal">
+        <p>And no, I don't have a PhD.</p>
+        <p>No, I haven't earned a Nobel Prize in Economics.</p>
+        <p class="signoff-perhaps"><em>Perhaps that's a good thing.</em></p>
+      </div>
+
+      <div class="body-cta">
+        <a class="cta cta-large" href="/contact">Start a conversation</a>
+      </div>
+    </div>
+
+    <footer class="app-footer">
+      <p class="app-footer-eyebrow">        <span>Sources</span>
+      </p>
+      <ol class="app-sources">
+        <li>CNBC, <em>Situational Awareness fund: $45B to fire sale.</em> July 31, 2026.</li>
+        <li>Yahoo Finance, <em>AI hedge fund collapses after margin calls.</em> July 31, 2026.</li>
+        <li>SpotGamma, <em>Anatomy of a margin call.</em></li>
+        <li>Bloomberg, <em>Citadel buys bulk of Situational Awareness' AI stock wagers.</em> July 30, 2026.</li>
+        <li>CNBC, <em>Microsoft flat the day after sinking 10%.</em> January 30, 2026.</li>
+        <li>Wikipedia, <em>Long-Term Capital Management.</em></li>
+        <li>Rubinstein, <em>Markowitz's "Portfolio Selection": a fifty-year retrospective.</em></li>
+        <li>IRS, <em>RMD FAQs.</em></li>
+      </ol>
+      <p class="app-footer-note">
+        v1.0 · Approved by Alex on September 4, 2026 · Compliance read pending before public circulation.
+        Descriptions of third-party events and figures are attributed and dated. Nothing on this
+        page constitutes a claim of past or expected performance for any strategy I run.
+      </p>
+    </footer>
+  </article>
+</Base>
+
+<style>
+  /* Essay-first layout, three-column: reading main + outer marginalia columns */
+  .approach-page {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: clamp(3rem, 5vw, 6rem) clamp(1.5rem, 4vw, 3rem) clamp(4rem, 6vw, 8rem);
+    color: var(--ink, #1c1712);
+  }
+
+  .app-masthead {
+    max-width: 860px;
+    margin: 0 auto clamp(3rem, 5vw, 5rem);
+    text-align: left;
+    border-bottom: 1px solid rgba(28, 23, 18, 0.16);
+    padding-bottom: clamp(1.75rem, 3vw, 2.5rem);
+  }
+  .app-marker {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--rubric, #8a3324);
+    font-weight: 600;
+    margin: 0 0 1.5rem;
+  }
+  .app-marker-dash {
+    display: inline-block;
+    width: 32px;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.7;
+  }
+  .app-title {
+    font-family: 'Fraunces', 'Vollkorn', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(2.6rem, 5.5vw, 4.6rem);
+    line-height: 1.02;
+    letter-spacing: -0.015em;
+    margin: 0 0 1.25rem;
+    font-variation-settings: 'opsz' 144, 'SOFT' 60;
+  }
+  .app-title em { font-style: italic; color: var(--rubric, #8a3324); font-weight: 400; }
+  .app-deck {
+    font-family: 'Vollkorn', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+    line-height: 1.5;
+    color: rgba(28, 23, 18, 0.72);
+    max-width: 62ch;
+    margin: 0 0 1.75rem;
+  }
+  .app-byline {
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    font-size: 0.82rem;
+    color: rgba(28, 23, 18, 0.62);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+  .app-byline-name {
+    font-weight: 600;
+    color: var(--ink, #1c1712);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+  }
+  .app-byline-sep { color: rgba(28, 23, 18, 0.35); }
+  .app-byline-tag { font-style: italic; }
+
+  /* Three-column grid: outer margins for marginalia, center for reading */
+  .app-column {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: [outer-l] 1fr [main] minmax(0, 660px) [outer-r] 1fr;
+    column-gap: clamp(1rem, 3vw, 2.5rem);
+    row-gap: 1.4em;
+  }
+  .app-column > * { grid-column: main; }
+
+  /* Section marks (§ I, § II, etc.) */
+  .app-section-mark {
+    grid-column: main;
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    align-items: center;
+    gap: 1rem;
+    margin: 3.5rem 0 1.75rem;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 700ms ease, transform 700ms ease;
+  }
+  .app-section-mark.is-in { opacity: 1; transform: none; }
+  .app-section-mark:first-of-type { margin-top: 0; }
+  .app-section-sigil {
+    font-family: 'Fraunces', 'Vollkorn', Georgia, serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 1.35rem;
+    color: var(--rubric, #8a3324);
+    letter-spacing: 0.02em;
+    font-variation-settings: 'opsz' 96;
+  }
+  .app-section-label {
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(28, 23, 18, 0.7);
+    font-weight: 600;
+  }
+  .app-section-rule {
+    display: block;
+    height: 1px;
+    background: linear-gradient(to right, rgba(138, 51, 36, 0.45), rgba(138, 51, 36, 0));
+    transform-origin: left center;
+    transform: scaleX(0);
+    transition: transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1) 200ms;
+  }
+  .app-section-mark.is-in .app-section-rule { transform: scaleX(1); }
+
+  /* Body paragraphs */
+  .body-p {
+    font-family: 'Vollkorn', Georgia, serif;
+    font-size: clamp(1.05rem, 1.35vw, 1.18rem);
+    line-height: 1.72;
+    color: rgba(28, 23, 18, 0.9);
+    margin: 0 0 0.2em;
+  }
+  .body-p em {
+    font-style: italic;
+    color: var(--rubric, #8a3324);
+    font-weight: 500;
+  }
+  .body-p-lead { font-size: clamp(1.1rem, 1.5vw, 1.28rem); line-height: 1.65; }
+  .body-dropcap {
+    float: left;
+    font-family: 'Fraunces', 'Vollkorn', Georgia, serif;
+    font-weight: 500;
+    font-size: 4.6em;
+    line-height: 0.85;
+    padding: 0.06em 0.14em 0 0;
+    margin: 0.05em 0.05em 0 0;
+    color: var(--rubric, #8a3324);
+    font-variation-settings: 'opsz' 144, 'SOFT' 30;
+  }
+
+  /* Marginalia — sit in the outer columns at wide viewports */
+  .app-marginalia {
+    display: block;
+    padding: 0.5rem 0.9rem;
+    border-left: 1px solid rgba(138, 51, 36, 0.35);
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity 700ms ease, transform 700ms ease;
+    align-self: start;
+  }
+  .app-marginalia.is-in { opacity: 1; transform: none; }
+  .app-marg-label {
+    display: block;
+    font-size: 0.66rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--rubric, #8a3324);
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+  .app-marg-body {
+    display: block;
+    font-family: 'Vollkorn', Georgia, serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: rgba(28, 23, 18, 0.72);
+  }
+  @media (min-width: 980px) {
+    .app-margin-recto { grid-column: outer-r; align-self: start; margin-top: 0.35rem; }
+    .app-margin-verso { grid-column: outer-l; align-self: start; margin-top: 0.35rem; text-align: right; border-left: none; border-right: 1px solid rgba(138, 51, 36, 0.35); padding: 0.5rem 0.9rem 0.5rem 0.5rem; }
+    .app-margin-verso.app-marg-body { text-align: right; }
+  }
+
+  /* Pullquote — spans full main column, hangs into left margin at wide */
+  .body-pullquote {
+    margin: 2rem 0;
+    padding: 1.25rem 0 1.25rem 1.5rem;
+    border-left: 3px solid var(--rubric, #8a3324);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 700ms ease, transform 700ms ease;
+  }
+  .body-pullquote.is-in { opacity: 1; transform: none; }
+  .body-pullquote p {
+    font-family: 'Fraunces', 'Vollkorn', Georgia, serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(1.35rem, 2.1vw, 1.75rem);
+    line-height: 1.3;
+    color: var(--ink, #1c1712);
+    margin: 0;
+    font-variation-settings: 'opsz' 96, 'SOFT' 40;
+  }
+  @media (min-width: 980px) {
+    .body-pullquote {
+      grid-column: outer-l / outer-r;
+      max-width: 780px;
+      margin-left: -1.5rem;
+      padding-left: 3rem;
+    }
+  }
+
+  /* Stylized SA LP chart */
+  .app-chart-wrap {
+    margin: 2.5rem 0 1.75rem;
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    background: var(--paper-2, #ece1c9);
+    border: 1px solid rgba(138, 51, 36, 0.18);
+    box-shadow: 0 20px 40px -30px rgba(28, 23, 18, 0.4);
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 800ms ease, transform 800ms ease;
+  }
+  .app-chart-wrap.is-in { opacity: 1; transform: none; }
+  .app-chart-caption { margin: 0 0 1.5rem; text-align: left; }
+  .app-chart-title {
+    font-family: 'Fraunces', 'Vollkorn', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    color: var(--ink, #1c1712);
+    margin: 0 0 0.35rem;
+    font-variation-settings: 'opsz' 96;
+  }
+  .app-chart-sub {
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(28, 23, 18, 0.6);
+    font-weight: 600;
+    margin: 0;
+  }
+  .app-chart-legend {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin: 0 0 1.25rem;
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    font-size: 0.78rem;
+    color: rgba(28, 23, 18, 0.68);
+  }
+  .lg { display: inline-flex; align-items: center; gap: 0.55rem; }
+  .lg-swatch {
+    width: 24px;
+    height: 8px;
+    display: inline-block;
+    border-radius: 1px;
+  }
+  .lg-drop .lg-swatch { background: var(--rubric, #8a3324); }
+  .lg-pop  .lg-swatch { background: var(--brass-soft, #c9a15a); }
+
+  .app-chart-rows {
+    display: grid;
+    gap: 0.65rem;
+    margin: 0 0 0.75rem;
+  }
+  .chart-row {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+  }
+  .chart-row-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ink, #1c1712);
+    letter-spacing: 0.01em;
+  }
+  .chart-row-track {
+    position: relative;
+    height: 22px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+  .chart-axis {
+    position: absolute;
+    left: 50%;
+    top: -4px;
+    bottom: -4px;
+    width: 1px;
+    background: rgba(28, 23, 18, 0.35);
+  }
+  .chart-bar {
+    height: 14px;
+    position: relative;
+    opacity: 0;
+    transform-origin: right center;
+    transform: scaleX(0);
+    transition: transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1), opacity 600ms ease;
+  }
+  .chart-bar-drop {
+    background: var(--rubric, #8a3324);
+    margin-right: 0;
+    margin-left: auto;
+    width: calc(var(--drop-w) * 1.4%);
+    max-width: 100%;
+    justify-self: end;
+  }
+  .chart-bar-pop {
+    background: var(--brass-soft, #c9a15a);
+    margin-left: 0;
+    width: calc(var(--pop-w) * 1.4%);
+    max-width: 100%;
+    justify-self: start;
+    transform-origin: left center;
+  }
+  .app-chart-wrap.is-in .chart-bar { opacity: 1; transform: scaleX(1); }
+  .app-chart-wrap.is-in .chart-row:nth-child(1) .chart-bar { transition-delay: 100ms; }
+  .app-chart-wrap.is-in .chart-row:nth-child(2) .chart-bar { transition-delay: 220ms; }
+  .app-chart-wrap.is-in .chart-row:nth-child(3) .chart-bar { transition-delay: 340ms; }
+  .app-chart-wrap.is-in .chart-row:nth-child(4) .chart-bar { transition-delay: 460ms; }
+  .app-chart-wrap.is-in .chart-row:nth-child(5) .chart-bar { transition-delay: 580ms; }
+  .chart-bar::after {
+    content: attr(data-label);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink, #1c1712);
+    opacity: 0;
+    transition: opacity 400ms ease 900ms;
+  }
+  .chart-bar-drop::after { right: calc(100% + 6px); color: var(--rubric, #8a3324); }
+  .chart-bar-pop::after  { left:  calc(100% + 6px); color: color-mix(in oklab, var(--brass-soft, #c9a15a) 65%, var(--ink) 35%); }
+  .app-chart-wrap.is-in .chart-bar::after { opacity: 1; }
+
+  .app-chart-scale {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 0.75rem;
+    margin: 0.35rem 0 0;
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    font-size: 0.7rem;
+    color: rgba(28, 23, 18, 0.4);
+    letter-spacing: 0.04em;
+    font-variant-numeric: tabular-nums;
+  }
+  .app-chart-scale::before { content: ''; }
+  .app-chart-scale > * { grid-column: 2; }
+  .app-chart-scale { grid-template-columns: 90px repeat(6, 1fr); }
+  .app-chart-scale .scale-tick { grid-column: auto; text-align: center; }
+  .app-chart-scale .scale-tick:first-of-type { grid-column: 2; }
+  .app-chart-scale .scale-zero { color: rgba(28, 23, 18, 0.6); font-weight: 600; }
+
+  .app-chart-note {
+    font-family: 'Vollkorn', Georgia, serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: rgba(28, 23, 18, 0.75);
+    margin: 1.25rem 0 0;
+    max-width: 60ch;
+  }
+  .app-chart-note em { color: var(--rubric, #8a3324); font-weight: 500; }
+
+  /* Tie-in block */
+  .body-tie {
+    margin: 2.5rem 0;
+    padding: 1.75rem 1.75rem 1.75rem 2rem;
+    background: transparent;
+    border-top: 1px solid rgba(138, 51, 36, 0.35);
+    border-bottom: 1px solid rgba(138, 51, 36, 0.35);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 700ms ease, transform 700ms ease;
+  }
+  .body-tie.is-in { opacity: 1; transform: none; }
+  .body-tie-eyebrow {
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--rubric, #8a3324);
+    font-weight: 600;
+    margin: 0 0 0.75rem;
+  }
+  .body-tie-body {
+    font-family: 'Vollkorn', Georgia, serif;
+    font-size: clamp(1.08rem, 1.4vw, 1.22rem);
+    line-height: 1.7;
+    color: var(--ink, #1c1712);
+    margin: 0;
+  }
+  .body-tie-body strong {
+    font-weight: 600;
+    font-family: 'Fraunces', 'Vollkorn', Georgia, serif;
+    color: var(--rubric, #8a3324);
+  }
+
+  .body-p-close {
+    font-family: 'Fraunces', 'Vollkorn', Georgia, serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(1.3rem, 2vw, 1.6rem);
+    line-height: 1.35;
+    color: var(--ink, #1c1712);
+    margin: 2.5rem 0 2rem;
+    text-align: center;
+    max-width: 46ch;
+    margin-left: auto;
+    margin-right: auto;
+    font-variation-settings: 'opsz' 96, 'SOFT' 40;
+  }
+
+  .body-signoff {
+    text-align: center;
+    margin: 0 0 2.5rem;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 800ms ease, transform 800ms ease;
+  }
+  .body-signoff.is-in { opacity: 1; transform: none; }
+  .body-signoff p {
+    font-family: 'Vollkorn', Georgia, serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(28, 23, 18, 0.72);
+    margin: 0 0 0.35rem;
+  }
+  .signoff-perhaps {
+    color: var(--rubric, #8a3324) !important;
+    font-style: italic;
+    padding-top: 0.35rem;
+  }
+
+  .body-cta { text-align: center; margin: 0 0 3rem; }
+
+  /* Footer */
+  .app-footer {
+    max-width: 780px;
+    margin: 3rem auto 0;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(28, 23, 18, 0.16);
+  }
+  .app-footer-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--rubric, #8a3324);
+    font-weight: 600;
+    margin: 0 0 1rem;
+  }
+  .app-sources {
+    padding: 0;
+    margin: 0 0 2rem;
+    list-style: none;
+    counter-reset: src;
+    display: grid;
+    gap: 0.5rem;
+  }
+  .app-sources li {
+    counter-increment: src;
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: rgba(28, 23, 18, 0.75);
+    padding-left: 2rem;
+    position: relative;
+  }
+  .app-sources li::before {
+    content: counter(src, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 0.05rem;
+    font-family: 'Fraunces', 'Vollkorn', Georgia, serif;
+    font-size: 0.85rem;
+    color: var(--rubric, #8a3324);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+  .app-sources em { font-style: italic; color: var(--ink, #1c1712); font-weight: 500; }
+  .app-footer-note {
+    font-family: 'Vollkorn', Georgia, serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: rgba(28, 23, 18, 0.55);
+    margin: 0;
+    padding: 1rem 1.25rem;
+    background: transparent;
+    border-left: 2px solid rgba(28, 23, 18, 0.2);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .app-section-mark, .app-marginalia, .body-pullquote, .app-chart-wrap, .body-tie, .body-signoff, .chart-bar {
+      opacity: 1; transform: none; transition: none;
+    }
+    .app-section-rule { transform: scaleX(1); }
+  }
+</style>

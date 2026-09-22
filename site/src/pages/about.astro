@@ -1,8 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 
-const title = 'About Alex Hilbert — Registered Investment Advisor, Scottsdale, Arizona | Life Story Wealth Planning';
-const description = 'Alex Hilbert is a Registered Investment Advisor and fiduciary, formerly at Vanguard, now running Life Story Wealth Planning — a small Scottsdale investment advisory firm.';
+const title = 'About Alex Hilbert · Registered Investment Advisor, Scottsdale, Arizona | Life Story Wealth Planning';
+const description = 'Alex Hilbert is a Registered Investment Advisor and fiduciary, formerly at Vanguard, now running Life Story Wealth Planning, a small Scottsdale investment advisory firm.';
 
 const personSchema = {
   '@context': 'https://schema.org',
@@ -29,21 +29,34 @@ const personSchema = {
   </Fragment>
 
   <article class="chapter-page">
-    <header class="chapter-header">
-      <div class="chapter-header-inner">
-        <div>
-          <p class="chapter-eyebrow">Chapter · About</p>
-          <h1 class="chapter-title">About <em>Alex Hilbert</em></h1>
-          <p class="chapter-sub">Registered Investment Advisor · Fiduciary · Scottsdale, Arizona</p>
+    <header class="about-hero">
+      <figure class="about-portrait" aria-label="Alex Hilbert portrait, forthcoming">
+        <div class="about-portrait-frame">
+          <span class="about-portrait-corner tl" aria-hidden="true"></span>
+          <span class="about-portrait-corner tr" aria-hidden="true"></span>
+          <span class="about-portrait-corner bl" aria-hidden="true"></span>
+          <span class="about-portrait-corner br" aria-hidden="true"></span>
+          <span class="about-portrait-mono" aria-hidden="true">AH</span>
+          <span class="about-portrait-rule" aria-hidden="true"></span>
+          <span class="about-portrait-firm" aria-hidden="true">Life Story <em>Wealth Planning</em></span>
         </div>
-        <figure class="chapter-portrait" aria-label="Publisher's monogram — real photograph forthcoming">
-          <div class="hero-mark" aria-hidden="true">
-            <span class="hero-mark-letters">AH</span>
-            <span class="hero-mark-rule"></span>
-            <span class="hero-mark-label">Life Story · Wealth Planning</span>
-          </div>
-          <span class="hero-figure-caption">Portrait forthcoming</span>
-        </figure>
+        <figcaption class="about-portrait-caption">Portrait forthcoming · Scottsdale, Arizona</figcaption>
+      </figure>
+
+      <div class="about-hero-copy">
+        <p class="about-hero-eyebrow">Chapter · About</p>
+        <h1 class="about-hero-h1">
+          <span class="about-hero-first">Alex</span>
+          <span class="about-hero-last">Hilbert</span>
+        </h1>
+        <div class="about-hero-credentials">
+          <span>Registered Investment Advisor</span>
+          <span class="ah-sep" aria-hidden="true"></span>
+          <span>Fiduciary since 2012</span>
+        </div>
+        <p class="about-hero-epigraph">
+          <span class="ah-quote" aria-hidden="true">“</span>Most people who arrive at this page were introduced by someone they trust. If that is how you got here, this is written for you.<span class="ah-quote ah-quote-end" aria-hidden="true">”</span>
+        </p>
       </div>
     </header>
 
@@ -53,7 +66,7 @@ const personSchema = {
         <p>
           My name is Alex Hilbert. I run Life Story Wealth Planning, a small investment advisory
           firm in Scottsdale, Arizona. I am a Registered Investment Advisor, which in the United
-          States is a specific, licensed role — not a job title anyone can adopt. Being an RIA also
+          States is a specific, licensed role, not a job title anyone can adopt. Being an RIA also
           means I am a fiduciary. I am legally required to put my clients' interests ahead of my own.
         </p>
         <p>
@@ -63,13 +76,41 @@ const personSchema = {
         </p>
       </section>
 
-      <section>
+      <section class="app-reveal">
         <h3>Why I built this firm</h3>
+
+        <figure class="about-timeline" aria-labelledby="timeline-cap">
+          <svg viewBox="0 0 640 90" class="about-timeline-svg" role="img" aria-labelledby="timeline-cap">
+            <title id="timeline-cap">A timeline showing the transition from Vanguard to Life Story Wealth Planning, founded in 2012.</title>
+
+            {/* Baseline */}
+            <line x1="30" y1="55" x2="610" y2="55" class="tl-line" />
+
+            {/* Vanguard node (left) */}
+            <circle cx="120" cy="55" r="5" class="tl-node tl-node-past" />
+            <text x="120" y="42" text-anchor="middle" class="tl-label tl-label-eyebrow">Before</text>
+            <text x="120" y="82" text-anchor="middle" class="tl-label">Adviser at Vanguard</text>
+
+            {/* Founded 2012 node (middle) */}
+            <circle cx="320" cy="55" r="7" class="tl-node tl-node-anchor" />
+            <text x="320" y="38" text-anchor="middle" class="tl-label tl-label-year">2012</text>
+            <text x="320" y="82" text-anchor="middle" class="tl-label tl-label-rubric">Life Story founded</text>
+
+            {/* Today node (right) */}
+            <circle cx="520" cy="55" r="5" class="tl-node tl-node-now" />
+            <text x="520" y="42" text-anchor="middle" class="tl-label tl-label-eyebrow">Now</text>
+            <text x="520" y="82" text-anchor="middle" class="tl-label">Fiduciary · fee-aligned</text>
+          </svg>
+          <figcaption class="about-timeline-caption">
+            The origin story in one line. The rest of the paragraphs below tell you why the transition happened.
+          </figcaption>
+        </figure>
+
         <p>Before this firm, I was an adviser at Vanguard.</p>
         <p>
           The clients I spoke with there were smart people who had built real wealth over long
           careers. They read carefully, they asked real questions, and they were paying attention.
-          When markets fell — and they always fall, eventually — those clients would call. They
+          When markets fell, and they always fall, eventually, those clients would call. They
           wanted to know what we were going to do about their portfolios. They watched the value of
           their accounts drop day after day, and they wanted a plan.
         </p>
@@ -91,7 +132,7 @@ const personSchema = {
           So I left, and I built this firm to do the other thing. To actually manage portfolios.
           To reconsider positions every quarter, to move between asset classes when conditions
           change, and to hold cash when nothing deserves capital. To answer the phone when a client
-          wants to know what we are doing about a market that is falling — with something better
+          wants to know what we are doing about a market that is falling, with something better
           than "nothing."
         </p>
         <blockquote class="pull-inline">
@@ -108,8 +149,8 @@ const personSchema = {
         </p>
         <ul>
           <li>
-            I do not earn commissions on the products I recommend. My fee structure — described
-            on the <a href="/fees">Fees page</a> — pays me only when your portfolio gains value
+            I do not earn commissions on the products I recommend. My fee structure, described
+            on the <a href="/fees">Fees page</a>, pays me only when your portfolio gains value
             above a defined threshold. I do not get paid for holding your assets. I get paid when
             they grow.
           </li>
@@ -128,7 +169,7 @@ const personSchema = {
       <section>
         <h3>How I manage money</h3>
         <p>
-          The process has a name — I call it <strong>Zermagen</strong>, from the Hebrew for
+          The process has a name, I call it <strong>Tzur Magen</strong>, from the Hebrew for
           <em>fortress and shield</em>. It is built around a single idea: risk comes first. Before
           I decide what to buy, I decide what could go wrong and how to guard against it. The full
           explanation, layer by layer, is on the <a href="/approach">Approach page</a>.
@@ -148,7 +189,7 @@ const personSchema = {
         <h3>How to verify me</h3>
         <p>
           You can look up any Registered Investment Advisor in the United States through the SEC's
-          public records. My firm's Form ADV — the standard regulatory filing — is linked in the
+          public records. My firm's Form ADV, the standard regulatory filing, is linked in the
           footer of every page on this site. If it matters to you to verify anything before we
           speak, that is where to look.
         </p>
@@ -158,7 +199,7 @@ const personSchema = {
         <h4>A note on the name</h4>
         <p>
           There is an unrelated firm called Life Story Financial. I am not connected with them.
-          This site — and my firm, Life Story Wealth Planning — belong to me.
+          This site, and my firm, Life Story Wealth Planning, belong to me.
         </p>
       </aside>
 
@@ -168,3 +209,276 @@ const personSchema = {
     </div>
   </article>
 </Base>
+
+<style>
+  /* Asymmetric portrait spread — book-jacket-style hero */
+  .about-hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(2rem, 4vw, 3.5rem);
+    max-width: 1100px;
+    margin: 0 auto clamp(3rem, 5vw, 5rem);
+    padding: clamp(2.5rem, 5vw, 5rem) clamp(1.5rem, 4vw, 3rem) clamp(2rem, 4vw, 3.5rem);
+    align-items: center;
+  }
+  @media (min-width: 820px) {
+    .about-hero {
+      grid-template-columns: minmax(240px, 340px) 1fr;
+      gap: clamp(3rem, 5vw, 5rem);
+    }
+  }
+
+  /* Portrait plate — corner-marked frame with AH monogram + firm mark */
+  .about-portrait {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    align-items: center;
+    text-align: center;
+  }
+  .about-portrait-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    max-width: 320px;
+    background:
+      radial-gradient(120% 80% at 50% 0%, rgba(201, 161, 90, 0.10), transparent 55%),
+      linear-gradient(180deg, var(--paper-2, #f4ecdc) 0%, var(--paper, #f2e6c8) 100%);
+    border: 1px solid rgba(138, 51, 36, 0.20);
+    display: grid;
+    place-items: center;
+    box-shadow: 0 26px 60px -30px rgba(28, 23, 18, 0.35);
+    padding: 2rem;
+  }
+  .about-portrait-corner {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid var(--rubric, #8a3324);
+  }
+  .about-portrait-corner.tl { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+  .about-portrait-corner.tr { top: 10px; right: 10px; border-left: none; border-bottom: none; }
+  .about-portrait-corner.bl { bottom: 10px; left: 10px; border-right: none; border-top: none; }
+  .about-portrait-corner.br { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+
+  .about-portrait-mono {
+    font-family: 'Fraunces', 'Vollkorn', Georgia, serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(4.5rem, 8vw, 6.5rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--ink, #1c1712);
+    font-variation-settings: 'opsz' 144, 'SOFT' 100;
+    margin-bottom: 0.65rem;
+  }
+  .about-portrait-rule {
+    display: block;
+    width: 42px;
+    height: 1px;
+    background: var(--rubric, #8a3324);
+    margin: 0 0 0.75rem;
+  }
+  .about-portrait-firm {
+    font-family: 'Fraunces', 'Vollkorn', Georgia, serif;
+    font-weight: 400;
+    font-size: 0.72rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgba(28, 23, 18, 0.55);
+    text-align: center;
+    line-height: 1.4;
+  }
+  .about-portrait-firm em {
+    font-style: italic;
+    color: var(--rubric, #8a3324);
+    text-transform: none;
+    letter-spacing: 0.02em;
+    font-size: 0.95rem;
+    display: block;
+    font-weight: 400;
+    margin-top: 0.35rem;
+  }
+  .about-portrait-caption {
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(28, 23, 18, 0.5);
+    font-weight: 500;
+  }
+
+  /* Copy column — vertical typographic ladder */
+  .about-hero-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .about-hero-eyebrow {
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--rubric, #8a3324);
+    font-weight: 600;
+    margin: 0;
+  }
+  .about-hero-h1 {
+    font-family: 'Fraunces', 'Vollkorn', Georgia, serif;
+    font-weight: 400;
+    margin: 0;
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15em;
+  }
+  .about-hero-first {
+    font-style: italic;
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    color: rgba(28, 23, 18, 0.55);
+    font-variation-settings: 'opsz' 120, 'SOFT' 80;
+    align-self: flex-start;
+    padding-left: 0.15em;
+  }
+  .about-hero-last {
+    font-weight: 500;
+    font-size: clamp(4.2rem, 8vw, 6.5rem);
+    color: var(--ink, #1c1712);
+    font-variation-settings: 'opsz' 144, 'SOFT' 40;
+    letter-spacing: -0.035em;
+  }
+  .about-hero-credentials {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.85rem;
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(28, 23, 18, 0.72);
+    font-weight: 600;
+    padding-top: 0.4rem;
+    border-top: 1px solid rgba(138, 51, 36, 0.35);
+  }
+  .ah-sep {
+    width: 4px;
+    height: 4px;
+    background: var(--rubric, #8a3324);
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.7;
+  }
+  .about-hero-epigraph {
+    font-family: 'Vollkorn', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+    line-height: 1.55;
+    color: rgba(28, 23, 18, 0.72);
+    margin: 0.25rem 0 0;
+    max-width: 52ch;
+    position: relative;
+  }
+  .ah-quote {
+    font-family: 'Fraunces', 'Vollkorn', Georgia, serif;
+    font-style: italic;
+    font-size: 1.6em;
+    line-height: 0;
+    color: var(--rubric, #8a3324);
+    vertical-align: -0.28em;
+    margin-right: 0.05em;
+    font-weight: 400;
+  }
+  .ah-quote-end {
+    margin-right: 0;
+    margin-left: 0.05em;
+  }
+
+  /* Vanguard → 2012 → Now timeline mark, positioned above the origin story */
+  .about-timeline {
+    margin: 1.5rem 0 2rem;
+    padding: 1.5rem clamp(1rem, 3vw, 1.75rem) 1.25rem;
+    background: var(--paper-2, #f4ecdc);
+    border: 1px solid rgba(138, 51, 36, 0.14);
+  }
+  .about-timeline-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 640px;
+    margin: 0 auto;
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+  }
+
+  .tl-line {
+    stroke: rgba(28, 23, 18, 0.28);
+    stroke-width: 1;
+    stroke-dasharray: 620;
+    stroke-dashoffset: 620;
+    transition: stroke-dashoffset 1200ms cubic-bezier(0.2, 0.7, 0.2, 1) 150ms;
+  }
+  .app-reveal.is-in .tl-line { stroke-dashoffset: 0; }
+
+  .tl-node {
+    fill: var(--ink, #1c1712);
+    stroke: none;
+    opacity: 0;
+    transform-origin: center;
+    transform: scale(0.4);
+    transition: opacity 500ms ease, transform 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .tl-node-past { fill: rgba(28, 23, 18, 0.42); }
+  .tl-node-anchor { fill: var(--rubric, #8a3324); }
+  .tl-node-now { fill: color-mix(in oklab, var(--brass-soft, #c9a15a) 60%, var(--ink, #1c1712) 40%); }
+  .app-reveal.is-in .tl-node { opacity: 1; transform: none; }
+  .app-reveal.is-in .tl-node-past { transition-delay: 700ms; }
+  .app-reveal.is-in .tl-node-anchor { transition-delay: 1000ms; }
+  .app-reveal.is-in .tl-node-now { transition-delay: 1300ms; }
+
+  .tl-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    fill: rgba(28, 23, 18, 0.72);
+    opacity: 0;
+    transition: opacity 500ms ease 1500ms;
+  }
+  .tl-label-eyebrow {
+    font-size: 9.5px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    fill: rgba(28, 23, 18, 0.5);
+    font-weight: 600;
+  }
+  .tl-label-year {
+    font-family: 'Fraunces', 'Vollkorn', Georgia, serif;
+    font-style: italic;
+    font-size: 15px;
+    fill: var(--rubric, #8a3324);
+    font-weight: 500;
+  }
+  .tl-label-rubric {
+    fill: var(--rubric, #8a3324);
+    font-weight: 600;
+  }
+  .app-reveal.is-in .tl-label { opacity: 1; }
+
+  .about-timeline-caption {
+    font-family: 'Vollkorn', Georgia, serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: rgba(28, 23, 18, 0.58);
+    text-align: center;
+    margin: 1rem auto 0;
+    max-width: 52ch;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tl-line, .tl-node, .tl-label {
+      opacity: 1; transform: none; transition: none; stroke-dashoffset: 0;
+    }
+  }
+</style>

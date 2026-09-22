@@ -1,37 +1,31 @@
 ---
 import Base from '../layouts/Base.astro';
 
-const title = 'Fees — Results, not fees | Life Story Wealth Planning';
+const title = 'Fees · Results, not fees | Life Story Wealth Planning';
 const description = 'No management fee. I am paid only on gains above a high water mark and a quarterly 1.5% hurdle rate. If the strategy does not work in a given quarter, I do not get paid.';
 ---
 <Base title={title} description={description} canonicalPath="/fees">
   <main class="fees-page">
     <section class="fees-hero">
-      <p class="fees-eyebrow">
-        <span class="fees-eyebrow-dash"></span>
-        <span>Chapter · Fees</span>
-        <span class="fees-eyebrow-dash"></span>
-      </p>
+      <p class="fees-eyebrow">        <span>Chapter · Fees</span>      </p>
       <h1 class="fees-h1">Results, <em>not fees.</em></h1>
       <p class="fees-lede">The wait-what answer, followed by the exact wording, followed by what it means.</p>
     </section>
 
     <section class="fees-hook" aria-labelledby="hook-h">
-      <p class="fees-hook-q">So — what does this cost?</p>
+      <p class="fees-hook-q">So, what does this cost?</p>
       <p id="hook-h" class="fees-hook-a">Potentially nothing.</p>
       <p class="fees-hook-body">
         Most advisers charge a management fee. Whether your portfolio goes up, down, or
         sideways, the fee is charged. I do not. If the strategy I run for you does not work
-        in a given quarter — if it does not exceed a defined threshold — I am not paid for
+        in a given quarter, if it does not exceed a defined threshold, I am not paid for
         that quarter. When it does exceed the threshold, I am paid a share of the excess.
         <strong>That is the whole model.</strong>
       </p>
     </section>
 
     <section class="fees-verbatim" aria-labelledby="verbatim-h">
-      <p id="verbatim-h" class="fees-section-eyebrow">
-        <span class="fees-eyebrow-dash"></span>
-        <span>In my own words</span>
+      <p id="verbatim-h" class="fees-section-eyebrow">        <span>In my own words</span>
       </p>
       <p class="fees-section-note">
         The wording below is exactly as I publish it. It is the wording that governs the fee arrangement.
@@ -53,18 +47,52 @@ const description = 'No management fee. I am paid only on gains above a high wat
       <p class="fees-plain-lede">Two things have to be true before I am paid anything.</p>
 
       <ol class="fees-conditions">
-        <li>
+        <li class="app-reveal">
           <span class="fees-cond-num">01</span>
           <div class="fees-cond-body">
             <h3 class="fees-cond-h">Your account has to reach a new high.</h3>
             <p>
               This is the <em>high water mark</em>. If your portfolio drops and later recovers,
-              no fee is charged on the recovered ground — the water mark is the previous peak.
+              no fee is charged on the recovered ground, the water mark is the previous peak.
               I am not paid twice on the same gains.
             </p>
+
+            <figure class="fees-diagram" aria-labelledby="hwm-cap">
+              <svg viewBox="0 0 400 190" class="fees-svg fees-svg-hwm" role="img" aria-labelledby="hwm-cap">
+                <title id="hwm-cap">A stylised portfolio value line rises to a peak, dips, recovers back to the peak (no fee zone), then continues to a new high (fee zone).</title>
+
+                {/* Baseline */}
+                <line x1="20" y1="150" x2="380" y2="150" class="fees-svg-axis" />
+
+                {/* Previous-peak dashed line */}
+                <line x1="20" y1="75" x2="380" y2="75" class="fees-svg-peakline" />
+
+                {/* No-fee recovery band (between valley and peak, up to x=270) */}
+                <path class="fees-svg-nofee" d="M 100 75 L 270 75 L 270 115 C 220 130 180 130 165 115 C 145 100 130 90 100 75 Z" />
+
+                {/* Fee zone above peak beyond x=270 */}
+                <path class="fees-svg-feezone" d="M 270 75 L 380 75 L 380 40 L 270 40 Z" />
+
+                {/* Portfolio value line */}
+                <path class="fees-svg-line" d="M 20 130 C 55 100 80 80 100 75 C 130 90 145 100 165 115 C 190 130 235 120 270 75 C 305 55 350 45 380 40" />
+
+                {/* Peak dot */}
+                <circle cx="100" cy="75" r="4" class="fees-svg-dot" />
+                {/* New-high dot */}
+                <circle cx="380" cy="40" r="4" class="fees-svg-dot fees-svg-dot-brass" />
+
+                {/* Labels */}
+                <text x="105" y="66" class="fees-svg-label fees-svg-label-rubric">Previous peak</text>
+                <text x="180" y="102" class="fees-svg-label">Returns to peak. No fee here.</text>
+                <text x="376" y="60" class="fees-svg-label fees-svg-label-brass" text-anchor="end">New high. Fee only above.</text>
+              </svg>
+              <figcaption class="fees-diagram-caption">
+                The line is your portfolio value over time. Recovery to the previous peak charges no fee. Only gains above the peak count.
+              </figcaption>
+            </figure>
           </div>
         </li>
-        <li>
+        <li class="app-reveal">
           <span class="fees-cond-num">02</span>
           <div class="fees-cond-body">
             <h3 class="fees-cond-h">The new high has to clear the hurdle, for that quarter.</h3>
@@ -72,6 +100,37 @@ const description = 'No management fee. I am paid only on gains above a high wat
               This is the <em>hurdle rate</em>: 1.5% above the previous peak, per quarter.
               Small gains do not trigger a fee.
             </p>
+
+            <figure class="fees-diagram" aria-labelledby="hurdle-cap">
+              <svg viewBox="0 0 400 190" class="fees-svg fees-svg-hurdle" role="img" aria-labelledby="hurdle-cap">
+                <title id="hurdle-cap">A stylised diagram showing two quarterly gains: one below the hurdle line (no fee), one above the hurdle where only the portion above the hurdle counts as fee.</title>
+
+                {/* Baseline */}
+                <line x1="20" y1="150" x2="380" y2="150" class="fees-svg-axis" />
+
+                {/* Hurdle line */}
+                <line x1="20" y1="85" x2="380" y2="85" class="fees-svg-hurdle-line" />
+                <text x="380" y="80" class="fees-svg-label fees-svg-label-brass" text-anchor="end">Hurdle · 1.5%</text>
+
+                {/* Bar A (below hurdle) */}
+                <rect x="90" y="100" width="70" height="50" class="fees-svg-bar-quiet" />
+                <text x="125" y="170" class="fees-svg-label" text-anchor="middle">Below hurdle</text>
+                <text x="125" y="184" class="fees-svg-label fees-svg-label-faint" text-anchor="middle">No fee.</text>
+
+                {/* Bar B (above hurdle: quiet base + rubric excess) */}
+                <rect x="240" y="85" width="70" height="65" class="fees-svg-bar-quiet" />
+                <rect x="240" y="45" width="70" height="40" class="fees-svg-bar-fee" />
+                <text x="275" y="170" class="fees-svg-label" text-anchor="middle">Above hurdle</text>
+                <text x="275" y="184" class="fees-svg-label fees-svg-label-rubric" text-anchor="middle">Fee on excess only.</text>
+
+                {/* Small callout arrow to the excess portion */}
+                <line x1="325" y1="65" x2="345" y2="65" class="fees-svg-axis" />
+                <text x="350" y="68" class="fees-svg-label fees-svg-label-rubric">this slice</text>
+              </svg>
+              <figcaption class="fees-diagram-caption">
+                Two hypothetical quarterly outcomes. Below the hurdle: no fee at all. Above: the fee applies only to the slice above the hurdle line.
+              </figcaption>
+            </figure>
           </div>
         </li>
       </ol>
@@ -83,9 +142,7 @@ const description = 'No management fee. I am paid only on gains above a high wat
     </section>
 
     <section class="fees-why" aria-labelledby="why-h">
-      <p class="fees-section-eyebrow">
-        <span class="fees-eyebrow-dash"></span>
-        <span>Why the model is built this way</span>
+      <p class="fees-section-eyebrow">        <span>Why the model is built this way</span>
       </p>
       <p id="why-h" class="fees-why-body">
         I built it this way so my incentives line up with yours. If you do well, I do well.
@@ -101,7 +158,7 @@ const description = 'No management fee. I am paid only on gains above a high wat
         otherwise would, in the hope of triggering a fee. I am aware of it, and it is part
         of why my approach starts with risk management before anything else. The high water
         mark also helps: once a portfolio has fallen, I do not get paid on the recovery back
-        to the previous peak — which removes any incentive to gamble the account back.
+        to the previous peak, which removes any incentive to gamble the account back.
       </p>
     </aside>
 
@@ -179,7 +236,7 @@ const description = 'No management fee. I am paid only on gains above a high wat
     font-style: italic;
   }
 
-  /* Hook — "Potentially nothing." as visual anchor */
+  /* Hook, "Potentially nothing." as visual anchor */
   .fees-hook {
     text-align: center;
     padding: clamp(2rem, 4vw, 3rem) 0;
@@ -214,7 +271,7 @@ const description = 'No management fee. I am paid only on gains above a high wat
   }
   .fees-hook-body strong { font-weight: 600; color: var(--ink, #1c1712); }
 
-  /* Verbatim wording — treated as legal citation */
+  /* Verbatim wording, treated as legal citation */
   .fees-verbatim {}
   .fees-section-eyebrow {
     display: flex;
@@ -271,7 +328,7 @@ const description = 'No management fee. I am paid only on gains above a high wat
     font-style: normal;
   }
 
-  /* Plain language — numbered conditions */
+  /* Plain language, numbered conditions */
   .fees-h2 {
     font-family: 'Fraunces', 'Vollkorn', Georgia, serif;
     font-weight: 400;
@@ -332,6 +389,113 @@ const description = 'No management fee. I am paid only on gains above a high wat
     color: var(--rubric, #8a3324);
     font-weight: 500;
   }
+
+  /* Pedagogical diagram beneath each condition */
+  .fees-diagram {
+    margin: 1.25rem 0 0;
+    padding: 1rem 1.15rem 1.15rem;
+    background: transparent;
+    border: 1px solid rgba(28, 23, 18, 0.12);
+    border-radius: 2px;
+  }
+  .fees-svg {
+    width: 100%;
+    height: auto;
+    max-width: 460px;
+    display: block;
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+  }
+  .fees-svg-axis { stroke: rgba(28, 23, 18, 0.35); stroke-width: 1; }
+  .fees-svg-peakline,
+  .fees-svg-hurdle-line {
+    stroke: var(--brass-soft, #c9a15a);
+    stroke-width: 1.25;
+    stroke-dasharray: 4 4;
+  }
+  .fees-svg-line {
+    fill: none;
+    stroke: var(--ink, #1c1712);
+    stroke-width: 1.75;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 900;
+    stroke-dashoffset: 900;
+    transition: stroke-dashoffset 1400ms cubic-bezier(0.2, 0.7, 0.2, 1) 250ms;
+  }
+  .app-reveal.is-in .fees-svg-line { stroke-dashoffset: 0; }
+  .fees-svg-nofee {
+    fill: rgba(201, 161, 90, 0.14);
+    stroke: none;
+    opacity: 0;
+    transition: opacity 700ms ease 1200ms;
+  }
+  .app-reveal.is-in .fees-svg-nofee { opacity: 1; }
+  .fees-svg-feezone {
+    fill: rgba(138, 51, 36, 0.16);
+    stroke: none;
+    opacity: 0;
+    transition: opacity 700ms ease 1400ms;
+  }
+  .app-reveal.is-in .fees-svg-feezone { opacity: 1; }
+  .fees-svg-dot {
+    fill: var(--ink, #1c1712);
+    opacity: 0;
+    transition: opacity 500ms ease 1000ms;
+  }
+  .fees-svg-dot-brass { fill: var(--rubric, #8a3324); transition-delay: 1600ms; }
+  .app-reveal.is-in .fees-svg-dot { opacity: 1; }
+  .fees-svg-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    fill: rgba(28, 23, 18, 0.7);
+    opacity: 0;
+    transition: opacity 500ms ease 1400ms;
+  }
+  .fees-svg-label-rubric { fill: var(--rubric, #8a3324); font-weight: 600; }
+  .fees-svg-label-brass  { fill: color-mix(in oklab, var(--brass-soft, #c9a15a) 60%, var(--ink, #1c1712) 40%); font-weight: 600; }
+  .fees-svg-label-faint  { fill: rgba(28, 23, 18, 0.45); font-style: italic; }
+  .app-reveal.is-in .fees-svg-label { opacity: 1; }
+
+  /* Hurdle diagram bars */
+  .fees-svg-bar-quiet {
+    fill: rgba(28, 23, 18, 0.18);
+    opacity: 0;
+    transform-origin: 50% 150px;
+    transform: scaleY(0);
+    transition: transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1) 300ms, opacity 400ms ease 300ms;
+  }
+  .fees-svg-bar-fee {
+    fill: var(--rubric, #8a3324);
+    opacity: 0;
+    transform-origin: 50% 85px;
+    transform: scaleY(0);
+    transition: transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1) 900ms, opacity 400ms ease 900ms;
+  }
+  .app-reveal.is-in .fees-svg-bar-quiet,
+  .app-reveal.is-in .fees-svg-bar-fee {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+
+  .fees-diagram-caption {
+    font-family: 'Vollkorn', Georgia, serif;
+    font-style: italic;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: rgba(28, 23, 18, 0.6);
+    margin: 0.85rem 0 0;
+    max-width: 62ch;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fees-svg-line { stroke-dashoffset: 0; transition: none; }
+    .fees-svg-nofee, .fees-svg-feezone, .fees-svg-dot, .fees-svg-label,
+    .fees-svg-bar-quiet, .fees-svg-bar-fee {
+      opacity: 1; transform: none; transition: none;
+    }
+  }
+
   .fees-plain-close {
     font-family: 'Vollkorn', Georgia, serif;
     font-size: 1.05rem;
@@ -353,7 +517,7 @@ const description = 'No management fee. I am paid only on gains above a high wat
     max-width: 58ch;
   }
 
-  /* Notes — asides with quiet treatment */
+  /* Notes, asides with quiet treatment */
   .fees-note {
     padding: 1.5rem 1.75rem;
     background: transparent;
