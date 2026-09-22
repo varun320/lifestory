@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 72" width="360" height="72" role="img" aria-label="Life Story Wealth Planning">
+  <style>
+    .lswp-word { font-family: 'Cormorant Garamond', 'Fraunces', 'Vollkorn', Georgia, serif; font-weight: 500; font-size: 34px; fill: #f2e6c8; letter-spacing: 0.3px; }
+    .lswp-word-em { font-style: italic; fill: #c9a15a; }
+  </style>
+  <text x="0" y="46" class="lswp-word">Life Story <tspan class="lswp-word-em">Wealth Planning</tspan></text>
+  <g transform="translate(300, 14)">
+    <circle cx="22" cy="22" r="20" fill="#c9a15a"/>
+    <path d="M 14 30 C 16 22 20 15 30 12 C 30 16 28 21 24 25 C 21 27 17 29 14 30 Z" fill="none" stroke="#1a1712" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 14 30 L 19 25" fill="none" stroke="#1a1712" stroke-width="1.4" stroke-linecap="round"/>
+    <path d="M 17 33 C 21 32 26 32 32 33" fill="none" stroke="#1a1712" stroke-width="1.4" stroke-linecap="round"/>
+  </g>
+</svg>

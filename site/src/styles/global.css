@@ -115,12 +115,49 @@ img { max-width: 100%; display: block; }
   max-width: 1240px; margin: 0 auto; padding: 22px 40px;
   display: flex; align-items: center; justify-content: space-between; gap: 40px;
 }
-.brand { display: flex; align-items: baseline; gap: 14px; }
+.brand { display: flex; align-items: center; gap: 14px; }
 .brand-mark {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 500; font-size: 26px; letter-spacing: 0.01em; color: var(--navy);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--ink, #1c1712);
 }
-.brand-mark em { font-style: italic; color: var(--brass); }
+.brand-word {
+  font-family: 'Cormorant Garamond', 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 26px;
+  letter-spacing: 0.01em;
+  color: var(--ink, #1c1712);
+  line-height: 1;
+}
+.brand-word em {
+  font-style: italic;
+  color: var(--brass-soft, #c9a15a);
+  font-weight: 500;
+}
+.brand-mark-glyph {
+  display: block;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+.brand-mark-glyph .bm-disc { fill: var(--brass-soft, #c9a15a); }
+.brand-mark-glyph .bm-feather {
+  fill: none;
+  stroke: var(--ink, #1c1712);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.brand-mark-glyph .bm-shaft,
+.brand-mark-glyph .bm-underline {
+  fill: none;
+  stroke: var(--ink, #1c1712);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 .brand-tag {
   font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
   color: var(--ink-soft); border-left: 1px solid var(--line); padding-left: 14px;
@@ -135,6 +172,134 @@ nav a::after {
 nav a:hover::after { right: 0; }
 nav a[aria-current="page"] { color: var(--brass); }
 nav a[aria-current="page"]::after { right: 0; }
+
+/* Mobile nav toggle (hamburger). Hidden by default; revealed below 640px. */
+.nav-toggle {
+  display: none;
+  background: transparent;
+  border: 1px solid rgba(28, 23, 18, 0.18);
+  padding: 8px 12px 8px 10px;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+  color: var(--ink, #1c1712);
+  border-radius: 2px;
+  font-family: 'Source Sans 3', system-ui, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 600;
+  line-height: 1;
+  min-height: 44px;
+  transition: border-color 200ms ease;
+}
+.nav-toggle:hover, .nav-toggle:focus-visible { border-color: var(--rubric); outline: none; }
+.nav-toggle-icon {
+  display: block;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+.nav-toggle-icon line {
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+.nav-toggle-label {
+  margin-left: 4px;
+  color: rgba(28, 23, 18, 0.75);
+}
+
+/* Close button — only visible inside the open menu */
+.nav-close {
+  display: none;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: 1px solid rgba(28, 23, 18, 0.16);
+  padding: 0;
+  cursor: pointer;
+  border-radius: 2px;
+  color: var(--ink, #1c1712);
+  align-items: center;
+  justify-content: center;
+}
+.nav-close:hover, .nav-close:focus-visible { border-color: var(--rubric); outline: none; }
+.nav-close svg { width: 20px; height: 20px; }
+.nav-close svg line { stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; }
+
+/* Lock scroll when the mobile menu is open */
+html.has-nav-open { overflow: hidden; }
+
+@media (max-width: 720px) {
+  .topbar { font-size: 9px; letter-spacing: 0.10em; white-space: nowrap; }
+  .topbar-inner { padding: 8px 16px; gap: 8px; flex-wrap: nowrap; }
+  .topbar-inner span { gap: 6px; }
+  .topbar-inner span::before { width: 3px; height: 3px; }
+
+  .nav-inner { flex-wrap: nowrap; gap: 12px; padding-top: 16px; padding-bottom: 16px; }
+  .brand-tag { display: none; }
+  .brand-mark { gap: 8px; }
+  .brand-mark .brand-word { font-size: 18px; line-height: 1.05; }
+  .brand-mark-glyph { width: 28px; height: 28px; }
+
+  .nav-toggle { display: inline-flex; flex-shrink: 0; padding: 8px 10px; }
+  .nav-toggle-label { display: none; }
+
+  /* Nav becomes a fullscreen editorial menu when open */
+  .nav-primary {
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(60% 40% at 50% 0%, rgba(201, 161, 90, 0.12), transparent 60%),
+      var(--paper, #f2e6c8);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 280ms ease, visibility 0s linear 280ms;
+  }
+  .nav-primary.is-open {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 280ms ease, visibility 0s;
+  }
+  .nav-primary ul {
+    flex-direction: column;
+    gap: 0.9em;
+    text-align: center;
+    padding: 0;
+    font-family: 'Fraunces', 'Vollkorn', Georgia, serif;
+    font-size: clamp(1.9rem, 6vw, 2.6rem);
+    font-weight: 400;
+    font-variation-settings: 'opsz' 120, 'SOFT' 40;
+  }
+  .nav-primary a {
+    padding: 0.35em 1em;
+    display: inline-block;
+    font-style: italic;
+    color: rgba(28, 23, 18, 0.85);
+    line-height: 1.1;
+  }
+  .nav-primary a::after {
+    left: 50%; right: 50%;
+    bottom: 0;
+    background: var(--rubric);
+  }
+  .nav-primary a:hover::after,
+  .nav-primary a:focus-visible::after {
+    left: 20%; right: 20%;
+  }
+  .nav-primary a[aria-current="page"] { color: var(--rubric); font-style: normal; }
+  .nav-primary a[aria-current="page"]::after { left: 20%; right: 20%; }
+
+  .nav-primary.is-open .nav-close { display: inline-flex; }
+}
 
 /* Right rail (desktop only) */
 .rail {
@@ -357,9 +522,10 @@ nav a[aria-current="page"]::after { right: 0; }
 }
 @media (max-width: 640px) {
   .titlepage { padding: 72px 24px 100px; }
-  .titlepage-monogram { top: 40px; right: 24px; }
-  .mono-letters { font-size: 32px; }
-  .mono-label { font-size: 8px; }
+  .titlepage-monogram { top: 32px; right: 20px; opacity: 0.55; }
+  .mono-letters { font-size: 24px; }
+  .mono-line { width: 22px; }
+  .mono-label { font-size: 7px; letter-spacing: 0.22em; }
   .titlepage-eyebrow { font-size: 10px; letter-spacing: 0.20em; margin-bottom: 28px; }
   .titlepage-lede { font-size: 18px; }
   .titlepage-cta-row { gap: 24px; margin-bottom: 40px; }
@@ -2002,8 +2168,7 @@ footer.site-footer {
 
 @media (max-width: 900px) {
   .topbar-inner, .credbar-inner, .nav-inner { padding-left: 24px; padding-right: 24px; }
-  nav ul { gap: 16px; font-size: 13px; flex-wrap: wrap; }
-  .nav-inner { flex-wrap: wrap; }
+  nav ul { gap: 16px; font-size: 13px; }
   .hero { padding: 64px 24px 80px; }
   .hero-inner { grid-template-columns: 1fr; gap: 48px; }
   .cta-ghost { margin-left: 0; margin-top: 14px; display: block; text-align: center; }

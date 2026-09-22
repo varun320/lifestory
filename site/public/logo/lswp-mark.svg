@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="44" height="44" role="img" aria-label="Life Story Wealth Planning mark">
+  <circle cx="22" cy="22" r="20" fill="#c9a15a"/>
+  <path d="M 14 30 C 16 22 20 15 30 12 C 30 16 28 21 24 25 C 21 27 17 29 14 30 Z" fill="none" stroke="#1c1712" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 14 30 L 19 25" fill="none" stroke="#1c1712" stroke-width="1.4" stroke-linecap="round"/>
+  <path d="M 17 33 C 21 32 26 32 32 33" fill="none" stroke="#1c1712" stroke-width="1.4" stroke-linecap="round"/>
+</svg>

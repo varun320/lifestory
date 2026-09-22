@@ -30,17 +30,23 @@ const personSchema = {
 
   <article class="chapter-page">
     <header class="about-hero">
-      <figure class="about-portrait" aria-label="Alex Hilbert portrait, forthcoming">
-        <div class="about-portrait-frame">
+      <figure class="about-portrait">
+        <div class="about-portrait-wrap">
+          <div class="about-portrait-frame">
+            <img
+              src="/images/alex-portrait.jpg"
+              alt="Alex Hilbert, Registered Investment Advisor at Life Story Wealth Planning"
+              class="about-portrait-img"
+              loading="eager"
+              decoding="async"
+            />
+          </div>
           <span class="about-portrait-corner tl" aria-hidden="true"></span>
           <span class="about-portrait-corner tr" aria-hidden="true"></span>
           <span class="about-portrait-corner bl" aria-hidden="true"></span>
           <span class="about-portrait-corner br" aria-hidden="true"></span>
-          <span class="about-portrait-mono" aria-hidden="true">AH</span>
-          <span class="about-portrait-rule" aria-hidden="true"></span>
-          <span class="about-portrait-firm" aria-hidden="true">Life Story <em>Wealth Planning</em></span>
         </div>
-        <figcaption class="about-portrait-caption">Portrait forthcoming · Scottsdale, Arizona</figcaption>
+        <figcaption class="about-portrait-caption">Alex Hilbert · Scottsdale, Arizona</figcaption>
       </figure>
 
       <div class="about-hero-copy">
@@ -221,10 +227,11 @@ const personSchema = {
     padding: clamp(2.5rem, 5vw, 5rem) clamp(1.5rem, 4vw, 3rem) clamp(2rem, 4vw, 3.5rem);
     align-items: center;
   }
-  @media (min-width: 820px) {
+  @media (min-width: 700px) {
     .about-hero {
-      grid-template-columns: minmax(240px, 340px) 1fr;
-      gap: clamp(3rem, 5vw, 5rem);
+      grid-template-columns: minmax(220px, 320px) 1fr;
+      gap: clamp(2.5rem, 5vw, 5rem);
+      align-items: center;
     }
   }
 
@@ -241,65 +248,37 @@ const personSchema = {
     position: relative;
     width: 100%;
     aspect-ratio: 3 / 4;
-    max-width: 320px;
-    background:
-      radial-gradient(120% 80% at 50% 0%, rgba(201, 161, 90, 0.10), transparent 55%),
-      linear-gradient(180deg, var(--paper-2, #f4ecdc) 0%, var(--paper, #f2e6c8) 100%);
+    max-width: 340px;
+    background: var(--paper-2, #f4ecdc);
     border: 1px solid rgba(138, 51, 36, 0.20);
-    display: grid;
-    place-items: center;
-    box-shadow: 0 26px 60px -30px rgba(28, 23, 18, 0.35);
-    padding: 2rem;
+    overflow: hidden;
+    box-shadow: 0 26px 60px -30px rgba(28, 23, 18, 0.4);
+  }
+  .about-portrait-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    display: block;
+    filter: contrast(1.02) saturate(0.92);
+  }
+  .about-portrait-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 340px;
+    margin: 0 auto;
   }
   .about-portrait-corner {
     position: absolute;
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
     border: 1.5px solid var(--rubric, #8a3324);
+    pointer-events: none;
   }
-  .about-portrait-corner.tl { top: 10px; left: 10px; border-right: none; border-bottom: none; }
-  .about-portrait-corner.tr { top: 10px; right: 10px; border-left: none; border-bottom: none; }
-  .about-portrait-corner.bl { bottom: 10px; left: 10px; border-right: none; border-top: none; }
-  .about-portrait-corner.br { bottom: 10px; right: 10px; border-left: none; border-top: none; }
-
-  .about-portrait-mono {
-    font-family: 'Fraunces', 'Vollkorn', Georgia, serif;
-    font-weight: 400;
-    font-style: italic;
-    font-size: clamp(4.5rem, 8vw, 6.5rem);
-    line-height: 1;
-    letter-spacing: -0.02em;
-    color: var(--ink, #1c1712);
-    font-variation-settings: 'opsz' 144, 'SOFT' 100;
-    margin-bottom: 0.65rem;
-  }
-  .about-portrait-rule {
-    display: block;
-    width: 42px;
-    height: 1px;
-    background: var(--rubric, #8a3324);
-    margin: 0 0 0.75rem;
-  }
-  .about-portrait-firm {
-    font-family: 'Fraunces', 'Vollkorn', Georgia, serif;
-    font-weight: 400;
-    font-size: 0.72rem;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: rgba(28, 23, 18, 0.55);
-    text-align: center;
-    line-height: 1.4;
-  }
-  .about-portrait-firm em {
-    font-style: italic;
-    color: var(--rubric, #8a3324);
-    text-transform: none;
-    letter-spacing: 0.02em;
-    font-size: 0.95rem;
-    display: block;
-    font-weight: 400;
-    margin-top: 0.35rem;
-  }
+  .about-portrait-corner.tl { top: -8px; left: -8px; border-right: none; border-bottom: none; }
+  .about-portrait-corner.tr { top: -8px; right: -8px; border-left: none; border-bottom: none; }
+  .about-portrait-corner.bl { bottom: -8px; left: -8px; border-right: none; border-top: none; }
+  .about-portrait-corner.br { bottom: -8px; right: -8px; border-left: none; border-top: none; }
   .about-portrait-caption {
     font-family: 'Source Sans 3', system-ui, sans-serif;
     font-size: 0.7rem;
