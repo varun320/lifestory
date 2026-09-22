@@ -56,13 +56,7 @@ const reviewedLabel = new Date(LAST_REVIEWED).toLocaleDateString('en-US', {
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={new URL('/og-image.png', Astro.site).toString()} />
 
-  {/* Fonts, CDN for now, upgrade to @fontsource pre-launch for perf */}
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..800,30..100;1,9..144,300..800,30..100&family=Vollkorn:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Source+Sans+3:wght@400;500;600;700&display=swap"
-  />
+  {/* Fonts self-hosted via @fontsource, imported in global.css */}
 
   <slot name="head" />
 </head>
@@ -121,11 +115,12 @@ const reviewedLabel = new Date(LAST_REVIEWED).toLocaleDateString('en-US', {
         </button>
         <ul>
           <li><a href="/" aria-current={Astro.url.pathname === '/' ? 'page' : undefined}>Home</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/approach">Approach</a></li>
-          <li><a href="/fees">Fees</a></li>
-          <li><a href="/custody">Custody</a></li>
-          <li><a href="/contact">Contact</a></li>
+          <li><a href="/about" aria-current={Astro.url.pathname === '/about' ? 'page' : undefined}>About</a></li>
+          <li><a href="/approach" aria-current={Astro.url.pathname === '/approach' ? 'page' : undefined}>Approach</a></li>
+          <li><a href="/fees" aria-current={Astro.url.pathname === '/fees' ? 'page' : undefined}>Fees</a></li>
+          <li><a href="/custody" aria-current={Astro.url.pathname === '/custody' ? 'page' : undefined}>Custody</a></li>
+          <li><a href="/insights" aria-current={Astro.url.pathname === '/insights' ? 'page' : undefined}>Insights</a></li>
+          <li><a href="/contact" aria-current={Astro.url.pathname === '/contact' ? 'page' : undefined}>Contact</a></li>
         </ul>
       </nav>
     </div>

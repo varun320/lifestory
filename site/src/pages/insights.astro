@@ -1,0 +1,255 @@
+---
+import Base from '../layouts/Base.astro';
+
+const title = 'Insights | Life Story Wealth Planning';
+const description = 'Written research and occasional notes on markets, risk management, and how I think about long-term investing.';
+
+// Manual entries for now. When there is a real blog collection, this
+// becomes a getStaticPaths / content-collection loop.
+const entries = [
+  {
+    slug: '/approach',
+    kicker: 'Philosophy',
+    title: 'Perfect math, wrong problem.',
+    dek: "Nobel Prizes don't move markets. Liquidity does.",
+    date: '2026-09-04',
+    dateLabel: 'September 2026',
+    length: '5 minute read',
+  },
+];
+---
+<Base title={title} description={description} canonicalPath="/insights">
+  <main class="insights-page">
+    <section class="ins-hero">
+      <p class="ins-eyebrow">Chapter · Insights</p>
+      <h1 class="ins-h1">Insights.</h1>
+      <p class="ins-lede">
+        Occasional written notes on markets, risk management, and how I think about long-term
+        investing. Quiet on purpose. Filled when there is something worth reading.
+      </p>
+    </section>
+
+    <section class="ins-note app-reveal" aria-labelledby="note-h">
+      <p class="ins-note-eyebrow">A word on why this section is short</p>
+      <p id="note-h" class="ins-note-body">
+        I am not going to fill this section with generic finance posts. When I write something, it
+        is because I believe it changes how you would think about your money. That does not happen
+        weekly, and I would rather this page be quiet than filler.
+      </p>
+    </section>
+
+    <section class="ins-list-wrap">
+      <p class="ins-list-eyebrow">Currently on the shelf</p>
+      <ol class="ins-list">
+        {entries.map((e) => (
+          <li class="ins-item app-reveal">
+            <a href={e.slug} class="ins-item-link">
+              <span class="ins-item-kicker">{e.kicker}</span>
+              <h2 class="ins-item-title">{e.title}</h2>
+              <p class="ins-item-dek">{e.dek}</p>
+              <div class="ins-item-meta">
+                <time datetime={e.date}>{e.dateLabel}</time>
+                <span class="ins-item-sep" aria-hidden="true"></span>
+                <span>{e.length}</span>
+                <span class="ins-item-arrow" aria-hidden="true">→</span>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ol>
+
+      <p class="ins-forthcoming">
+        More is being written. A research white paper is in the queue. If you want to be told when
+        the next piece lands, ask.
+      </p>
+    </section>
+
+    <div class="ins-cta">
+      <a class="cta cta-large" href="/contact">Ask to be notified</a>
+    </div>
+  </main>
+</Base>
+
+<style>
+  .insights-page {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: clamp(3rem, 5vw, 6rem) clamp(1.5rem, 4vw, 3rem) clamp(4rem, 6vw, 8rem);
+    color: var(--ink, #1c1712);
+    display: grid;
+    row-gap: clamp(3rem, 5vw, 5rem);
+  }
+  .insights-page > * { max-width: 780px; margin-left: auto; margin-right: auto; width: 100%; }
+
+  /* Hero */
+  .ins-hero { text-align: center; padding-bottom: clamp(1.75rem, 3vw, 2.5rem); border-bottom: 1px solid rgba(28, 23, 18, 0.16); }
+  .ins-eyebrow {
+    font-family: 'Source Sans 3 Variable', 'Source Sans 3', system-ui, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--rubric, #8a3324);
+    font-weight: 600;
+    margin: 0 0 1.5rem;
+  }
+  .ins-h1 {
+    font-family: 'Fraunces Variable', 'Fraunces', 'Vollkorn', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(2.6rem, 5vw, 4.2rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin: 0 0 1.25rem;
+    font-variation-settings: 'opsz' 144, 'SOFT' 60;
+  }
+  .ins-lede {
+    font-family: 'Vollkorn', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+    line-height: 1.55;
+    color: rgba(28, 23, 18, 0.72);
+    max-width: 56ch;
+    margin: 0 auto;
+  }
+
+  /* Note: the "why so short" block */
+  .ins-note {
+    padding: 1.5rem 1.75rem;
+    background: transparent;
+    border-left: 2px solid rgba(138, 51, 36, 0.4);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 700ms ease, transform 700ms ease;
+  }
+  .ins-note.is-in { opacity: 1; transform: none; }
+  .ins-note-eyebrow {
+    font-family: 'Source Sans 3 Variable', 'Source Sans 3', system-ui, sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--rubric, #8a3324);
+    font-weight: 600;
+    margin: 0 0 0.75rem;
+  }
+  .ins-note-body {
+    font-family: 'Vollkorn', Georgia, serif;
+    font-style: italic;
+    font-size: 1.02rem;
+    line-height: 1.65;
+    color: rgba(28, 23, 18, 0.82);
+    margin: 0;
+  }
+
+  /* Entries list */
+  .ins-list-eyebrow {
+    font-family: 'Source Sans 3 Variable', 'Source Sans 3', system-ui, sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(28, 23, 18, 0.5);
+    font-weight: 600;
+    margin: 0 0 1.5rem;
+    text-align: center;
+  }
+  .ins-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2.5rem;
+    display: grid;
+    gap: 1rem;
+  }
+  .ins-item {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 800ms ease, transform 800ms ease;
+  }
+  .ins-item.is-in { opacity: 1; transform: none; }
+  .ins-item-link {
+    display: block;
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    background: var(--paper-2, #f4ecdc);
+    border: 1px solid rgba(138, 51, 36, 0.18);
+    text-decoration: none;
+    color: var(--ink, #1c1712);
+    transition: border-color 250ms ease, background-color 250ms ease, transform 250ms ease;
+  }
+  .ins-item-link:hover,
+  .ins-item-link:focus-visible {
+    border-color: var(--rubric, #8a3324);
+    background: color-mix(in oklab, var(--paper-2, #f4ecdc) 85%, var(--rubric, #8a3324) 15%);
+    outline: none;
+  }
+  .ins-item-kicker {
+    display: block;
+    font-family: 'Source Sans 3 Variable', 'Source Sans 3', system-ui, sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--rubric, #8a3324);
+    font-weight: 600;
+    margin-bottom: 0.9rem;
+  }
+  .ins-item-title {
+    font-family: 'Fraunces Variable', 'Fraunces', 'Vollkorn', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(1.6rem, 2.4vw, 2rem);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.6rem;
+    font-variation-settings: 'opsz' 120, 'SOFT' 40;
+  }
+  .ins-item-dek {
+    font-family: 'Vollkorn', Georgia, serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: rgba(28, 23, 18, 0.72);
+    margin: 0 0 1.2rem;
+    max-width: 52ch;
+  }
+  .ins-item-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    font-family: 'Source Sans 3 Variable', 'Source Sans 3', system-ui, sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    color: rgba(28, 23, 18, 0.6);
+  }
+  .ins-item-sep {
+    width: 4px;
+    height: 4px;
+    background: rgba(28, 23, 18, 0.35);
+    border-radius: 50%;
+  }
+  .ins-item-arrow {
+    margin-left: auto;
+    color: var(--rubric, #8a3324);
+    font-size: 1rem;
+    transition: transform 220ms ease;
+  }
+  .ins-item-link:hover .ins-item-arrow,
+  .ins-item-link:focus-visible .ins-item-arrow {
+    transform: translateX(4px);
+  }
+
+  /* Forthcoming line */
+  .ins-forthcoming {
+    font-family: 'Fraunces Variable', 'Fraunces', 'Vollkorn', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+    line-height: 1.55;
+    color: rgba(28, 23, 18, 0.7);
+    text-align: center;
+    max-width: 52ch;
+    margin: 0 auto;
+    font-variation-settings: 'opsz' 96;
+  }
+
+  .ins-cta { text-align: center; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ins-note, .ins-item {
+      opacity: 1; transform: none; transition: none;
+    }
+  }
+</style>
