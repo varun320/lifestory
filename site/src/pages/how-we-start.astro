@@ -1,0 +1,530 @@
+---
+import Base from '../layouts/Base.astro';
+
+const title = 'How we start · The Tzur Magen process | Life Story Wealth Planning';
+const description = 'A belief that markets run on liquidity and behavior is only useful if it turns into rules a portfolio can follow on a Tuesday. This is the process.';
+
+// TODO(alex): confirm the numeric labels for each step (from the process one-pager).
+const steps = [
+  {
+    label: '21 + 7',
+    title: 'Narrow the universe',
+    lede: 'We start with a global asset universe — 21 equity groupings and 7 fixed-income and alternative categories — and reduce them to a working shortlist based on prevailing market conditions, current signals, and where risk is asymmetric.',
+    // TODO(alex): confirm the two sub-categories and their descriptions from the screenshot
+    subs: [
+      { label: 'Equities', body: 'Global sector, factor, and regional groupings. Reduced quarterly to a working set that fits the current regime.' },
+      { label: 'Fixed income + alternatives', body: 'Duration, credit, real assets. Held or cut based on rate expectations and hedging value.' },
+    ],
+  },
+  {
+    label: '5',
+    title: 'Analyze the constituents',
+    lede: 'Inside each surviving asset class, we look at what it is actually made of. Five dimensions of analysis run in parallel — not to average them, but to see when they disagree.',
+    // TODO(alex): confirm these five (or six) analysis pillars — the screenshot shows what looks like six tags
+    dims: [
+      { label: 'Fundamental', body: 'Earnings, cash flow, balance-sheet strength.' },
+      { label: 'Technical',   body: 'Trend, momentum, mean-reversion signals.' },
+      { label: 'Cyclical',    body: 'Where we sit in the broader rate and credit cycle.' },
+      { label: 'Sentiment',   body: 'Positioning, flows, crowded vs contrarian.' },
+      { label: 'Macro',       body: 'Rates, currency, geopolitics, liquidity.' },
+    ],
+  },
+  {
+    label: '6 or 5',
+    title: 'Craft the position',
+    lede: 'Only when we know where to invest do we decide how. The same idea can be expressed as a long, a spread, a hedged pair, an option structure, or a call on cash — each with a different risk-and-reward profile. We prefer the expression that captures the idea with the least fragility.',
+    // TODO(alex): confirm the seven position "shapes" you use
+    shapes: [
+      'Outright long', 'Paired short', 'Covered call', 'Cash-secured put',
+      'Spread structure', 'Hedged pair', 'Cash reserve',
+    ],
+    callout: 'Cash is a position, not the absence of one. When nothing deserves capital, holding it is the discipline.',
+  },
+];
+
+const disciplines = [
+  { h: 'Reconstituted quarterly',   b: 'The whole portfolio is re-examined from the ground up each quarter, not incrementally tweaked.' },
+  { h: 'Rebalanced weekly',         b: 'Individual positions are re-tuned as prices drift between our targets and stops.' },
+  { h: 'Discretionary',             b: 'A human decision at every stage, not an all-or-nothing response run by an algorithm.' },
+  { h: 'One model, one process',    b: 'Every client is on the same discipline. Trades are not customised to individual accounts.' },
+];
+---
+<Base title={title} description={description} canonicalPath="/how-we-start">
+  <main class="hws-page">
+    <section class="hws-hero">
+      <p class="hws-eyebrow">Chapter · How we start</p>
+      <h1 class="hws-h1">
+        A belief that markets run on liquidity and behavior is only useful if it turns into
+        <em>rules a portfolio can follow on a Tuesday.</em>
+      </h1>
+      <p class="hws-lede">
+        The <a href="/approach">Approach page</a> explains the philosophy in the abstract. This
+        page shows what that philosophy actually does when a portfolio is being built.
+        <span class="hws-lede-note">
+          {/* TODO(alex): confirm the exact intro copy from the process one-pager */}
+        </span>
+      </p>
+    </section>
+
+    <section class="hws-tzurmagen app-reveal" aria-labelledby="tm-h">
+      <div class="hws-tm-header">
+        <p class="hws-tm-eyebrow">The process</p>
+        <h2 id="tm-h" class="hws-tm-h">Tzur Magen.</h2>
+        <p class="hws-tm-lede">
+          Three stages, run in order, quarter after quarter. The order matters.
+        </p>
+      </div>
+
+      <ol class="hws-steps">
+        {steps.map((s, i) => (
+          <li class="hws-step app-reveal">
+            <header class="hws-step-header">
+              <span class="hws-step-marker">
+                <span class="hws-step-word">Step {['One', 'Two', 'Three'][i]}</span>
+                <span class="hws-step-label">{s.label}</span>
+              </span>
+              <h3 class="hws-step-h">{s.title}</h3>
+            </header>
+            <p class="hws-step-lede">{s.lede}</p>
+
+            {s.subs && (
+              <div class="hws-subs">
+                {s.subs.map((sub) => (
+                  <div class="hws-sub">
+                    <p class="hws-sub-label">{sub.label}</p>
+                    <p class="hws-sub-body">{sub.body}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {s.dims && (
+              <div class="hws-dims">
+                {s.dims.map((d) => (
+                  <div class="hws-dim">
+                    <p class="hws-dim-label">{d.label}</p>
+                    <p class="hws-dim-body">{d.body}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {s.shapes && (
+              <div class="hws-shapes">
+                <p class="hws-shapes-label">Position shapes we consider</p>
+                <ul class="hws-shape-tags">
+                  {s.shapes.map((shape) => (
+                    <li class="hws-shape">{shape}</li>
+                  ))}
+                </ul>
+                {s.callout && <p class="hws-shape-callout">{s.callout}</p>}
+              </div>
+            )}
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="hws-discipline app-reveal" aria-labelledby="disc-h">
+      <p class="hws-disc-eyebrow">Four things that run through all three stages</p>
+      <h2 id="disc-h" class="hws-disc-h">The discipline underneath.</h2>
+      <ol class="hws-disc-list">
+        {disciplines.map((d, i) => (
+          <li class="hws-disc-item">
+            <span class="hws-disc-num">{String(i + 1).padStart(2, '0')}</span>
+            <div class="hws-disc-body">
+              <p class="hws-disc-h3">{d.h}</p>
+              <p class="hws-disc-p">{d.b}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="hws-fee app-reveal" aria-labelledby="fee-h">
+      <p class="hws-fee-eyebrow">What it costs you</p>
+      <h2 id="fee-h" class="hws-fee-h">The strategy is ours. <em>The fee is the firm's.</em></h2>
+      <p class="hws-fee-body">
+        There is no management fee. I am paid a share of the additional gain above a defined
+        threshold, quarter by quarter, above a high water mark. Below the threshold, I am not
+        paid at all. Above it, the fee applies only to the excess.
+        <span class="hws-fee-note">
+          {/* TODO(alex): confirm any final wording tweaks — kept aligned with the /fees page verbatim block */}
+        </span>
+      </p>
+      <div class="hws-fee-cta-row">
+        <a class="cta cta-large" href="/contact">Schedule a conversation</a>
+        <a class="cta-ghost cta-ghost-ink" href="/fees">Read the fee page</a>
+      </div>
+    </section>
+  </main>
+</Base>
+
+<style>
+  .hws-page {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: clamp(3rem, 5vw, 6rem) clamp(1.5rem, 4vw, 3rem) clamp(4rem, 6vw, 8rem);
+    color: var(--ink, #1c1712);
+    display: grid;
+    row-gap: clamp(3rem, 5vw, 5rem);
+  }
+  .hws-page > * { max-width: 820px; margin-left: auto; margin-right: auto; width: 100%; }
+
+  /* Hero */
+  .hws-hero { padding-bottom: clamp(1.75rem, 3vw, 2.5rem); border-bottom: 1px solid rgba(28, 23, 18, 0.16); text-align: center; }
+  .hws-eyebrow {
+    font-family: 'Source Sans 3 Variable', 'Source Sans 3', system-ui, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--rubric, #8a3324);
+    font-weight: 600;
+    margin: 0 0 1.5rem;
+  }
+  .hws-h1 {
+    font-family: 'Fraunces Variable', 'Fraunces', 'Vollkorn', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(2rem, 3.6vw, 3.2rem);
+    line-height: 1.15;
+    letter-spacing: -0.005em;
+    margin: 0 auto 1.25rem;
+    max-width: 22ch;
+    font-variation-settings: 'opsz' 144, 'SOFT' 60;
+  }
+  .hws-h1 em { font-style: italic; color: var(--rubric, #8a3324); font-weight: 400; }
+  .hws-lede {
+    font-family: 'Vollkorn', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+    line-height: 1.55;
+    color: rgba(28, 23, 18, 0.72);
+    max-width: 56ch;
+    margin: 0 auto;
+  }
+  .hws-lede a { color: var(--rubric, #8a3324); text-decoration: none; border-bottom: 1px solid rgba(138, 51, 36, 0.4); }
+  .hws-lede a:hover { border-bottom-color: var(--rubric, #8a3324); }
+  .hws-lede-note { display: none; } /* TODO markers, held in DOM as comments */
+
+  /* Tzur Magen section header */
+  .hws-tzurmagen {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 800ms ease, transform 800ms ease;
+  }
+  .hws-tzurmagen.is-in { opacity: 1; transform: none; }
+  .hws-tm-header { text-align: center; margin: 0 auto 3rem; max-width: 60ch; }
+  .hws-tm-eyebrow {
+    font-family: 'Source Sans 3 Variable', 'Source Sans 3', system-ui, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--rubric, #8a3324);
+    font-weight: 600;
+    margin: 0 0 0.9rem;
+  }
+  .hws-tm-h {
+    font-family: 'Fraunces Variable', 'Fraunces', 'Vollkorn', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(2.4rem, 4vw, 3.4rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin: 0 0 1rem;
+    font-variation-settings: 'opsz' 144, 'SOFT' 60;
+  }
+  .hws-tm-lede {
+    font-family: 'Vollkorn', Georgia, serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: rgba(28, 23, 18, 0.7);
+    margin: 0;
+  }
+
+  /* Steps */
+  .hws-steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: clamp(2.5rem, 4vw, 4rem);
+  }
+  .hws-step {
+    padding: clamp(2rem, 4vw, 3rem);
+    background: var(--paper-2, #f4ecdc);
+    border-left: 3px solid var(--rubric, #8a3324);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 800ms ease, transform 800ms ease;
+  }
+  .hws-step.is-in { opacity: 1; transform: none; }
+
+  .hws-step-header { margin-bottom: 1.25rem; }
+  .hws-step-marker {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.9rem;
+    margin-bottom: 0.85rem;
+  }
+  .hws-step-word {
+    font-family: 'Source Sans 3 Variable', 'Source Sans 3', system-ui, sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--rubric, #8a3324);
+    font-weight: 600;
+  }
+  .hws-step-label {
+    font-family: 'Fraunces Variable', 'Fraunces', 'Vollkorn', Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+    color: rgba(28, 23, 18, 0.85);
+    font-variation-settings: 'opsz' 96, 'SOFT' 40;
+  }
+  .hws-step-h {
+    font-family: 'Fraunces Variable', 'Fraunces', 'Vollkorn', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(1.75rem, 2.8vw, 2.35rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin: 0;
+    font-variation-settings: 'opsz' 120, 'SOFT' 40;
+  }
+  .hws-step-lede {
+    font-family: 'Vollkorn', Georgia, serif;
+    font-size: 1.08rem;
+    line-height: 1.7;
+    color: rgba(28, 23, 18, 0.88);
+    margin: 0 0 1.5rem;
+    max-width: 62ch;
+  }
+
+  /* Sub-blocks inside step 1 */
+  .hws-subs {
+    display: grid;
+    gap: 1rem;
+  }
+  @media (min-width: 720px) {
+    .hws-subs { grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  }
+  .hws-sub {
+    padding: 1.1rem 1.25rem;
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(138, 51, 36, 0.15);
+  }
+  .hws-sub-label {
+    font-family: 'Source Sans 3 Variable', 'Source Sans 3', system-ui, sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--rubric, #8a3324);
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+  }
+  .hws-sub-body {
+    font-family: 'Vollkorn', Georgia, serif;
+    font-size: 0.96rem;
+    line-height: 1.55;
+    color: rgba(28, 23, 18, 0.8);
+    margin: 0;
+  }
+
+  /* Dimensions grid inside step 2 */
+  .hws-dims {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  @media (min-width: 620px) {
+    .hws-dims { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 920px) {
+    .hws-dims { grid-template-columns: repeat(5, 1fr); }
+  }
+  .hws-dim {
+    padding: 0.9rem 1rem;
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(138, 51, 36, 0.15);
+  }
+  .hws-dim-label {
+    font-family: 'Source Sans 3 Variable', 'Source Sans 3', system-ui, sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--rubric, #8a3324);
+    font-weight: 600;
+    margin: 0 0 0.35rem;
+  }
+  .hws-dim-body {
+    font-family: 'Vollkorn', Georgia, serif;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: rgba(28, 23, 18, 0.78);
+    margin: 0;
+  }
+
+  /* Shape tags for step 3 */
+  .hws-shapes { display: grid; gap: 1rem; }
+  .hws-shapes-label {
+    font-family: 'Source Sans 3 Variable', 'Source Sans 3', system-ui, sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(28, 23, 18, 0.55);
+    font-weight: 600;
+    margin: 0;
+  }
+  .hws-shape-tags {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .hws-shape {
+    font-family: 'Source Sans 3 Variable', 'Source Sans 3', system-ui, sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    color: var(--ink, #1c1712);
+    padding: 0.4rem 0.85rem;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(138, 51, 36, 0.25);
+  }
+  .hws-shape-callout {
+    font-family: 'Fraunces Variable', 'Fraunces', 'Vollkorn', Georgia, serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: var(--ink, #1c1712);
+    margin: 0.75rem 0 0;
+    padding: 1rem 1.25rem;
+    background: rgba(138, 51, 36, 0.06);
+    border-left: 2px solid var(--rubric, #8a3324);
+    font-variation-settings: 'opsz' 96;
+  }
+
+  /* Discipline strip */
+  .hws-discipline {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(28, 23, 18, 0.16);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 800ms ease, transform 800ms ease;
+  }
+  .hws-discipline.is-in { opacity: 1; transform: none; }
+  .hws-disc-eyebrow {
+    font-family: 'Source Sans 3 Variable', 'Source Sans 3', system-ui, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--rubric, #8a3324);
+    font-weight: 600;
+    margin: 0 0 1rem;
+  }
+  .hws-disc-h {
+    font-family: 'Fraunces Variable', 'Fraunces', 'Vollkorn', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(1.75rem, 2.8vw, 2.35rem);
+    line-height: 1.15;
+    margin: 0 0 2rem;
+    font-variation-settings: 'opsz' 120, 'SOFT' 40;
+  }
+  .hws-disc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1.25rem;
+    text-align: left;
+  }
+  @media (min-width: 720px) { .hws-disc-list { grid-template-columns: 1fr 1fr; gap: 1.5rem; } }
+  @media (min-width: 1000px) { .hws-disc-list { grid-template-columns: repeat(4, 1fr); } }
+  .hws-disc-item {
+    padding: 1.25rem 1.35rem;
+    background: transparent;
+    border-top: 2px solid var(--rubric, #8a3324);
+  }
+  .hws-disc-num {
+    font-family: 'Fraunces Variable', 'Fraunces', 'Vollkorn', Georgia, serif;
+    font-size: 1rem;
+    color: var(--rubric, #8a3324);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    display: block;
+    margin-bottom: 0.6rem;
+  }
+  .hws-disc-h3 {
+    font-family: 'Fraunces Variable', 'Fraunces', 'Vollkorn', Georgia, serif;
+    font-weight: 500;
+    font-size: 1.1rem;
+    line-height: 1.25;
+    color: var(--ink, #1c1712);
+    margin: 0 0 0.5rem;
+    font-variation-settings: 'opsz' 96;
+  }
+  .hws-disc-p {
+    font-family: 'Vollkorn', Georgia, serif;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: rgba(28, 23, 18, 0.78);
+    margin: 0;
+  }
+
+  /* Fee close */
+  .hws-fee {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(28, 23, 18, 0.16);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 800ms ease, transform 800ms ease;
+  }
+  .hws-fee.is-in { opacity: 1; transform: none; }
+  .hws-fee-eyebrow {
+    font-family: 'Source Sans 3 Variable', 'Source Sans 3', system-ui, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--rubric, #8a3324);
+    font-weight: 600;
+    margin: 0 0 1rem;
+  }
+  .hws-fee-h {
+    font-family: 'Fraunces Variable', 'Fraunces', 'Vollkorn', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(2rem, 3.2vw, 2.8rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin: 0 auto 1.5rem;
+    max-width: 22ch;
+    font-variation-settings: 'opsz' 144, 'SOFT' 60;
+  }
+  .hws-fee-h em { font-style: italic; color: var(--rubric, #8a3324); font-weight: 400; }
+  .hws-fee-body {
+    font-family: 'Vollkorn', Georgia, serif;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(28, 23, 18, 0.85);
+    max-width: 60ch;
+    margin: 0 auto 2rem;
+  }
+  .hws-fee-note { display: none; }
+  .hws-fee-cta-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  @media (min-width: 640px) {
+    .hws-fee-cta-row { flex-direction: row; justify-content: center; gap: 1.5rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hws-tzurmagen, .hws-step, .hws-discipline, .hws-fee {
+      opacity: 1; transform: none; transition: none;
+    }
+  }
+</style>

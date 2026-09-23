@@ -180,6 +180,9 @@ const pops = [
           a single theory or a single idea that has to stand on its own. I didn't want it
           constrained to a single market. Money moves between markets. So should your portfolio.
         </p>
+        <p class="body-tie-next">
+          <a href="/how-we-start">See what this looks like on a Tuesday <span aria-hidden="true">→</span></a>
+        </p>
       </section>
 
       <p class="body-p body-p-close">If you want to look at a different way to manage your portfolio, let's have a conversation.</p>
@@ -617,6 +620,30 @@ const pops = [
     line-height: 1.7;
     color: var(--ink, #1c1712);
     margin: 0;
+  }
+  .body-tie-next {
+    font-family: 'Source Sans 3 Variable', 'Source Sans 3', system-ui, sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--rubric, #8a3324);
+    font-weight: 600;
+    margin: 1.5rem 0 0;
+  }
+  .body-tie-next a {
+    color: var(--rubric, #8a3324);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(138, 51, 36, 0.4);
+    padding-bottom: 3px;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5em;
+    transition: gap 220ms ease, border-bottom-color 220ms ease;
+  }
+  .body-tie-next a:hover,
+  .body-tie-next a:focus-visible {
+    gap: 0.75em;
+    border-bottom-color: var(--rubric, #8a3324);
   }
   .body-tie-body strong {
     font-weight: 600;
