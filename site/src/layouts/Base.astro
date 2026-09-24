@@ -83,7 +83,7 @@ const reviewedLabel = new Date(LAST_REVIEWED).toLocaleDateString('en-US', {
             <path class="bm-underline" d="M 17 33 C 21 32 26 32 32 33" />
           </svg>
         </a>
-        <div class="brand-tag">Est. 2012</div>
+        <div class="brand-tag">Est. 2024</div>
       </div>
       <button
         type="button"
@@ -116,10 +116,11 @@ const reviewedLabel = new Date(LAST_REVIEWED).toLocaleDateString('en-US', {
         <ul>
           <li><a href="/" aria-current={Astro.url.pathname === '/' ? 'page' : undefined}>Home</a></li>
           <li><a href="/about" aria-current={Astro.url.pathname === '/about' ? 'page' : undefined}>About</a></li>
-          <li><a href="/approach" aria-current={Astro.url.pathname === '/approach' ? 'page' : undefined}>Approach</a></li>
+          <li><a href="/approach" aria-current={Astro.url.pathname === '/approach' ? 'page' : undefined}>Philosophy</a></li>
+          <li><a href="/how-we-start" aria-current={Astro.url.pathname === '/how-we-start' ? 'page' : undefined}>Methodology</a></li>
           <li><a href="/fees" aria-current={Astro.url.pathname === '/fees' ? 'page' : undefined}>Fees</a></li>
           <li><a href="/custody" aria-current={Astro.url.pathname === '/custody' ? 'page' : undefined}>Custody</a></li>
-          <li><a href="/insights" aria-current={Astro.url.pathname === '/insights' ? 'page' : undefined}>Insights</a></li>
+          <li><a href="/insights" aria-current={Astro.url.pathname === '/insights' ? 'page' : undefined}>Blog</a></li>
           <li><a href="/contact" aria-current={Astro.url.pathname === '/contact' ? 'page' : undefined}>Contact</a></li>
         </ul>
       </nav>
@@ -143,9 +144,9 @@ const reviewedLabel = new Date(LAST_REVIEWED).toLocaleDateString('en-US', {
       <div>
         <h5>Verify</h5>
         <ul>
-          {/* [NEEDS CONFIRMATION: exact SEC IAPD URL for Alex/firm CRD] */}
-          <li><a href="https://adviserinfo.sec.gov/" target="_blank" rel="noopener">Form ADV (SEC / IAPD)</a></li>
-          <li><a href="https://brokercheck.finra.org/" target="_blank" rel="noopener">FINRA BrokerCheck</a></li>
+          <li><a href="https://adviserinfo.sec.gov/firm/summary/332717" target="_blank" rel="noopener">Form ADV</a></li>
+          <li><a href="https://adviserinfo.sec.gov/individual/summary/5993000" target="_blank" rel="noopener">Advisor background</a></li>
+          <li><a href="https://brokercheck.finra.org/individual/summary/5993000" target="_blank" rel="noopener">FINRA BrokerCheck</a></li>
         </ul>
       </div>
       <div>
@@ -159,7 +160,7 @@ const reviewedLabel = new Date(LAST_REVIEWED).toLocaleDateString('en-US', {
     <div class="footer-legal">
       <span>© {new Date().getFullYear()} Life Story Wealth Planning</span>
       <span>This site was last reviewed {reviewedLabel}.</span>
-      <span>[Required regulatory disclosures, from counsel, not copied]</span>
+      <span>All content is intended for U.S. residents in the states in which the firm is properly registered to conduct business, and is subject to change without notice.</span>
     </div>
   </footer>
 

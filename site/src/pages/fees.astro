@@ -9,7 +9,6 @@ const description = 'No management fee. I am paid only on gains above a high wat
     <section class="fees-hero">
       <p class="fees-eyebrow">        <span>Chapter · Fees</span>      </p>
       <h1 class="fees-h1">Results, <em>not fees.</em></h1>
-      <p class="fees-lede">The wait-what answer, followed by the exact wording, followed by what it means.</p>
     </section>
 
     <section class="fees-hook" aria-labelledby="hook-h">
@@ -19,7 +18,7 @@ const description = 'No management fee. I am paid only on gains above a high wat
         Most advisers charge a management fee. Whether your portfolio goes up, down, or
         sideways, the fee is charged. I do not. If the strategy I run for you does not work
         in a given quarter, if it does not exceed a defined threshold, I am not paid for
-        that quarter. When it does exceed the threshold, I am paid a share of the excess.
+        that quarter. When it does exceed the threshold, I am paid a share of the excess gain.
         <strong>That is the whole model.</strong>
       </p>
     </section>
@@ -110,7 +109,7 @@ const description = 'No management fee. I am paid only on gains above a high wat
 
                 {/* Hurdle line */}
                 <line x1="20" y1="85" x2="380" y2="85" class="fees-svg-hurdle-line" />
-                <text x="380" y="80" class="fees-svg-label fees-svg-label-brass" text-anchor="end">Hurdle · 1.5%</text>
+                <text x="376" y="98" class="fees-svg-label fees-svg-label-brass" text-anchor="end">Hurdle · 1.5%</text>
 
                 {/* Bar A (below hurdle) */}
                 <rect x="90" y="100" width="70" height="50" class="fees-svg-bar-quiet" />
@@ -123,9 +122,10 @@ const description = 'No management fee. I am paid only on gains above a high wat
                 <text x="275" y="170" class="fees-svg-label" text-anchor="middle">Above hurdle</text>
                 <text x="275" y="184" class="fees-svg-label fees-svg-label-rubric" text-anchor="middle">Fee on excess only.</text>
 
-                {/* Small callout arrow to the excess portion */}
-                <line x1="325" y1="65" x2="345" y2="65" class="fees-svg-axis" />
-                <text x="350" y="68" class="fees-svg-label fees-svg-label-rubric">this slice</text>
+                {/* Brace around just the top slice, showing what the 30% is assessed on */}
+                <path class="fees-svg-brace" d="M 316 45 C 322 45 322 52 328 52 C 322 52 322 58 316 58 M 316 85 C 322 85 322 78 328 78 C 322 78 322 72 316 72 M 328 52 L 328 78" />
+                <text x="336" y="63" class="fees-svg-label fees-svg-label-rubric">30% of</text>
+                <text x="336" y="76" class="fees-svg-label fees-svg-label-rubric">just this</text>
               </svg>
               <figcaption class="fees-diagram-caption">
                 Two hypothetical quarterly outcomes. Below the hurdle: no fee at all. Above: the fee applies only to the slice above the hurdle line.
@@ -173,7 +173,7 @@ const description = 'No management fee. I am paid only on gains above a high wat
     </aside>
 
     <div class="fees-cta">
-      <p class="fees-cta-line">The rest of a good conversation about fees is the conversation itself.</p>
+      <p class="fees-cta-line">A page like this can only go so far. A first call takes it the rest of the way.</p>
       <a class="cta cta-large" href="/contact">Start a conversation</a>
     </div>
   </main>
@@ -412,6 +412,16 @@ const description = 'No management fee. I am paid only on gains above a high wat
     stroke-width: 1.25;
     stroke-dasharray: 4 4;
   }
+  .fees-svg-brace {
+    fill: none;
+    stroke: var(--rubric, #8a3324);
+    stroke-width: 1.25;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0;
+    transition: opacity 500ms ease 1600ms;
+  }
+  .app-reveal.is-in .fees-svg-brace { opacity: 1; }
   .fees-svg-line {
     fill: none;
     stroke: var(--ink, #1c1712);

@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 
-const title = "Approach · Perfect math, wrong problem | Life Story Wealth Planning";
+const title = "Philosophy · Perfect math, wrong problem | Life Story Wealth Planning";
 const description = "Alex Hilbert's case that Nobel Prizes don't move markets and liquidity does. The philosophy behind Tzur Magen, in his own words.";
 const publishedISO = '2026-09-04';
 const publishedLabel = 'September 4, 2026';
@@ -24,7 +24,7 @@ const pops = [
 <Base title={title} description={description} canonicalPath="/approach">
   <article class="approach-page">
     <header class="app-masthead">
-      <p class="app-marker">        <span>Chapter · Approach</span>
+      <p class="app-marker">        <span>Chapter · Philosophy</span>
       </p>
       <h1 class="app-title">Perfect math, <em>wrong problem.</em></h1>
       <p class="app-deck">
@@ -86,7 +86,7 @@ const pops = [
         <span class="app-section-rule"></span>
       </div>
 
-      <p class="body-p">We just got a live demonstration. In July, a hedge fund run by a 20-something former OpenAI researcher, a fund that had reportedly returned more than 1,000% since it launched in 2024 and was sitting on something like $45 billion, got caught levered about 4 to 1 in AI infrastructure stocks. The Nasdaq 100 fell roughly 10% that month. His core holdings fell 27% to 54%. At 4x leverage, a 30% drop in the book is about a 120% hit to your equity, and the prime brokers (Goldman, JPMorgan, Bank of America) started making margin calls. On July 30 he sold something like $20 billion of stock to Citadel in a single block before the market opened.</p>
+      <p class="body-p">We just got a live demonstration. In July 2026, a hedge fund run by a 20-something former OpenAI researcher, a fund that had reportedly returned more than 1,000% since it launched in 2024 and was sitting on something like $45 billion, got caught levered about 4 to 1 in AI infrastructure stocks. The Nasdaq 100 fell roughly 10% that month. His core holdings fell 27% to 54%. At 4x leverage, a 30% drop in the book is about a 120% hit to your equity, and the prime brokers (Goldman, JPMorgan, Bank of America) started making margin calls. On July 30 he sold something like $20 billion of stock to Citadel in a single block before the market opened.</p>
 
       <figure class="app-chart-wrap app-reveal" aria-labelledby="chart-h">
         <figcaption class="app-chart-caption">
@@ -144,7 +144,7 @@ const pops = [
 
       <p class="body-p">So you've got fear and greed, you've got supply and demand, and then, oh yeah, there's the various ways of estimating what a company is worth. And that last piece is the one everyone harps on. The efficient market crowd says information travels fast and everyone can react to it instantly, so prices are always about right, and that's why we punish insider trading, to keep the market efficient.</p>
 
-      <p class="body-p">The pieces are true. Prices move fast, data routes instantly, access is broad. But a lot of the people making decisions are making them on very little of that information. Plenty of retail traders are buying because line go up. They're already late to the party. There's the old joke that when your cab driver starts giving you stock tips, it's time to sell. It's a joke, but there's some reality in it. Retail demand shows up, institutions unload into it, and they do it just gently enough to keep the line going up until they've exited what they wanted to exit.</p>
+      <p class="body-p">The pieces are true. Prices move fast, data routes instantly, access is broad. But a lot of the people making decisions are making them on very little of that information. Plenty of retail traders are buying because "line go up." They're already late to the party. There's the old joke that when your cab driver starts giving you stock tips, it's time to sell. It's a joke, but there's some reality in it. Retail demand shows up, institutions unload into it, and they do it just gently enough to keep the line going up until they've exited what they wanted to exit.</p>
 
       <aside class="app-marginalia app-margin-verso app-reveal">
         <span class="app-marg-label">The old joke</span>
@@ -348,17 +348,19 @@ const pops = [
   /* Body paragraphs */
   .body-p {
     font-family: 'Vollkorn', Georgia, serif;
-    font-size: clamp(1.05rem, 1.35vw, 1.18rem);
+    font-size: clamp(1.14rem, 1.45vw, 1.28rem);
     line-height: 1.72;
-    color: rgba(28, 23, 18, 0.9);
+    letter-spacing: 0.005em;
+    color: rgba(28, 23, 18, 0.92);
+    font-weight: 500;
     margin: 0 0 0.2em;
   }
   .body-p em {
     font-style: italic;
     color: var(--rubric, #8a3324);
-    font-weight: 500;
+    font-weight: 600;
   }
-  .body-p-lead { font-size: clamp(1.1rem, 1.5vw, 1.28rem); line-height: 1.65; }
+  .body-p-lead { font-size: clamp(1.18rem, 1.6vw, 1.38rem); line-height: 1.65; }
   .body-dropcap {
     float: left;
     font-family: 'Fraunces Variable', 'Fraunces', 'Vollkorn', Georgia, serif;
@@ -396,8 +398,10 @@ const pops = [
     display: block;
     font-family: 'Vollkorn', Georgia, serif;
     font-style: italic;
-    font-size: 0.9rem;
-    line-height: 1.5;
+    font-size: 1rem;
+    line-height: 1.55;
+    letter-spacing: 0.008em;
+    font-weight: 500;
     color: rgba(28, 23, 18, 0.72);
   }
   @media (min-width: 980px) {

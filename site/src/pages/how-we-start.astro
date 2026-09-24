@@ -1,26 +1,24 @@
 ---
 import Base from '../layouts/Base.astro';
 
-const title = 'How we start · The Tzur Magen process | Life Story Wealth Planning';
+const title = 'Methodology · The Tzur Magen process | Life Story Wealth Planning';
 const description = 'A belief that markets run on liquidity and behavior is only useful if it turns into rules a portfolio can follow on a Tuesday. This is the process.';
 
 // TODO(alex): confirm the numeric labels for each step (from the process one-pager).
 const steps = [
   {
-    label: '21 + 7',
+    label: '21 → 7',
     title: 'Narrow the universe',
-    lede: 'We start with a global asset universe — 21 equity groupings and 7 fixed-income and alternative categories — and reduce them to a working shortlist based on prevailing market conditions, current signals, and where risk is asymmetric.',
-    // TODO(alex): confirm the two sub-categories and their descriptions from the screenshot
-    subs: [
-      { label: 'Equities', body: 'Global sector, factor, and regional groupings. Reduced quarterly to a working set that fits the current regime.' },
-      { label: 'Fixed income + alternatives', body: 'Duration, credit, real assets. Held or cut based on rate expectations and hedging value.' },
-    ],
+    lede: 'We start with a global asset universe of 21 distinct asset classes — equities, fixed income, and alternative categories, cryptocurrency included — and reduce them down to a working shortlist of 7, based on prevailing market conditions, current signals, and where risk is asymmetric.',
+    universe: {
+      label: 'The 21 asset classes',
+      body: 'Equities, fixed income, and alternatives — a broad-cross-section of global markets from which the 7 that carry the quarter are chosen. Narrowed quarterly to the set that fits the regime.',
+    },
   },
   {
     label: '5',
     title: 'Analyze the constituents',
-    lede: 'Inside each surviving asset class, we look at what it is actually made of. Five dimensions of analysis run in parallel — not to average them, but to see when they disagree.',
-    // TODO(alex): confirm these five (or six) analysis pillars — the screenshot shows what looks like six tags
+    lede: 'Inside each surviving asset class, we look at what it is actually made of. Five dimensions of analysis run in parallel, not to average them, but to see when they disagree.',
     dims: [
       { label: 'Fundamental', body: 'Earnings, cash flow, balance-sheet strength.' },
       { label: 'Technical',   body: 'Trend, momentum, mean-reversion signals.' },
@@ -30,10 +28,9 @@ const steps = [
     ],
   },
   {
-    label: '6 or 5',
+    label: 'How',
     title: 'Craft the position',
-    lede: 'Only when we know where to invest do we decide how. The same idea can be expressed as a long, a spread, a hedged pair, an option structure, or a call on cash — each with a different risk-and-reward profile. We prefer the expression that captures the idea with the least fragility.',
-    // TODO(alex): confirm the seven position "shapes" you use
+    lede: 'Only when we know where to invest do we decide how. The same idea can be expressed as a long, a spread, a hedged pair, an option structure, or a call on cash. Each carries a different risk-and-reward profile. We prefer the expression that captures the idea with the least fragility.',
     shapes: [
       'Outright long', 'Paired short', 'Covered call', 'Cash-secured put',
       'Spread structure', 'Hedged pair', 'Cash reserve',
@@ -45,20 +42,20 @@ const steps = [
 const disciplines = [
   { h: 'Reconstituted quarterly',   b: 'The whole portfolio is re-examined from the ground up each quarter, not incrementally tweaked.' },
   { h: 'Rebalanced weekly',         b: 'Individual positions are re-tuned as prices drift between our targets and stops.' },
-  { h: 'Discretionary',             b: 'A human decision at every stage, not an all-or-nothing response run by an algorithm.' },
-  { h: 'One model, one process',    b: 'Every client is on the same discipline. Trades are not customised to individual accounts.' },
+  { h: 'Discretionary',             b: 'A human decision at every stage, not an all-or-nothing response run by a blind algorithm.' },
+  { h: 'One model, one process',    b: 'Every client runs the same core discipline. Reasonable client-level adjustments — more aggressive, hedges left off, specific exclusions — are honored on top of it. Around 80% of the process is the same for everyone; the rest fits the client.' },
 ];
 ---
 <Base title={title} description={description} canonicalPath="/how-we-start">
   <main class="hws-page">
     <section class="hws-hero">
-      <p class="hws-eyebrow">Chapter · How we start</p>
+      <p class="hws-eyebrow">Chapter · Methodology</p>
       <h1 class="hws-h1">
         A belief that markets run on liquidity and behavior is only useful if it turns into
         <em>rules a portfolio can follow on a Tuesday.</em>
       </h1>
       <p class="hws-lede">
-        The <a href="/approach">Approach page</a> explains the philosophy in the abstract. This
+        The <a href="/approach">Philosophy page</a> explains the philosophy in the abstract. This
         page shows what that philosophy actually does when a portfolio is being built.
         <span class="hws-lede-note">
           {/* TODO(alex): confirm the exact intro copy from the process one-pager */}
@@ -87,14 +84,10 @@ const disciplines = [
             </header>
             <p class="hws-step-lede">{s.lede}</p>
 
-            {s.subs && (
-              <div class="hws-subs">
-                {s.subs.map((sub) => (
-                  <div class="hws-sub">
-                    <p class="hws-sub-label">{sub.label}</p>
-                    <p class="hws-sub-body">{sub.body}</p>
-                  </div>
-                ))}
+            {s.universe && (
+              <div class="hws-universe">
+                <p class="hws-universe-label">{s.universe.label}</p>
+                <p class="hws-universe-body">{s.universe.body}</p>
               </div>
             )}
 
@@ -145,7 +138,7 @@ const disciplines = [
       <p class="hws-fee-eyebrow">What it costs you</p>
       <h2 id="fee-h" class="hws-fee-h">The strategy is ours. <em>The fee is the firm's.</em></h2>
       <p class="hws-fee-body">
-        There is no management fee. I am paid a share of the additional gain above a defined
+        There is no management fee. I am paid a share of the excess gain above a defined
         threshold, quarter by quarter, above a high water mark. Below the threshold, I am not
         paid at all. Above it, the fee applies only to the excess.
         <span class="hws-fee-note">
@@ -300,34 +293,28 @@ const disciplines = [
     max-width: 62ch;
   }
 
-  /* Sub-blocks inside step 1 */
-  .hws-subs {
-    display: grid;
-    gap: 1rem;
-  }
-  @media (min-width: 720px) {
-    .hws-subs { grid-template-columns: 1fr 1fr; gap: 1.25rem; }
-  }
-  .hws-sub {
-    padding: 1.1rem 1.25rem;
-    background: rgba(255, 255, 255, 0.4);
+  /* Single universe block inside step 1 */
+  .hws-universe {
+    padding: 1.25rem 1.5rem;
+    background: rgba(255, 255, 255, 0.5);
     border: 1px solid rgba(138, 51, 36, 0.15);
   }
-  .hws-sub-label {
+  .hws-universe-label {
     font-family: 'Source Sans 3 Variable', 'Source Sans 3', system-ui, sans-serif;
     font-size: 0.7rem;
     letter-spacing: 0.28em;
     text-transform: uppercase;
     color: var(--rubric, #8a3324);
     font-weight: 600;
-    margin: 0 0 0.5rem;
+    margin: 0 0 0.6rem;
   }
-  .hws-sub-body {
+  .hws-universe-body {
     font-family: 'Vollkorn', Georgia, serif;
-    font-size: 0.96rem;
-    line-height: 1.55;
-    color: rgba(28, 23, 18, 0.8);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(28, 23, 18, 0.82);
     margin: 0;
+    max-width: 62ch;
   }
 
   /* Dimensions grid inside step 2 */
